@@ -1,4 +1,4 @@
-package com.algaworks.hospedagem.util;
+package br.com.wcorrea.util;
 
 import java.io.File;
 import java.io.FileInputStream;
