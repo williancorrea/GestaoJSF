@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+body .ui-state-error, body .ui-state-default.ui-state-error {
+    border-left: 3px solid #e13131;
+}
+
+.rotulo {
+    width: 150px
+}

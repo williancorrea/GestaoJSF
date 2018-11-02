@@ -1,17 +1,20 @@
-<ui:composition 
+<ui:composition
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
     xmlns:pa="http://primefaces.org/atlantis">
-    
+
     <div class="layout-sidebar #{guestPreferences.darkMenu ? 'layout-sidebar-dark': ''}">
         <pa:tabMenu>
             <pa:tab icon="fa fa-cube" title="Features">
                 <h:form id="menu-form">
                     <pa:menu widgetVar="me">
                         <p:menuitem id="om_dashboard" value="Dashboard" icon="fa fa-fw fa-home" outcome="/dashboard"/>
+                        <p:submenu id="base" label="Base" icon="fa fa-fw fa-bars">
+                            <p:menuitem id="classe-despesa-novo" value="Classe de Despesa" icon="fa fa-fw fa-columns" outcome="/pages/base/classe-despesa/classe-despesa-cadastro" />
+                        </p:submenu>
                         <p:submenu id="um_customization2" label="Menu Modes" icon="fa fa-fw fa-bars">
                             <p:menuitem id="menu1" value="Light Menu" icon="fa fa-fw fa-bars" actionListener="#{guestPreferences.setDarkMenu(false)}" ajax="false"/>
                             <p:menuitem id="menu2" value="Dark Menu" icon="fa fa-fw fa-bars" actionListener="#{guestPreferences.setDarkMenu(true)}" ajax="false"/>
@@ -88,7 +91,7 @@
                     </pa:menu>
                 </h:form>
             </pa:tab>
-            
+
             <pa:tab icon="fa fa-inbox" title="Inbox">
                 <div class="inbox-tab">
                     <ul>
@@ -118,7 +121,7 @@
                             <span class="message">Rating Reviews</span>
                         </li>
                     </ul>
-                    
+
                     <div class="inbox-labels">
                         <span>Labels</span>
                         <ul>
@@ -142,7 +145,7 @@
                     </div>
                 </div>
             </pa:tab>
-            
+
             <pa:tab icon="fa fa-calendar-o" title="Calendar">
                 <div class="calendar-tab">
                     <ul>
@@ -197,7 +200,7 @@
                     </ul>
                 </div>
             </pa:tab>
-            
+
              <pa:tab icon="fa fa-sliders" title="Projects">
                  <div class="projects-tab">
                     <ul>
@@ -244,7 +247,7 @@
                     </ul>
                  </div>
             </pa:tab>
-            
+
              <pa:tab icon="fa fa-users" title="Team">
                 <div class="team-tab">
                     <ul>
@@ -271,7 +274,7 @@
                     </ul>
                 </div>
             </pa:tab>
-        </pa:tabMenu>        
+        </pa:tabMenu>
     </div>
-    
+
 </ui:composition>
