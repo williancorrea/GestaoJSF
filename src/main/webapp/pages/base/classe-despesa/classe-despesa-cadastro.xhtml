@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Classe de Despesa</ui:define>
+
+    <ui:define name="content">
+
+
+        <div class="ui-g ">
+            <div class="ui-g-12">
+                <div class="card" style="padding-top: 1px;">
+                    <h:form>
+                        <h1>Nova classe de despesa</h1>
+
+                        <p:toolbar>
+                            <p:toolbarGroup styleClass="ui-fli">
+                                <!--<p:button value="Novo" outcome="/produtos/CadastroProduto"/>-->
+                                <p:button value="Novo"/>
+                                <p:commandButton value="Salvar" id="botaoSalvar"/>
+                            </p:toolbarGroup>
+                            <p:toolbarGroup align="right">
+                                <!--<p:button value="Pesquisa" outcome="/produtos/PesquisaProdutos"/>-->
+                                <p:button value="Pesquisa"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+
+                        <p:panelGrid id="pnl" columns="2"
+                                     style="width: 100%; margin-top: 20px"
+                                     styleClass="ui-fluid"
+                                     columnClasses="rotulo, campo">
+
+                            <p:outputLabel value="Descricao" for="descricao"/>
+                            <p:inputText id="descricao" maxlength="150"/>
+
+                            <p:outputLabel value="Inativo" for="inativo"/>
+                            <p:selectBooleanCheckbox id="inativo"/>
+
+                            <p:outputLabel value="Valor unitário" for="valorUnitario"/>
+                            <p:inputText id="valorUnitario" size="10" maxlength="10" styleClass="moeda"/>
+
+                        </p:panelGrid>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

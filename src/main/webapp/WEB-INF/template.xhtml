@@ -13,9 +13,20 @@
         <meta name="apple-mobile-web-app-capable" content="yes"/>
         <meta name="theme-color" content="#{guestPreferences.themeColors[guestPreferences.layout]}"/>
     </f:facet>
-    <title><ui:insert name="title">PrimeFaces Poseidon</ui:insert></title>
-    <h:outputScript name="js/nanoscroller.js" library="atlantis-layout"/>
-    <h:outputScript name="js/layout.js" library="atlantis-layout"/>
+
+    <title>
+        <ui:insert name="title">Gestão</ui:insert>
+    </title>
+
+    <h:outputScript library="atlantis-layout" name="js/nanoscroller.js"/>
+    <h:outputScript library="atlantis-layout" name="js/layout.js"/>
+    <h:outputScript library="wcorrea" name="js/jquery.maskMoney.js"/>
+
+    <h:outputStylesheet library="atlantis-layout" name="css/nanoscroller.css"/>
+    <h:outputStylesheet library="atlantis-layout" name="css/animate.css"/>
+    <h:outputStylesheet library="atlantis-layout" name="css/layout-#{guestPreferences.layout}.css"/>
+    <h:outputStylesheet library="wcorrea" name="css/sistema.css"/>
+
     <ui:insert name="head"/>
 </h:head>
 
@@ -34,7 +45,7 @@
     </div>
 
     <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
-        <f:facet name="start">
+        <f:facet name="start" onsuccess="configurarMoeda()">
             <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
         </f:facet>
 
@@ -43,11 +54,16 @@
         </f:facet>
     </p:ajaxStatus>
 
-    <h:outputStylesheet name="css/nanoscroller.css" library="atlantis-layout"/>
-    <h:outputStylesheet name="css/animate.css" library="atlantis-layout"/>
-    <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="atlantis-layout"/>
+    <script>
+        function configurarMoeda() {
+            $(".moeda").maskMoney({prefix: "R$ ", decimal: ",", thousands: ".", allowZero: true});
+        }
 
-    <h:outputStylesheet name="css/sistema.css" library="wcorrea"/>
+        $(document).ready(function () {
+            configurarMoeda();
+        });
+    </script>
+
 </h:body>
 
 </html>
