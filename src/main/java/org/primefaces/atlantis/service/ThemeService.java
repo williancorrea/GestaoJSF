@@ -24,12 +24,12 @@ import javax.faces.bean.ManagedBean;
 
 import org.primefaces.atlantis.domain.Theme;
 
-@ManagedBean(name="themeService", eager = true)
+@ManagedBean(name = "themeService", eager = true)
 @ApplicationScoped
 public class ThemeService {
-    
+
     private List<Theme> themes;
-    
+
     @PostConstruct
     public void init() {
         themes = new ArrayList<Theme>();
@@ -72,8 +72,8 @@ public class ThemeService {
         themes.add(new Theme(36, "UI-Lightness", "ui-lightness"));
         themes.add(new Theme(37, "Vader", "vader"));
     }
-    
+
     public List<Theme> getThemes() {
         return themes;
-    } 
+    }
 }

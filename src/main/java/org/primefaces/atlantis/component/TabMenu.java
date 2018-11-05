@@ -9,68 +9,72 @@ import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
+
 import org.primefaces.util.ComponentUtils;
 
 @ListenerFor(sourceClass = TabMenu.class, systemEventClass = PostAddToViewEvent.class)
 public class TabMenu extends UIPanel implements org.primefaces.component.api.Widget {
 
-	public static final String COMPONENT_TYPE = "org.primefaces.component.AtlantisTabMenu";
-	public static final String COMPONENT_FAMILY = "org.primefaces.component";
-	public static final String DEFAULT_RENDERER = "org.primefaces.component.AtlantisTabMenuRenderer";
-    
-    private static final String[] LEGACY_RESOURCES = new String[]{"primefaces.css","jquery/jquery.js","jquery/jquery-plugins.js","primefaces.js"};
-    private static final String[] MODERN_RESOURCES = new String[]{"components.css","jquery/jquery.js","jquery/jquery-plugins.js","core.js"};
+    public static final String COMPONENT_TYPE = "org.primefaces.component.AtlantisTabMenu";
+    public static final String COMPONENT_FAMILY = "org.primefaces.component";
+    public static final String DEFAULT_RENDERER = "org.primefaces.component.AtlantisTabMenuRenderer";
 
-	public enum PropertyKeys {
+    private static final String[] LEGACY_RESOURCES = new String[]{"primefaces.css", "jquery/jquery.js", "jquery/jquery-plugins.js", "primefaces.js"};
+    private static final String[] MODERN_RESOURCES = new String[]{"components.css", "jquery/jquery.js", "jquery/jquery-plugins.js", "core.js"};
 
-		widgetVar,
-		activeIndex;
+    public enum PropertyKeys {
 
-		String toString;
+        widgetVar,
+        activeIndex;
 
-		PropertyKeys(String toString) {
-			this.toString = toString;
-		}
+        String toString;
 
-		PropertyKeys() {}
+        PropertyKeys(String toString) {
+            this.toString = toString;
+        }
 
-		public String toString() {
-			return ((this.toString != null) ? this.toString : super.toString());
-}
-	}
+        PropertyKeys() {
+        }
 
-	public TabMenu() {
-		setRendererType(DEFAULT_RENDERER);
-	}
+        public String toString() {
+            return ((this.toString != null) ? this.toString : super.toString());
+        }
+    }
 
-	public String getFamily() {
-		return COMPONENT_FAMILY;
-	}
+    public TabMenu() {
+        setRendererType(DEFAULT_RENDERER);
+    }
 
-	public String getWidgetVar() {
-		return (String) getStateHelper().eval(PropertyKeys.widgetVar, null);
-	}
-	public void setWidgetVar(String _widgetVar) {
-		getStateHelper().put(PropertyKeys.widgetVar, _widgetVar);
-	}
+    public String getFamily() {
+        return COMPONENT_FAMILY;
+    }
 
-	public int getActiveIndex() {
-		return (Integer) getStateHelper().eval(PropertyKeys.activeIndex, 0);
-	}
-	public void setActiveIndex(int _activeIndex) {
-		getStateHelper().put(PropertyKeys.activeIndex, _activeIndex);
-	}
-    
+    public String getWidgetVar() {
+        return (String) getStateHelper().eval(PropertyKeys.widgetVar, null);
+    }
+
+    public void setWidgetVar(String _widgetVar) {
+        getStateHelper().put(PropertyKeys.widgetVar, _widgetVar);
+    }
+
+    public int getActiveIndex() {
+        return (Integer) getStateHelper().eval(PropertyKeys.activeIndex, 0);
+    }
+
+    public void setActiveIndex(int _activeIndex) {
+        getStateHelper().put(PropertyKeys.activeIndex, _activeIndex);
+    }
+
     public String resolveWidgetVar() {
-		return ComponentUtils.resolveWidgetVar(getFacesContext(), this);
-	}
-    
+        return ComponentUtils.resolveWidgetVar(getFacesContext(), this);
+    }
+
     @Override
     public void processEvent(ComponentSystemEvent event) throws AbortProcessingException {
-        if(event instanceof PostAddToViewEvent) {
+        if (event instanceof PostAddToViewEvent) {
             FacesContext context = getFacesContext();
             UIViewRoot root = context.getViewRoot();
-            
+
             boolean isPrimeConfig;
             try {
                 isPrimeConfig = Class.forName("org.primefaces.config.PrimeConfiguration") != null;
@@ -80,11 +84,11 @@ public class TabMenu extends UIPanel implements org.primefaces.component.api.Wid
 
             String[] resources = (isPrimeConfig) ? MODERN_RESOURCES : LEGACY_RESOURCES;
 
-            for(String res : resources) {
+            for (String res : resources) {
                 UIComponent component = context.getApplication().createComponent(UIOutput.COMPONENT_TYPE);
-                if(res.endsWith("css"))
+                if (res.endsWith("css"))
                     component.setRendererType("javax.faces.resource.Stylesheet");
-                else if(res.endsWith("js"))
+                else if (res.endsWith("js"))
                     component.setRendererType("javax.faces.resource.Script");
 
                 component.getAttributes().put("library", "primefaces");
