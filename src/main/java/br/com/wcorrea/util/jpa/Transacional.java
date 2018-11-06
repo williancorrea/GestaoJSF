@@ -1,4 +1,4 @@
-package br.com.wcorrea.util;
+package br.com.wcorrea.util.jpa;
 
 import javax.interceptor.InterceptorBinding;
 import java.lang.annotation.ElementType;

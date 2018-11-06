@@ -1,4 +1,4 @@
-package br.com.wcorrea.util;
+package br.com.wcorrea.util.jpa;
 
 import java.io.File;
 import java.io.FileInputStream;

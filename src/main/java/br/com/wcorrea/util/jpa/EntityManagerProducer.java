@@ -1,4 +1,4 @@
-package br.com.wcorrea.util;
+package br.com.wcorrea.util.jpa;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;

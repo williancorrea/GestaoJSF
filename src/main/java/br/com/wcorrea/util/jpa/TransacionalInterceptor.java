@@ -1,4 +1,4 @@
-package br.com.wcorrea.util;
+package br.com.wcorrea.util.jpa;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
