@@ -15,27 +15,41 @@
  */
 package org.primefaces.atlantis.view;
 
-import javax.annotation.PostConstruct;
-import java.util.Map;
-import java.util.HashMap;
-import java.io.Serializable;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import lombok.Getter;
+import lombok.Setter;
 
-@ManagedBean
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+@Named
 @SessionScoped
 public class GuestPreferences implements Serializable {
 
+    @Getter
     private Map<String, String> themeColors;
 
+    @Getter
+    @Setter
     private String theme = "blue";
 
+    @Getter
+    @Setter
     private String layout = "dark";
 
+    @Getter
+    @Setter
     private boolean overlayMenu;
 
+    @Getter
+    @Setter
     private boolean darkMenu;
 
+    @Getter
+    @Setter
     private boolean orientationRTL;
 
     @PostConstruct
@@ -49,49 +63,5 @@ public class GuestPreferences implements Serializable {
         themeColors.put("purple", "#985edb");
         themeColors.put("green", "#5ea980");
         themeColors.put("black", "#545b61");
-    }
-
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
-
-    public String getLayout() {
-        return this.layout;
-    }
-
-    public void setLayout(String layout) {
-        this.layout = layout;
-    }
-
-    public boolean isDarkMenu() {
-        return this.darkMenu;
-    }
-
-    public void setDarkMenu(boolean value) {
-        this.darkMenu = value;
-    }
-
-    public boolean isOverlayMenu() {
-        return this.overlayMenu;
-    }
-
-    public void setOverlayMenu(boolean value) {
-        this.overlayMenu = value;
-    }
-
-    public Map getThemeColors() {
-        return this.themeColors;
-    }
-
-    public boolean isOrientationRTL() {
-        return orientationRTL;
-    }
-
-    public void setOrientationRTL(boolean orientationRTL) {
-        this.orientationRTL = orientationRTL;
     }
 }

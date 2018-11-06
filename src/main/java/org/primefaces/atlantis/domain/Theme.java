@@ -15,13 +15,25 @@
  */
 package org.primefaces.atlantis.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Theme {
 
-    private int id;    
-    private String displayName; 
+    @Getter
+    @Setter
+    private int id;
+
+    @Getter
+    @Setter
+    private String displayName;
+
+    @Getter
+    @Setter
     private String name;
-    
-    public Theme() {}
+
+    public Theme() {
+    }
 
     public Theme(int id, String displayName, String name) {
         this.id = id;
@@ -29,32 +41,8 @@ public class Theme {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    
     @Override
     public String toString() {
-        return name;
+        return this.name;
     }
 }

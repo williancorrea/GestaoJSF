@@ -43,7 +43,7 @@
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.faces</artifactId>
-            <version>2.2.14</version>
+            <version>2.4.0</version>
             <scope>compile</scope>
         </dependency>
 
@@ -66,6 +66,13 @@
             <artifactId>jsp-api</artifactId>
             <version>2.1</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Utilitarios JSF -->
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+            <version>3.2</version>
         </dependency>
 
 

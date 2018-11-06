@@ -15,19 +15,22 @@
  */
 package org.primefaces.atlantis.service;
 
+import lombok.Getter;
+import org.omnifaces.cdi.Eager;
+import org.primefaces.atlantis.domain.Theme;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
-
-import org.primefaces.atlantis.domain.Theme;
-
-@ManagedBean(name = "themeService", eager = true)
+@Named(value = "themeService")
+@Eager
 @ApplicationScoped
 public class ThemeService {
 
+    @Getter
     private List<Theme> themes;
 
     @PostConstruct
@@ -71,9 +74,5 @@ public class ThemeService {
         themes.add(new Theme(35, "UI-Darkness", "ui-darkness"));
         themes.add(new Theme(36, "UI-Lightness", "ui-lightness"));
         themes.add(new Theme(37, "Vader", "vader"));
-    }
-
-    public List<Theme> getThemes() {
-        return themes;
     }
 }

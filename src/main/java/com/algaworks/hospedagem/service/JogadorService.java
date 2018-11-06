@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import com.algaworks.hospedagem.model.Jogador;
 import com.algaworks.hospedagem.repository.Jogadores;
-import br.com.wcorrea.util.Transacional;
+import br.com.wcorrea.util.jpa.Transacional;
 
 public class JogadorService implements Serializable {
 	

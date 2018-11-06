@@ -16,22 +16,23 @@
 package org.primefaces.atlantis.component;
 
 import org.primefaces.component.menu.AbstractMenu;
+
 import javax.faces.context.FacesContext;
 import javax.faces.component.UINamingContainer;
 import javax.faces.event.ComponentSystemEventListener;
 import javax.faces.event.ListenerFor;
 import javax.faces.event.PostAddToViewEvent;
+
 import org.primefaces.component.api.Widget;
 
 @ListenerFor(sourceClass = Menu.class, systemEventClass = PostAddToViewEvent.class)
-public class Menu extends AbstractMenu implements Widget,ComponentSystemEventListener {
+public class Menu extends AbstractMenu implements Widget, ComponentSystemEventListener {
 
     public static final String COMPONENT_TYPE = "org.primefaces.component.AtlantisMenu";
     public static final String COMPONENT_FAMILY = "org.primefaces.component";
     private static final String DEFAULT_RENDERER = "org.primefaces.component.AtlantisMenuRenderer";
-    
-    protected enum PropertyKeys {
 
+    protected enum PropertyKeys {
         widgetVar, model, style, styleClass;
 
         String toString;
