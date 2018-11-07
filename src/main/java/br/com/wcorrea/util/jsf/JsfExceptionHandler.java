@@ -1,5 +1,8 @@
 package br.com.wcorrea.util.jsf;
 
+import br.com.wcorrea.service.NegocioException;
+import br.com.wcorrea.util.FacesUtils;
+
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -38,18 +41,37 @@ public class JsfExceptionHandler extends ExceptionHandlerWrapper {
 
             Throwable exception = context.getException();
 
-            //TODO: Verificar a necessidade de enviar para um pagina de expiracao ou mostrar uma mensagem para o usuario
+            NegocioException negocioException = getNegocioException(exception);
+
+            boolean handled = false;
             try {
-                // PEGA A EXECEÇÃO QUE FOI LANCADA E REDIRECIONA PARA ALGUM LUGAR
                 if (exception instanceof ViewExpiredException) {
+                    handled = true;
                     redirect("/");
+                } else if (negocioException != null) {
+                    handled = true;
+                    FacesUtils.addMessageErro(null, negocioException.getMessage(), true);
+                } else {
+                    handled = true;
+                    redirect("/error.xhtml");
                 }
             } finally {
-                events.remove();
+                if (handled) {
+                    events.remove();
+                }
             }
         }
 
         getWrapped().handle();
+    }
+
+    private NegocioException getNegocioException(Throwable exception) {
+        if (exception instanceof NegocioException) {
+            return (NegocioException) exception;
+        } else if (exception.getCause() != null) {
+            return getNegocioException(exception.getCause());
+        }
+        return null;
     }
 
     private void redirect(String page) {

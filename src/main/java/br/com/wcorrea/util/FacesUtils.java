@@ -3,9 +3,9 @@ package br.com.wcorrea.util;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-public class WcorreaMenssagensUtils {
+public class FacesUtils {
 
-    public WcorreaMenssagensUtils() {
+    public FacesUtils() {
     }
 
     public static void addMessageinfo(String titulo, String mensagem, boolean manterMensagem) {

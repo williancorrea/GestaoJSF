@@ -1,7 +1,7 @@
 package br.com.wcorrea.bean;
 
 import br.com.wcorrea.modelo.ClasseDespesa;
-import br.com.wcorrea.util.WcorreaMenssagensUtils;
+import br.com.wcorrea.util.FacesUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.omnifaces.cdi.ViewScoped;
@@ -23,7 +23,7 @@ public class ClasseDespesaBean implements Serializable {
     @PostConstruct
     public void inicio() {
         classeDespesa.setDescricao("Willian Vagner Vicente Correa");
-        WcorreaMenssagensUtils.addMessageinfo("Titulo", "Mensagem", false);
+        FacesUtils.addMessageinfo("Titulo", "Mensagem", false);
     }
 
 }
