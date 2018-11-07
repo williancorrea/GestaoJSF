@@ -1,4 +1,4 @@
-package br.com.wcorrea.service;
+package br.com.wcorrea.util.jsf.exception;
 
 public class NegocioException extends RuntimeException {
 

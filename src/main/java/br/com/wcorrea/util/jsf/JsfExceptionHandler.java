@@ -1,7 +1,7 @@
 package br.com.wcorrea.util.jsf;
 
-import br.com.wcorrea.service.NegocioException;
 import br.com.wcorrea.util.FacesUtils;
+import br.com.wcorrea.util.jsf.exception.NegocioException;
 
 import java.io.IOException;
 import java.util.Iterator;
