@@ -20,6 +20,8 @@
                                 <!--<p:button value="Novo" outcome="/produtos/CadastroProduto"/>-->
                                 <p:button value="Novo"/>
                                 <p:commandButton value="Salvar" id="botaoSalvar"/>
+                                <p:commandButton value="Teste" id="botaoSalvar2"
+                                                 action="#{classeDespesaBean.salvarTeste}"/>
                             </p:toolbarGroup>
                             <p:toolbarGroup align="right">
                                 <!--<p:button value="Pesquisa" outcome="/produtos/PesquisaProdutos"/>-->
@@ -33,7 +35,8 @@
                                      columnClasses="rotulo, campo">
 
                             <p:outputLabel value="Descricao" for="descricao"/>
-                            <p:inputText id="descricao" maxlength="150" value="#{classeDespesaBean.classeDespesa.descricao}"/>
+                            <p:inputText id="descricao" maxlength="150"
+                                         value="#{classeDespesaBean.classeDespesa.descricao}"/>
 
                             <p:outputLabel value="Inativo" for="inativo"/>
                             <p:selectBooleanCheckbox id="inativo"/>

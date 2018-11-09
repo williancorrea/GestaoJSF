@@ -32,11 +32,19 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Especificação JEE - Implementacao de referencia do CDI -->
+        <!-- Weld (Implementação do CDI) -->
         <dependency>
             <groupId>org.jboss.weld.servlet</groupId>
             <artifactId>weld-servlet</artifactId>
             <version>2.4.1.Final</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- Weld depende do Jandex -->
+        <dependency>
+            <groupId>org.jboss</groupId>
+            <artifactId>jandex</artifactId>
+            <version>1.2.2.Final</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Mojarra (implementação JSF 2) -->
@@ -73,8 +81,18 @@
             <groupId>org.omnifaces</groupId>
             <artifactId>omnifaces</artifactId>
             <version>3.2</version>
+            <scope>compile</scope>
         </dependency>
 
+        <!--Implementação do Bean Validation-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.13.Final</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!--Núcleo do Hibernate-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -82,7 +100,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--Implementação de EntityManager d JPA-->
+        <!--Implementação de EntityManager do JPA-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
@@ -90,10 +108,12 @@
             <scope>compile</scope>
         </dependency>
 
+        <!-- Driver JDBC do banco de dados MySql -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>6.0.5</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
@@ -135,4 +155,15 @@
             </plugin>
         </plugins>
     </build>
+
+    <!--Repositorio central dos Layouts do Primefaces-->
+    <repositories>
+        <repository>
+            <id>prime-repo</id>
+            <name>PrimeFaces Maven Repository</name>
+            <url>http://repository.primefaces.org</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+
 </project>
