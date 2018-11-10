@@ -1,10 +1,6 @@
 package br.com.wcorrea.util.jsf;
 
-import br.com.wcorrea.util.FacesUtils;
 import br.com.wcorrea.util.jsf.exception.NegocioException;
-
-import java.io.IOException;
-import java.util.Iterator;
 
 import javax.faces.FacesException;
 import javax.faces.application.ViewExpiredException;
@@ -14,6 +10,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
+import java.io.IOException;
+import java.util.Iterator;
 
 /**
  * MANIPULA AS EXCEPTION DO JSF
@@ -50,7 +48,7 @@ public class JsfExceptionHandler extends ExceptionHandlerWrapper {
                     redirect("/");
                 } else if (negocioException != null) {
                     handled = true;
-                    FacesUtils.addMessageErro(null, negocioException.getMessage(), true);
+                    FacesUtils.addMessageErro(negocioException.getMessage(), true);
                 } else {
                     handled = true;
                     redirect("/error.xhtml");

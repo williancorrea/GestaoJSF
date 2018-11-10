@@ -5,11 +5,24 @@
               version="2.2">
 
     <application>
+        <!--
+            Arquivo de tradução das validações - resources
+            Caso seja necessario coloca-lo dentro de um diretorio diferente - segue a estrutura
+
+              util.Messages
+        -->
+
+        <message-bundle>
+            Messages
+        </message-bundle>
+
+        <!-- Traduz todas as mensagens do sistema -->
         <locale-config>
             <default-locale>pt_BR</default-locale>
         </locale-config>
     </application>
 
+    <!-- Tatamento de erros do sistema-->
     <factory>
         <exception-handler-factory>
             br.com.wcorrea.util.jsf.JsfExceptionHandlerFactory

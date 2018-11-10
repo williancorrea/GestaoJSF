@@ -8,7 +8,7 @@
         <welcome-file>dashboard.xhtml</welcome-file>
     </welcome-file-list>
 
-    <!-- CDI -->
+    <!-- Implementação do Weld -->
     <resource-env-ref>
         <resource-env-ref-name>BeanManager</resource-env-ref-name>
         <resource-env-ref-type>javax.enterprise.inject.spi.BeanManager</resource-env-ref-type>
@@ -44,6 +44,8 @@
     <listener>
         <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
     </listener>
+
+    <!--Resolve os problemas de ecoding das paginas -->
     <filter>
         <filter-name>Character Encoding Filter</filter-name>
         <filter-class>org.primefaces.atlantis.filter.CharacterEncodingFilter</filter-class>
@@ -53,7 +55,7 @@
         <servlet-name>Faces Servlet</servlet-name>
     </filter-mapping>
 
-
+    <!-- Mapeamento do servlet do JSF -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -68,7 +70,25 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
+    <!--
+        Replicará o timezone default para todas as datas componentizadas pelo PrimeFaces.
+        Soluciona o erro de um dia de atraso nas datas
+    -->
+    <context-param>
+        <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+        <param-value>true</param-value>
+    </context-param>
 
+    <!-- Tempo que dura uma sessão (Minutos) -->
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+
+    <!--
+        FONTES UTILIZADA NO TEMA DO PRIMEFACES
+    -->
     <mime-mapping>
         <extension>ttf</extension>
         <mime-type>application/font-sfnt</mime-type>

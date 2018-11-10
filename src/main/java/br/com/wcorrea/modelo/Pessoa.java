@@ -1,6 +1,5 @@
 package br.com.wcorrea.modelo;
 
-
 import br.com.wcorrea.modelo.util.Comum;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,7 +8,8 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -17,21 +17,15 @@ import java.io.Serializable;
 @ToString
 @EqualsAndHashCode
 @Entity
-@Table
-public class ClasseDespesa extends Comum implements Serializable {
-    private static final long serialVersionUID = 7180271019059228253L;
+public class Pessoa extends Comum implements Serializable {
+    private static final long serialVersionUID = -8977509125836117620L;
 
-    @Size(max = 150)
-    @Column(length = 150, nullable = false)
+    @Getter
+    @Setter
     @NotBlank
-    @Getter
-    @Setter
-    private String descricao;
+    @Enumerated(EnumType.STRING)
+    @Size(max = 20)
+    @Column(nullable = false, length = 20)
+    private PessoaTipo pessoaTipo;
 
-    @Getter
-    @Setter
-    private Boolean inativo;
-
-    public ClasseDespesa() {
-    }
 }

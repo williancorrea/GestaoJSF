@@ -1,9 +1,8 @@
 package br.com.wcorrea.bean;
 
 import br.com.wcorrea.modelo.ClasseDespesa;
-import br.com.wcorrea.repository.ClasseDespesaRepository;
-import br.com.wcorrea.util.FacesUtils;
-import br.com.wcorrea.util.jpa.Transacional;
+import br.com.wcorrea.service.ClasseDespesaService;
+import br.com.wcorrea.util.jsf.FacesUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.omnifaces.cdi.ViewScoped;
@@ -22,22 +21,38 @@ public class ClasseDespesaBean implements Serializable {
     @Inject
     private ClasseDespesa classeDespesa;
 
-
-    @Getter
-    @Setter
     @Inject
-    private ClasseDespesaRepository classeDespesaRepository;
+    private ClasseDespesaService classeDespesaService;
 
+
+    /**
+     * METODO EXEXUTADO LOGO APOS A RENDERIZACAO DA TELA
+     */
     @PostConstruct
     public void inicio() {
-        classeDespesa.setDescricao("Willian Vagner Vicente Correa");
-        FacesUtils.addMessageinfo("Titulo", "Mensagem", false);
     }
 
-    @Transacional
-    public void salvarTeste() {
-        classeDespesaRepository.salvar(classeDespesa);
-//        classeDespesaRepository.buscar(1L);
+    /**
+     * CRIAR UM NOVO ITEM
+     */
+    public void novo() {
+        classeDespesa = new ClasseDespesa();
     }
+
+    /**
+     * SALVAR OBJETO NO BANCO DO DADOS
+     */
+    public void salvar() {
+        boolean editando = classeDespesa.isEditando();
+        classeDespesa = classeDespesaService.salvar(classeDespesa);
+
+        novo();
+        if (editando) {
+            FacesUtils.addMessageinfo("Classe de Despesa (" + classeDespesa.getDescricao() + ") atualizada com sucesso!", false);
+            return;
+        }
+        FacesUtils.addMessageinfo("Classe de Despesa (" + classeDespesa.getDescricao() + ") cadastrada com sucesso!", false);
+    }
+
 
 }
