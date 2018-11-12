@@ -55,12 +55,57 @@
     </p:ajaxStatus>
 
     <script>
+
+        // Funcao que faz o texto ficar em uppercase
+        function upperText(obj) {
+            // Para tratar o colar
+            jQuery(obj).bind('paste', function (e) {
+                var el = jQuery(this);
+                setTimeout(function () {
+                    var text = jQuery(el).val();
+                    el.val(text.toUpperCase());
+                }, 100);
+            });
+            // Para tratar quando é digitado
+            jQuery(obj).keypress(function () {
+                var el = jQuery(this);
+                setTimeout(function () {
+                    var text = jQuery(el).val();
+                    el.val(text.toUpperCase());
+                }, 100);
+            });
+        }
+
+        // Funcao que faz o texto ficar em uppercase
+        function lowerText(obj) {
+            // Para tratar o colar
+            jQuery(obj).bind('paste', function (e) {
+                var el = jQuery(this);
+                setTimeout(function () {
+                    var text = jQuery(el).val();
+                    el.val(text.toLowerCase());
+                }, 100);
+            });
+            // Para tratar quando é digitado
+            jQuery(obj).keypress(function () {
+                var el = jQuery(this);
+                setTimeout(function () {
+                    var text = jQuery(el).val();
+                    el.val(text.toLowerCase());
+                }, 100);
+            });
+        }
+
         function configurarMoeda() {
             $(".moeda").maskMoney({prefix: "R$ ", decimal: ",", thousands: ".", allowZero: true});
         }
 
         $(document).ready(function () {
             configurarMoeda();
+            upperText(".uppercase");
+            upperText("input");
+
+            lowerText(".lowercase");
         });
     </script>
 
