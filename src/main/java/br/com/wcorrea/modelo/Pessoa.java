@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @ToString
-@EqualsAndHashCode
 @Entity
 public class Pessoa extends Comum implements Serializable {
     private static final long serialVersionUID = -8977509125836117620L;
