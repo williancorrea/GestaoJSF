@@ -17,3 +17,12 @@ body .ui-state-error, body .ui-state-default.ui-state-error {
 body .ui-messages .ui-messages-error {
     background-color: #d43145;
 }
+
+.ui-outputlabel-rfi {
+    color: #d43145;
+}
+
+.ui-outputlabel.ui-state-error {
+    color: #d43145;
+    font-weight: 600;
+}

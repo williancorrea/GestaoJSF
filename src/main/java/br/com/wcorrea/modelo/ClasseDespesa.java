@@ -30,7 +30,7 @@ public class ClasseDespesa extends Comum implements Serializable {
 
     @Getter
     @Setter
-    private Boolean inativo;
+    private boolean inativo;
 
     public ClasseDespesa() {
     }

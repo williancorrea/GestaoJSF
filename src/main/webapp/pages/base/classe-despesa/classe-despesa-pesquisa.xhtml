@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template.xhtml">
+
+    <f:metadata>
+        <f:event listener="#{classeDespesaBean.listarClasseDespesasCadastradas()}" type="preRenderView"/>
+    </f:metadata>
+
+    <ui:define name="title">Classe de Despesa</ui:define>
+
+    <ui:define name="content">
+
+
+        <div class="ui-g ">
+            <div class="ui-g-12">
+                <div class="card" style="padding-top: 1px;">
+                    <h:form>
+                        <h1>Lista das classes de despesas</h1>
+
+                        <p:toolbar>
+                            <p:toolbarGroup styleClass="ui-fli">
+
+                            </p:toolbarGroup>
+                            <p:toolbarGroup align="right">
+                                <p:button value="Novo" outcome="/pages/base/classe-despesa/classe-despesa-cadastro"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+
+                        <p:messages closable="true" showIcon="true" escape="true">
+                            <p:autoUpdate/>
+                        </p:messages>
+
+                        <p:dataTable id="dt"
+                                     var="obj"
+                                     value="#{classeDespesaBean.classeDespesaLazyDataModel}"
+                                     paginator="true"
+                                     rows="10"
+                                     lazy="true"
+                                     emptyMessage="#{app.nenhum-item-encontrado}"
+                                     rowsPerPageTemplate="5,10,15,20,200"
+                                     paginatorAlwaysVisible="false"
+                                     paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages}"
+                                     rowKey="#{obj.id}">
+
+                            <p:column headerText="#{app.filtro-descricao}">
+                                <h:outputText value="#{obj.descricao}"/>
+                            </p:column>
+
+                            <!--<p:column headerText="#{app.inativo}">-->
+                                <!--<h:outputText value="#{obj.inativo}"/>-->
+                            <!--</p:column>-->
+
+                        </p:dataTable>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

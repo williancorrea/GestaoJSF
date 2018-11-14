@@ -1,7 +1,10 @@
 package br.com.wcorrea.util.jsf;
 
+import org.primefaces.context.RequestContext;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.io.File;
 
 public class FacesUtils {
 
@@ -34,4 +37,69 @@ public class FacesUtils {
         }
     }
 
+
+    /**
+     * Adiciona o separador padrão de cada sistema operacional para os diretorios
+     *
+     * @return - Separador padrao do Sistema Operacional
+     */
+    public static String separadorCaminhoAplicacao() {
+        return File.separator;
+    }
+
+    /**
+     * Recupera a mensagem internacionalizada da aplicacao
+     *
+     * @param chave - Caminho dentro da aplicacao que quer chegar
+     * @return
+     */
+    public static String mensagemInternacionalizada(final String chave) {
+        final FacesContext context = FacesContext.getCurrentInstance();
+        return context.getApplication().getResourceBundle(context, "app").getString(chave);
+    }
+
+    /**
+     * Fecha o dialog, executa o valor hide ao dialogo passado por parametro
+     *
+     * @param dialog
+     */
+    public static void fecharDialogXhtml(String dialog) {
+        RequestContext.getCurrentInstance().execute("PF('" + dialog + "').hide();");
+    }
+
+    /**
+     * Atualiza um determinado componente da tela xhtml
+     *
+     * @param componente
+     */
+    public static void atualizarComponenteXhtml(String componente) {
+        RequestContext.getCurrentInstance().update(componente);
+    }
+
+    /**
+     * Executa um determinado javascript Ex: funcao()
+     *
+     * @param nomeJavaScript
+     */
+    public static void executarJavaScript(String nomeJavaScript) {
+        RequestContext.getCurrentInstance().execute(nomeJavaScript + ";");
+    }
+
+    /**
+     * Quando reenvia os dados para ela mesma
+     *
+     * @return
+     */
+    public static boolean isPostback() {
+        return FacesContext.getCurrentInstance().isPostback();
+    }
+
+    /**
+     * Quando NAO reenvia os dados para ela mesma
+     *
+     * @return
+     */
+    public static boolean isNotPostback() {
+        return !isPostback();
+    }
 }
