@@ -21,7 +21,7 @@ import java.io.Serializable;
 public class ClasseDespesa extends Comum implements Serializable {
     private static final long serialVersionUID = 7180271019059228253L;
 
-    @Size(max = 150)
+    @Size(min = 3, max = 150)
     @Column(length = 150, nullable = false)
     @NotBlank
     @Getter

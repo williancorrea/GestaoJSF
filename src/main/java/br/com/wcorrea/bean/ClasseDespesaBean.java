@@ -3,6 +3,8 @@ package br.com.wcorrea.bean;
 import br.com.wcorrea.modelo.ClasseDespesa;
 import br.com.wcorrea.modelo.filtros.FiltroPadrao;
 import br.com.wcorrea.repository.ClasseDespesaRepository;
+import br.com.wcorrea.repository.ClasseDespesaRepository2;
+import br.com.wcorrea.util.jpa.Transacional;
 import br.com.wcorrea.util.jsf.FacesUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +31,7 @@ public class ClasseDespesaBean implements Serializable {
     private FiltroPadrao filtroPadrao;
 
     @Inject
-    private ClasseDespesaRepository classeDespesaRepository;
+    private ClasseDespesaRepository2 classeDespesaRepository;
 
     @Getter
     @Setter
@@ -90,16 +92,19 @@ public class ClasseDespesaBean implements Serializable {
     /**
      * SALVAR OBJETO NO BANCO DO DADOS
      */
+    @Transacional
     public void salvar() {
         boolean editando = classeDespesa.isEditando();
         classeDespesa = classeDespesaRepository.salvar(classeDespesa);
 
-        novo();
+        //TODO: COLOCAR TELA DE LOADING NO MEIO DA TELA
+
         if (editando) {
             FacesUtils.addMessageinfo("Classe de Despesa (" + classeDespesa.getDescricao() + ") atualizada com sucesso!", false);
             return;
         }
         FacesUtils.addMessageinfo("Classe de Despesa (" + classeDespesa.getDescricao() + ") cadastrada com sucesso!", false);
+        novo();
     }
 
 
