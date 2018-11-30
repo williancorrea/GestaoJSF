@@ -2,43 +2,19 @@ package br.com.wcorrea.repository;
 
 import br.com.wcorrea.modelo.ClasseDespesa;
 import br.com.wcorrea.modelo.filtros.FiltroPadrao;
+import br.com.wcorrea.util.jpa.GenericDao;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
 
-public class ClasseDespesaRepository implements Serializable {
+public class ClasseDespesaRepository extends GenericDao<ClasseDespesa, Long> implements Serializable {
+    private static final long serialVersionUID = -4669657125949454834L;
 
-    private static final long serialVersionUID = 2169956831708235539L;
-
-    @Inject
-    private EntityManager entityManager;
-
-    public ClasseDespesa buscar(Long id) {
-        return entityManager.find(ClasseDespesa.class, id);
+    public ClasseDespesaRepository() {
+        super(ClasseDespesa.class);
     }
-
-    public List<ClasseDespesa> todos() {
-        return entityManager.createQuery("from ClasseDespesa", ClasseDespesa.class).getResultList();
-    }
-
-    public List<ClasseDespesa> pesquisar(String consulta) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-
-        CriteriaQuery<ClasseDespesa> criteriaQuery = criteriaBuilder.createQuery(ClasseDespesa.class);
-        Root<ClasseDespesa> root = criteriaQuery.from(ClasseDespesa.class);
-        criteriaQuery.select(root);
-        criteriaQuery.where(criteriaBuilder.like(root.get("descricao"), "%" + consulta + "%"));
-
-        return entityManager.createQuery(criteriaQuery).getResultList();
-    }
-
 
     /**
      * LISTAR AS AUDITORIAS DE ACORDO COM O PARAMETRO

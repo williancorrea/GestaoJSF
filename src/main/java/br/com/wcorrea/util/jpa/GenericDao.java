@@ -53,8 +53,11 @@ public abstract class GenericDao <T, I extends Serializable> {
         entityManager.flush();
     }
 
-
-    public List<T> getList() {
+    /**
+     * LISTA TODOS OS REGISTRO
+     * @return
+     */
+    public List<T> listarTudo() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(persistedClass);
         query.from(persistedClass);

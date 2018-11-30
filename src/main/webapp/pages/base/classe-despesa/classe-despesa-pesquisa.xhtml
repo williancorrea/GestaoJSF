@@ -33,8 +33,7 @@
                             <p:autoUpdate/>
                         </p:messages>
 
-                        <p:dataTable id="dt"
-                                     var="obj"
+                        <p:dataTable id="dt" var="obj"
                                      value="#{classeDespesaBean.classeDespesaLazyDataModel}"
                                      paginator="true"
                                      rows="10"
@@ -45,15 +44,16 @@
                                      paginatorPosition="bottom"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages}"
+                                     selectionMode="single"
                                      rowKey="#{obj.id}">
 
                             <p:column headerText="#{app.filtro-descricao}">
                                 <h:outputText value="#{obj.descricao}"/>
                             </p:column>
 
-                            <!--<p:column headerText="#{app.inativo}">-->
-                                <!--<h:outputText value="#{obj.inativo}"/>-->
-                            <!--</p:column>-->
+                            <p:column headerText="#{app.inativo}">
+                                <h:outputText value="#{obj.inativo}"/>
+                            </p:column>
 
                         </p:dataTable>
                     </h:form>

@@ -3,18 +3,21 @@ package br.com.wcorrea.bean;
 import br.com.wcorrea.modelo.ClasseDespesa;
 import br.com.wcorrea.modelo.filtros.FiltroPadrao;
 import br.com.wcorrea.repository.ClasseDespesaRepository;
-import br.com.wcorrea.repository.ClasseDespesaRepository2;
 import br.com.wcorrea.util.jpa.Transacional;
 import br.com.wcorrea.util.jsf.FacesUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.omnifaces.cdi.ViewScoped;
 import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Named
 @ViewScoped
@@ -31,7 +34,7 @@ public class ClasseDespesaBean implements Serializable {
     private FiltroPadrao filtroPadrao;
 
     @Inject
-    private ClasseDespesaRepository2 classeDespesaRepository;
+    private ClasseDespesaRepository classeDespesaRepository;
 
     @Getter
     @Setter
@@ -60,25 +63,18 @@ public class ClasseDespesaBean implements Serializable {
              * FAZ O CARREGAMENTO LAZYLOADING DE TODAS AS AUDITORIAS
              * CADASTRADAS
              */
-//            classeDespesaLazyDataModel = new LazyDataModel<ClasseDespesa>() {
-//                private static final long serialVersionUID = 1L;
-//
-//                @Override
-//                public List<ClasseDespesa> load(int primeiroRegistro, int quantidadeRegistros, String sortField,
-//                                                SortOrder sortOrder, Map<String, Object> filters) {
-//
-//                    List<ClasseDespesa> retorno = new ArrayList<>();
-//
-//                    // Lazy-loading
-//                    filtroPadrao.setPrimeiroRegistro(primeiroRegistro);
-//                    filtroPadrao.setQuantidadeRegistros(quantidadeRegistros);
-//
-//                    setRowCount(classeDespesaRepository.quantidadeRegistrosFiltrados(filtroPadrao));
-//                    retorno = classeDespesaRepository.listar(filtroPadrao);
-//
-//                    return retorno;
-//                }
-//            };
+            classeDespesaLazyDataModel = new LazyDataModel<ClasseDespesa>() {
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public List<ClasseDespesa> load(int primeiroRegistro, int quantidadeRegistros, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+                    filtroPadrao.setPrimeiroRegistro(primeiroRegistro);
+                    filtroPadrao.setQuantidadeRegistros(quantidadeRegistros);
+                    // Quantidade Maxima de Registros
+                    setRowCount(classeDespesaRepository.quantidadeRegistrosFiltrados(filtroPadrao));
+                    return classeDespesaRepository.listar(filtroPadrao);
+                }
+            };
         }
     }
 
