@@ -23,21 +23,36 @@ public abstract class GenericDao <T, I extends Serializable> {
         this.persistedClass = persistedClass;
     }
 
+    /**
+     * BUSCAR ITEM PELO ID
+     * @param id
+     * @return
+     */
+    public T buscarPorID(I id) {
+        return entityManager.find(persistedClass, id);
+    }
+
+    /**
+     * SALVAR OS DADOS DO ITEM
+     * @param entity
+     * @return
+     */
     public T salvar(@Valid T entity){
         entity = entityManager.merge(entity);
         entityManager.flush();
         return entity;
     }
 
+    /**
+     * REMOVER ITEM
+     * @param id
+     */
     public void remover(I id) {
-        T entity = encontrar(id);
-//        EntityTransaction tx = entityManager.getTransaction();
-//        tx.begin();
-        T mergedEntity = entityManager.merge(entity);
-        entityManager.remove(mergedEntity);
+        T entity = buscarPorID(id);
+        entityManager.remove(entity);
         entityManager.flush();
-//        tx.commit();
     }
+
 
     public List<T> getList() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -46,7 +61,5 @@ public abstract class GenericDao <T, I extends Serializable> {
         return entityManager.createQuery(query).getResultList();
     }
 
-    public T encontrar(I id) {
-        return entityManager.find(persistedClass, id);
-    }
+
 }

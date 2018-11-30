@@ -58,7 +58,6 @@ public class GuestPreferences implements Serializable {
         themeColors.put("turquoise", "#47c5d4");
         themeColors.put("blue", "#3192e1");
         themeColors.put("orange", "#ff9c59");
-        themeColors.put("purple", "#985edb");
         themeColors.put("pink", "#e42a7b");
         themeColors.put("purple", "#985edb");
         themeColors.put("green", "#5ea980");

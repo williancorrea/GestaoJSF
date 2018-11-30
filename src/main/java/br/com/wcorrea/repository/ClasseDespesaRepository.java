@@ -20,14 +20,6 @@ public class ClasseDespesaRepository implements Serializable {
     @Inject
     private EntityManager entityManager;
 
-    public ClasseDespesa salvar(ClasseDespesa obj) {
-        return entityManager.merge(obj);
-    }
-
-    public void remover(ClasseDespesa obj) {
-        entityManager.remove(entityManager.getReference(ClasseDespesa.class, obj.getId()));
-    }
-
     public ClasseDespesa buscar(Long id) {
         return entityManager.find(ClasseDespesa.class, id);
     }
