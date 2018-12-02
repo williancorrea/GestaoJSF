@@ -53,8 +53,9 @@
                              icon="pi pi-times"/>
         </p:confirmDialog>
 
-        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
-            <f:facet name="start" onsuccess="configurarMoeda()">
+<!--        
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px" onsuccess="configurarMoeda()">
+            <f:facet name="start">
                 <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
             </f:facet>
 
@@ -62,6 +63,16 @@
                 <h:outputText value=""/>
             </f:facet>
         </p:ajaxStatus>
+-->
+        
+        
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide(); configurarMoeda();" />
+        <p:dialog widgetVar="statusDialog" 
+                  modal="true" draggable="false"
+                closable="false" resizable="false" showHeader="false"
+                style="border-radius: 10px;">
+                <p:graphicImage library="wcorrea" name="img/loading.gif" />
+        </p:dialog>
     </h:form>
 
     <script>
