@@ -7,15 +7,14 @@ import br.com.wcorrea.util.jpa.Transacional;
 import br.com.wcorrea.util.jsf.FacesUtils;
 import lombok.Getter;
 import lombok.Setter;
-import org.omnifaces.cdi.ViewScoped;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
 import javax.annotation.PostConstruct;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +37,7 @@ public class ClasseDespesaBean implements Serializable {
 
     @Getter
     @Setter
-    private LazyDataModel<ClasseDespesa> classeDespesaLazyDataModel;
+    private LazyDataModel<ClasseDespesa> model;
 
 
     /**
@@ -63,13 +62,17 @@ public class ClasseDespesaBean implements Serializable {
              * FAZ O CARREGAMENTO LAZYLOADING DE TODAS AS AUDITORIAS
              * CADASTRADAS
              */
-            classeDespesaLazyDataModel = new LazyDataModel<ClasseDespesa>() {
+            model = new LazyDataModel<ClasseDespesa>() {
                 private static final long serialVersionUID = 1L;
 
                 @Override
                 public List<ClasseDespesa> load(int primeiroRegistro, int quantidadeRegistros, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+
                     filtroPadrao.setPrimeiroRegistro(primeiroRegistro);
                     filtroPadrao.setQuantidadeRegistros(quantidadeRegistros);
+                    filtroPadrao.setPropriedadeOrdenacao(sortField);
+                    filtroPadrao.setAscendente(SortOrder.ASCENDING.equals(sortOrder));
+
                     // Quantidade Maxima de Registros
                     setRowCount(classeDespesaRepository.quantidadeRegistrosFiltrados(filtroPadrao));
                     return classeDespesaRepository.listar(filtroPadrao);
@@ -103,5 +106,11 @@ public class ClasseDespesaBean implements Serializable {
         novo();
     }
 
+    @Transacional
+    public void excluir() {
+        //TODO: Traduzir mensagens
+        classeDespesaRepository.remover(classeDespesa.getId());
+        FacesUtils.addMessageinfo("Classe de Despesa (" + classeDespesa.getDescricao() + ") excluida com sucesso!", false);
+    }
 
 }

@@ -35,6 +35,7 @@
         <ui:include src="./topbar.xhtml"/>
         <ui:include src="./menu.xhtml"/>
 
+
         <div class="layout-main">
             <div class="layout-main-content">
                 <ui:insert name="content"/>
@@ -44,15 +45,24 @@
         </div>
     </div>
 
-    <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
-        <f:facet name="start" onsuccess="configurarMoeda()">
-            <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
-        </f:facet>
+    <h:form>
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+            <p:commandButton value="#{app.campo_sim}" type="button" styleClass="ui-confirmdialog-yes"
+                             icon="pi pi-check"/>
+            <p:commandButton value="#{app.campo_nao}" type="button" styleClass="ui-confirmdialog-no"
+                             icon="pi pi-times"/>
+        </p:confirmDialog>
 
-        <f:facet name="complete">
-            <h:outputText value=""/>
-        </f:facet>
-    </p:ajaxStatus>
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
+            <f:facet name="start" onsuccess="configurarMoeda()">
+                <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
+            </f:facet>
+
+            <f:facet name="complete">
+                <h:outputText value=""/>
+            </f:facet>
+        </p:ajaxStatus>
+    </h:form>
 
     <script>
 

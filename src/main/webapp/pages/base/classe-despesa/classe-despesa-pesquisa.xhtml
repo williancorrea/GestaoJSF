@@ -9,20 +9,17 @@
         <f:event listener="#{classeDespesaBean.listarClasseDespesasCadastradas()}" type="preRenderView"/>
     </f:metadata>
 
-    <ui:define name="title">Classe de Despesa</ui:define>
-
+    <ui:define name="title">#{app.classe_despesa_titulo}</ui:define>
     <ui:define name="content">
-
 
         <div class="ui-g ">
             <div class="ui-g-12">
                 <div class="card" style="padding-top: 1px;">
                     <h:form>
-                        <h1>Lista das classes de despesas</h1>
 
-                        <p:toolbar>
-                            <p:toolbarGroup styleClass="ui-fli">
-
+                        <p:toolbar styleClass="bloco-titulo-pesquisa">
+                            <p:toolbarGroup>
+                                <h1>#{app.classe_despesa_lista}</h1>
                             </p:toolbarGroup>
                             <p:toolbarGroup align="right">
                                 <p:button value="Novo" outcome="/pages/base/classe-despesa/classe-despesa-cadastro"/>
@@ -34,11 +31,11 @@
                         </p:messages>
 
                         <p:dataTable id="dt" var="obj"
-                                     value="#{classeDespesaBean.classeDespesaLazyDataModel}"
+                                     value="#{classeDespesaBean.model}"
                                      paginator="true"
                                      rows="10"
                                      lazy="true"
-                                     emptyMessage="#{app.nenhum-item-encontrado}"
+                                     emptyMessage="#{app.tabela_nenhum_item_encontrado}"
                                      rowsPerPageTemplate="5,10,15,20,200"
                                      paginatorAlwaysVisible="false"
                                      paginatorPosition="bottom"
@@ -47,15 +44,24 @@
                                      selectionMode="single"
                                      rowKey="#{obj.id}">
 
-                            <p:column headerText="#{app.filtro-descricao}">
+                            <p:column headerText="#{app.campo_descricao}">
                                 <h:outputText value="#{obj.descricao}"/>
                             </p:column>
 
-                            <p:column headerText="#{app.inativo}">
-                                <h:outputText value="#{obj.inativo}"/>
+                            <p:column headerText="#{app.campo_inativo}" styleClass="tabela-coluna-inativo">
+                                <h:outputText value="#{obj.inativo eq true ? app.campo_sim : app.campo_nao}"/>
                             </p:column>
 
                         </p:dataTable>
+
+                        <div>
+                            <p:commandButton value="#{app.btn_excluir}"
+                                             action="#{classeDespesaBean.excluir}">
+                                <p:confirm header="#{app.dialogo_modal_confirmacao}"
+                                           message="#{app.dialogo_modal_mensagem_excluir} + ' COLOCAR AQUI O ITEM'?'"
+                                           icon="pi pi-exclamation-triangle"/>
+                            </p:commandButton>
+                        </div>
                     </h:form>
                 </div>
             </div>

@@ -4,7 +4,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title">Classe de Despesa</ui:define>
+    <ui:define name="title">#{app.classe_despesa_titulo}</ui:define>
 
     <ui:define name="content">
 
@@ -13,16 +13,18 @@
             <div class="ui-g-12">
                 <div class="card" style="padding-top: 1px;">
                     <h:form>
-                        <h1>Nova classe de despesa</h1>
+                        <h1>#{app.classe_despesa_novo}</h1>
 
-                        <p:toolbar>
+                        <p:toolbar styleClass="bloco-titulo-pesquisa">
                             <p:toolbarGroup styleClass="ui-fli">
                                 <p:button value="Novo" outcome="/pages/base/classe-despesa/classe-despesa-cadastro"/>
-                                <p:commandButton value="Salvar" action="#{classeDespesaBean.salvar}"
+                                <p:commandButton value="#{app.btn_salvar}"
+                                                 action="#{classeDespesaBean.salvar}"
                                                  update="pnl"/>
                             </p:toolbarGroup>
                             <p:toolbarGroup align="right">
-                                <p:button value="Pesquisa" outcome="/pages/base/classe-despesa/classe-despesa-pesquisa"/>
+                                <p:button value="#{app.btn_pesquisa}"
+                                          outcome="/pages/base/classe-despesa/classe-despesa-pesquisa"/>
                             </p:toolbarGroup>
                         </p:toolbar>
 
@@ -35,14 +37,14 @@
                                      styleClass="ui-fluid"
                                      columnClasses="rotulo, campo">
 
-                            <p:outputLabel value="Descricao" for="descricao"/>
+                            <p:outputLabel value="#{app.campo_descricao}" for="descricao"/>
                             <p:inputText id="descricao"
-                                         maxlength="150"
                                          value="#{classeDespesaBean.classeDespesa.descricao}"/>
 
-                            <p:outputLabel value="Inativo" for="inativo"/>
+                            <p:outputLabel value="#{app.campo_inativo}" for="inativo"/>
                             <p:selectBooleanCheckbox id="inativo"/>
                         </p:panelGrid>
+
                     </h:form>
                 </div>
             </div>

@@ -16,4 +16,12 @@ public class Filtro implements Serializable {
     @Getter
     @Setter
     private int quantidadeRegistros;
+
+    @Getter
+    @Setter
+    private String propriedadeOrdenacao;
+
+    @Getter
+    @Setter
+    private boolean ascendente;
 }

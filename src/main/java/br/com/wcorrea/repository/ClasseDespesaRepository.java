@@ -4,8 +4,13 @@ import br.com.wcorrea.modelo.ClasseDespesa;
 import br.com.wcorrea.modelo.filtros.FiltroPadrao;
 import br.com.wcorrea.util.jpa.GenericDao;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
-import javax.persistence.TypedQuery;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,17 +28,18 @@ public class ClasseDespesaRepository extends GenericDao<ClasseDespesa, Long> imp
      * @return
      */
     public List<ClasseDespesa> listar(FiltroPadrao filtro) {
-        try {
-            String sql = criarSQL(filtro, false);
-            TypedQuery<ClasseDespesa> consulta = entityManager.createQuery(sql, ClasseDespesa.class);
+        Criteria criteria = criarCriteriaParaFiltro(filtro);
 
-            consulta.setFirstResult(filtro.getPrimeiroRegistro());
-            consulta.setMaxResults(filtro.getQuantidadeRegistros());
+        criteria.setFirstResult(filtro.getPrimeiroRegistro());
+        criteria.setMaxResults(filtro.getQuantidadeRegistros());
 
-            return consulta.getResultList();
-        } catch (Exception e) {
-            throw e;
+        if (filtro.isAscendente() && filtro.getPropriedadeOrdenacao() != null) {
+            criteria.addOrder(Order.asc(filtro.getPropriedadeOrdenacao()));
+        } else if (filtro.getPropriedadeOrdenacao() != null) {
+            criteria.addOrder(Order.desc(filtro.getPropriedadeOrdenacao()));
         }
+
+        return criteria.list();
     }
 
     /**
@@ -43,35 +49,25 @@ public class ClasseDespesaRepository extends GenericDao<ClasseDespesa, Long> imp
      * @return
      */
     public int quantidadeRegistrosFiltrados(FiltroPadrao filtro) {
-        try {
-            String sql = criarSQL(filtro, true);
-            TypedQuery<Long> consulta = entityManager.createQuery(sql, Long.class);
-            return consulta.getSingleResult().intValue();
-        } catch (Exception e) {
-            throw e;
-        }
+        Criteria criteria = criarCriteriaParaFiltro(filtro);
+        criteria.setProjection(Projections.rowCount());
+        return ((Number) criteria.uniqueResult()).intValue();
     }
 
     /**
-     * CRIA A SQL COM OS PARAMETROS DO FILTRO
+     * MONTA OS CRITERIOS PARA A PESQUISA
      *
      * @param filtro
      * @return
      */
-    private String criarSQL(FiltroPadrao filtro, boolean count) {
-        String sql = "";
-        if (count) {
-            sql = "select count(a) from ClasseDespesa a where 1=1";
-        } else {
-            sql = "from ClasseDespesa a where 1=1 ";
+    private Criteria criarCriteriaParaFiltro(FiltroPadrao filtro) {
+        Session session = entityManager.unwrap(Session.class);
+        Criteria criteria = session.createCriteria(ClasseDespesa.class);
+
+        if (StringUtils.isNotEmpty(filtro.getDescricao())) {
+            criteria.add(Restrictions.ilike("descricao", filtro.getDescricao(), MatchMode.ANYWHERE));
         }
 
-        /**
-         * FILTROS
-         */
-        if (StringUtils.isNotBlank(filtro.getDescricao())) {
-            sql += " and upper(a.descricao) like '%" + filtro.getDescricao().toUpperCase() + "%'";
-        }
-        return sql;
+        return criteria;
     }
 }

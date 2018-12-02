@@ -26,3 +26,20 @@ body .ui-messages .ui-messages-error {
     color: #d43145;
     font-weight: 600;
 }
+
+.bloco-titulo-pesquisa{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 35px;
+    background: none !important;
+    border: 0px !important;
+    border-bottom: 1px solid #c7c7c7 !important;
+}
+.bloco-titulo-pesquisa button {
+    min-width: 100px;
+    margin-top: 3px;
+}
+
+.tabela-coluna-inativo{
+    width: 50px; text-align: center;
+}
