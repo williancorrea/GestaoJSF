@@ -21,8 +21,8 @@ public class EntityManagerProducer {
 
     @PostConstruct
     public void postConstruct() {
-//        this.factory = Persistence.createEntityManagerFactory("GestaoPU", properties.get());
-        this.factory = Persistence.createEntityManagerFactory("GestaoPU");
+        this.factory = Persistence.createEntityManagerFactory("GestaoPU", properties.get());
+//        this.factory = Persistence.createEntityManagerFactory("GestaoPU");
     }
 
     @Produces
