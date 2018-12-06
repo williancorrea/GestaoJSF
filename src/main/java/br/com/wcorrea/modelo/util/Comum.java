@@ -22,6 +22,7 @@ public abstract class Comum implements Serializable {
     @Setter
     private Long id;
 
+    //TODO: COLOCAR A CRIPTOGRAFIA
     @Transient
     private String key;
 
