@@ -68,7 +68,7 @@
 -->
         
         
-        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide(); configurarMoeda();" />
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide(); recarregarScripts();" oncomplete="recarregarScripts();" onerror="recarregarScripts();"/>
         <p:dialog widgetVar="statusDialog" 
                   modal="true" draggable="false"
                 closable="false" resizable="false" showHeader="false"
@@ -123,12 +123,16 @@
             $(".moeda").maskMoney({prefix: "R$ ", decimal: ",", thousands: ".", allowZero: true});
         }
 
-        $(document).ready(function () {
+        function recarregarScripts(){
             configurarMoeda();
             upperText(".uppercase");
             upperText("input");
 
             lowerText(".lowercase");
+        }
+
+        $(document).ready(function () {
+            recarregarScripts();
         });
     </script>
 
