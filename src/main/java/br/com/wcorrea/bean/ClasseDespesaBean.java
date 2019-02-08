@@ -96,21 +96,24 @@ public class ClasseDespesaBean implements Serializable {
         boolean editando = classeDespesa.isEditando();
         classeDespesa = classeDespesaRepository.salvar(classeDespesa);
 
-        //TODO: COLOCAR TELA DE LOADING NO MEIO DA TELA
-
         if (editando) {
-            FacesUtils.addMessageinfo("Classe de Despesa (" + classeDespesa.getDescricao() + ") atualizada com sucesso!", false);
+            FacesUtils.addMessageinfo(classeDespesa.getDescricao() + " " + FacesUtils.mensagemInternacionalizada("informativo_atualizado_sucesso"), false);
             return;
         }
-        FacesUtils.addMessageinfo("Classe de Despesa (" + classeDespesa.getDescricao() + ") cadastrada com sucesso!", false);
+        FacesUtils.addMessageinfo(classeDespesa.getDescricao() + " " + FacesUtils.mensagemInternacionalizada("informativo_cadastrada_sucesso"), false);
         novo();
     }
 
+    /**
+     * EXCLUIR ITEM DO BANCO DE DADOS
+     *
+     * @param obj
+     */
     @Transacional
-    public void excluir() {
-        //TODO: Traduzir mensagens
-        classeDespesaRepository.remover(classeDespesa.getId());
-        FacesUtils.addMessageinfo("Classe de Despesa (" + classeDespesa.getDescricao() + ") excluida com sucesso!", false);
+    public void excluir(ClasseDespesa obj) {
+        classeDespesaRepository.remover(obj.getId());
+        FacesUtils.addMessageinfo(obj.getDescricao() + " " + FacesUtils.mensagemInternacionalizada("informativo_exlusao_sucesso"), false);
+        listarClasseDespesasCadastradas();
     }
 
 }

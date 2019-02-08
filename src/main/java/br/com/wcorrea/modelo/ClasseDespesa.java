@@ -2,9 +2,8 @@ package br.com.wcorrea.modelo;
 
 
 import br.com.wcorrea.modelo.util.Comum;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Column;
@@ -15,21 +14,19 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @ToString
-@EqualsAndHashCode
 @Entity
 @Table
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ClasseDespesa extends Comum implements Serializable {
     private static final long serialVersionUID = 7180271019059228253L;
 
     @Size(min = 3, max = 150)
     @Column(length = 150, nullable = false)
     @NotBlank
-    @Getter
-    @Setter
+    @EqualsAndHashCode.Include
     private String descricao;
 
-    @Getter
-    @Setter
     private boolean inativo;
 
     public ClasseDespesa() {

@@ -1,16 +1,14 @@
 package br.com.wcorrea.modelo.util;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @ToString
-@EqualsAndHashCode
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @MappedSuperclass
 public abstract class Comum implements Serializable {
 
@@ -18,22 +16,17 @@ public abstract class Comum implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
+    @EqualsAndHashCode.Include
     private Long id;
 
     //TODO: COLOCAR A CRIPTOGRAFIA
     @Transient
     private String key;
 
-    @Getter
-    @Setter
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_alteracao")
     private Date dataAlteracao;
 
-    @Getter
-    @Setter
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_criacao")
     private Date dataCriacao;
