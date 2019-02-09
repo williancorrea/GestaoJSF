@@ -49,7 +49,9 @@
                                          value="#{classeDespesaBean.classeDespesa.descricao}"/>
 
                             <p:outputLabel value="#{app.campo_inativo}" for="inativo"/>
-                            <p:selectBooleanCheckbox id="inativo"/>
+                            <p:inputSwitch id="inativo"
+                                           value="#{classeDespesaBean.classeDespesa.inativo}"
+                                           offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
                         </p:panelGrid>
 
                     </h:form>

@@ -1,7 +1,7 @@
 package br.com.wcorrea.repository;
 
 import br.com.wcorrea.modelo.ClasseDespesa;
-import br.com.wcorrea.modelo.filtros.FiltroPadrao;
+import br.com.wcorrea.modelo.filtros.FiltroGlobal;
 import br.com.wcorrea.util.jpa.GenericDao;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -27,7 +27,7 @@ public class ClasseDespesaRepository extends GenericDao<ClasseDespesa, Long> imp
      * @param filtro
      * @return
      */
-    public List<ClasseDespesa> listar(FiltroPadrao filtro) {
+    public List<ClasseDespesa> listar(FiltroGlobal filtro) {
         Criteria criteria = criarCriteriaParaFiltro(filtro);
 
         criteria.setFirstResult(filtro.getPrimeiroRegistro());
@@ -48,7 +48,7 @@ public class ClasseDespesaRepository extends GenericDao<ClasseDespesa, Long> imp
      * @param filtro
      * @return
      */
-    public int quantidadeRegistrosFiltrados(FiltroPadrao filtro) {
+    public int quantidadeRegistrosFiltrados(FiltroGlobal filtro) {
         Criteria criteria = criarCriteriaParaFiltro(filtro);
         criteria.setProjection(Projections.rowCount());
         return ((Number) criteria.uniqueResult()).intValue();
@@ -60,12 +60,12 @@ public class ClasseDespesaRepository extends GenericDao<ClasseDespesa, Long> imp
      * @param filtro
      * @return
      */
-    private Criteria criarCriteriaParaFiltro(FiltroPadrao filtro) {
+    private Criteria criarCriteriaParaFiltro(FiltroGlobal filtro) {
         Session session = entityManager.unwrap(Session.class);
         Criteria criteria = session.createCriteria(ClasseDespesa.class);
 
-        if (StringUtils.isNotEmpty(filtro.getDescricao())) {
-            criteria.add(Restrictions.ilike("descricao", filtro.getDescricao(), MatchMode.ANYWHERE));
+        if (StringUtils.isNotEmpty(filtro.getPesquisaGlobal())) {
+            criteria.add(Restrictions.ilike("descricao", filtro.getPesquisaGlobal(), MatchMode.ANYWHERE));
         }
 
         return criteria;

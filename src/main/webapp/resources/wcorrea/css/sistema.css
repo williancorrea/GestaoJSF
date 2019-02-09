@@ -45,15 +45,23 @@ body .ui-messages .ui-messages-error {
     width: 50px;
     text-align: center;
 }
+.tabela-coluna-inativo-cor{
+    background-color: #e0a3a3 !important;
+}
 
 body .ui-datatable thead th {
     background-color: #c7c7c7 !important;
     border-color: #aba8a8 !important;
 }
 
-body .ui-button.red-btn {
-    background-color: red;
+body .ui-button.btn-red {
+    background-color: #c14545;
 }
-body .ui-button.ui-button-text-icon-left .ui-button-text{
+
+body .ui-button.btn-green {
+    background-color: #3b8a4d;
+}
+
+body .ui-button.ui-button-text-icon-left .ui-button-text {
     padding: 4px 15px 4px 15px;
 }

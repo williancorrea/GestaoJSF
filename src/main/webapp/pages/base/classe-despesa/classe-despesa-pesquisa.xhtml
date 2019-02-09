@@ -22,7 +22,7 @@
                                 <h1>#{app.classe_despesa_lista}</h1>
                             </p:toolbarGroup>
                             <p:toolbarGroup align="right">
-                                <p:button value="#{app.btn_novo}"
+                                <p:button id="btnNovo" value="#{app.btn_novo}"
                                           outcome="/pages/base/classe-despesa/classe-despesa-cadastro"/>
                             </p:toolbarGroup>
                         </p:toolbar>
@@ -31,27 +31,24 @@
                             <p:autoUpdate/>
                         </p:messages>
 
-                        <p:fieldset legend="#{app.lbl_pesquisar}" style="margin-bottom:20px">
-                            <h:outputText
-                                    value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
-                                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
-                                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect,
-                                        but given to ruthless violence whenever anything stands against the good of the family."/>
+                        <p:fieldset id="grpFiltro" legend="#{app.lbl_pesquisar}" style="margin-bottom:20px">
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12">
+                                    <div class="ui-inputgroup">
+                                        <p:inputText id="filtroDescricao"
+                                                     value="#{classeDespesaBean.filtro.pesquisaGlobal}"
+                                                     placeholder="#{app.lbl_pesquisar_phaceholcer}"/>
+                                        <p:commandButton id="btnFiltrar" icon="fa fa-filter" styleClass="btn-green"
+                                                         action="#{classeDespesaBean.listarClasseDespesasCadastradas}"
+                                                         update=":frmPesquisa"/>
 
-                            <h:panelGrid columns="1"
-                                         style="width: 100%"
-                                         styleClass="ui-fluid"
-                                         columnClasses="rotulo, campo">
-                                <p:inputText id="filtroDescricao" value="#{classeDespesaBean.filtroPadrao.descricao}" placeholder="#{app.campo_descricao}"/>
-                            </h:panelGrid>
-
-                            <p:commandButton value="#{app.btn_filtrar}"
-                                             icon="pi pi-filter"
-                                             action="#{classeDespesaBean.listarClasseDespesasCadastradas}"
-                                             update=":frmPesquisa:tblDados">
-                            </p:commandButton>
-
-
+                                        <p:commandButton id="btnLimparFiltro" icon="fa fa-remove" styleClass="btn-red"
+                                                         rendered="#{not empty classeDespesaBean.filtro.pesquisaGlobal}"
+                                                         action="#{classeDespesaBean.limparFiltros}"
+                                                         update=":frmPesquisa"/>
+                                    </div>
+                                </div>
+                            </div>
                         </p:fieldset>
 
                         <p:dataTable id="tblDados" var="obj"
@@ -65,7 +62,7 @@
                                      paginatorPosition="bottom"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages}"
-                        >
+                                     rowStyleClass="#{obj.inativo ? 'tabela-coluna-inativo-cor': ''}">
 
                             <p:column headerText="#{app.campo_descricao}">
                                 <h:outputText value="#{obj.descricao}"/>
@@ -86,7 +83,7 @@
                                 <p:commandButton title="#{app.btn_excluir}"
                                                  icon="fa fa-trash-o"
                                                  style="height: 20px"
-                                                 styleClass="red-btn"
+                                                 styleClass="btn-red"
                                                  action="#{classeDespesaBean.excluir(obj)}"
                                                  update=":frmPesquisa:tblDados">
                                     <p:confirm header="#{app.dialogo_modal_confirmacao}"
@@ -97,9 +94,6 @@
 
                         </p:dataTable>
 
-                        <div>
-
-                        </div>
                     </h:form>
                 </div>
             </div>
