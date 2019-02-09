@@ -31,6 +31,29 @@
                             <p:autoUpdate/>
                         </p:messages>
 
+                        <p:fieldset legend="#{app.lbl_pesquisar}" style="margin-bottom:20px">
+                            <h:outputText
+                                    value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.
+                                        His beloved son Michael has just come home from the war, but does not intend to become part of his father's business.
+                                        Through Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect,
+                                        but given to ruthless violence whenever anything stands against the good of the family."/>
+
+                            <h:panelGrid columns="1"
+                                         style="width: 100%"
+                                         styleClass="ui-fluid"
+                                         columnClasses="rotulo, campo">
+                                <p:inputText id="filtroDescricao" value="#{classeDespesaBean.filtroPadrao.descricao}" placeholder="#{app.campo_descricao}"/>
+                            </h:panelGrid>
+
+                            <p:commandButton value="#{app.btn_filtrar}"
+                                             icon="pi pi-filter"
+                                             action="#{classeDespesaBean.listarClasseDespesasCadastradas}"
+                                             update=":frmPesquisa:tblDados">
+                            </p:commandButton>
+
+
+                        </p:fieldset>
+
                         <p:dataTable id="tblDados" var="obj"
                                      value="#{classeDespesaBean.model}"
                                      paginator="true"
@@ -53,14 +76,19 @@
                             </p:column>
 
                             <p:column width="66" exportable="false">
-                                <p:button title="Editar"
+                                <p:button title="#{app.btn_editar}"
                                           outcome="/pages/base/classe-despesa/classe-despesa-cadastro"
                                           icon="fa fa-edit"
                                           style="height: 20px">
-                                    <f:param name="objID" value="#{obj.id}"/>
+                                    <f:param name="key" value="#{obj.id}"/>
                                 </p:button>
 
-                                <p:commandButton icon="fa fa-trash-o" style="height: 20px" styleClass="red-btn" action="#{classeDespesaBean.excluir(obj)}" update=":frmPesquisa:tblDados">
+                                <p:commandButton title="#{app.btn_excluir}"
+                                                 icon="fa fa-trash-o"
+                                                 style="height: 20px"
+                                                 styleClass="red-btn"
+                                                 action="#{classeDespesaBean.excluir(obj)}"
+                                                 update=":frmPesquisa:tblDados">
                                     <p:confirm header="#{app.dialogo_modal_confirmacao}"
                                                message="#{app.dialogo_modal_mensagem_excluir} (#{obj.descricao})?"
                                                icon="pi pi-exclamation-triangle"/>

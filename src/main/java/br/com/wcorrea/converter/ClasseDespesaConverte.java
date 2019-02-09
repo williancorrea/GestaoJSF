@@ -15,15 +15,11 @@ public class ClasseDespesaConverte implements Converter {
     @Inject
     private ClasseDespesaRepository objDao;
 
-//    public CombustivelConverter() {
-//        objDao = CDIServiceLocator.getBean(CombustivelDao.class);
-//    }
-
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
         ClasseDespesa retorno = null;
 
-        if (value != null) {
+        if (!value.isEmpty()) {
             Long id = new Long(value);
             retorno = objDao.buscarPorID(id);
         }
@@ -34,9 +30,8 @@ public class ClasseDespesaConverte implements Converter {
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value != null) {
             ClasseDespesa obj = (ClasseDespesa) value;
-            return obj.getId() == 0 ? null : String.valueOf(obj.getId());
+            return obj.getId() != null && obj.getId() == 0 ? null : String.valueOf(obj.getId());
         }
         return "";
     }
-
 }

@@ -49,6 +49,9 @@ public class ClasseDespesaBean implements Serializable {
     }
 
     public void inicializarCadastro() {
+        if (classeDespesa == null) {
+            classeDespesa = new ClasseDespesa();
+        }
     }
 
     public void carregamentoInicial() {
@@ -101,9 +104,9 @@ public class ClasseDespesaBean implements Serializable {
 
         if (editando) {
             FacesUtils.addMessageinfo(classeDespesa.getDescricao() + " " + FacesUtils.mensagemInternacionalizada("informativo_atualizado_sucesso"), false);
-            return;
+        } else {
+            FacesUtils.addMessageinfo(classeDespesa.getDescricao() + " " + FacesUtils.mensagemInternacionalizada("informativo_cadastrada_sucesso"), false);
         }
-        FacesUtils.addMessageinfo(classeDespesa.getDescricao() + " " + FacesUtils.mensagemInternacionalizada("informativo_cadastrada_sucesso"), false);
         novo();
     }
 

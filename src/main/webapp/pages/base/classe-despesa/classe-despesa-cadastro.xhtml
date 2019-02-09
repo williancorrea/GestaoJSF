@@ -11,7 +11,7 @@
     <ui:define name="content">
 
         <f:metadata>
-            <o:viewParam name="objParametro" value="#{classeDespesaBean.classeDespesa}"/>
+            <o:viewParam name="key" value="#{classeDespesaBean.classeDespesa}"/>
             <f:event listener="#{classeDespesaBean.inicializarCadastro()}" type="preRenderView"/>
         </f:metadata>
 
@@ -24,7 +24,7 @@
 
                         <p:toolbar styleClass="bloco-titulo-pesquisa">
                             <p:toolbarGroup styleClass="ui-fli">
-                                <p:button value="Novo" outcome="/pages/base/classe-despesa/classe-despesa-cadastro"/>
+                                <p:button value="#{app.btn_novo}" outcome="/pages/base/classe-despesa/classe-despesa-cadastro"/>
                                 <p:commandButton value="#{app.btn_salvar}"
                                                  action="#{classeDespesaBean.salvar}"
                                                  update="pnl"/>
