@@ -48,6 +48,9 @@ public class ClasseDespesaBean implements Serializable {
 
     }
 
+    public void inicializarCadastro() {
+    }
+
     public void carregamentoInicial() {
         if (FacesUtils.isNotPostback()) {
             System.out.println("nao é um postback");
