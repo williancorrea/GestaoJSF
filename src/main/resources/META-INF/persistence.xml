@@ -25,6 +25,34 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="false"/>
 
+
+            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>
+            <property name="hibernate.cache.use_structured_entries" value="true"/>
+
+            <!-- ... -->
+            <property name="hibernate.c3p0.min_size" value="0"/>
+            <property name="hibernate.c3p0.max_size" value="6"/>
+            <property name="hibernate.c3p0.timeout" value="60"/>
+            <property name="hibernate.c3p0.max_statements" value="7"/> <!-- preste atenção aqui -->
+            <property name="hibernate.c3p0.acquire_increment" value="1"/>
+            <property name="hibernate.c3p0.idle_test_period" value="300"/> <!-- Em Segundos -->
+
+            <property name="c3p0.checkoutTimeout" value="60" />
+            <property name="testConnectionOnCheckout" value="true" />
+            <property name="testConnectionOnCheckin" value="false" />
+            <property name="preferredTestQuery" value="SELECT 1 from dual" />
+
+            <property name="c3p0.initialPoolSize" value="0" />
+            <property name="c3p0.maxStatementsPerConnection" value="10" />
+            <property name="c3p0.acquireRetryDelay" value="1000" />
+            <property name="c3p0.acquireRetryAttempts" value="60" />
+            <property name="c3p0.breakAfterAcquireFailure" value="false" />
+            <property name="c3p0.maxIdleTimeExcessConnections" value="60" />
+            <property name="c3p0.numHelperThreads" value="3" />
+            <property name="c3p0.debugUnreturnedConnectionStackTraces" value="true" />
+            <property name="c3p0.unreturnedConnectionTimeout" value="60" />
+            <!-- ... -->
+
         </properties>
     </persistence-unit>
 </persistence>

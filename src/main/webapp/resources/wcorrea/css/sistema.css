@@ -46,7 +46,7 @@ body .ui-messages .ui-messages-error {
     text-align: center;
 }
 .tabela-coluna-inativo-cor{
-    background-color: #e0a3a3 !important;
+    background-color: #bfbfbf !important;
 }
 
 body .ui-datatable thead th {

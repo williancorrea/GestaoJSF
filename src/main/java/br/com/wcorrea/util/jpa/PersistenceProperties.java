@@ -27,7 +27,7 @@ public class PersistenceProperties {
             /**
              * Digital Ocean
              */
-//            props.putAll(userHomeJdbcFile());
+            props.putAll(userHomeJdbcFile());
 
             /**
              * Heroku
@@ -39,13 +39,13 @@ public class PersistenceProperties {
              * JDBC FILE
              * Se esse método (systemEnv) retornar alguma propriedade, igual a que o método anterior tenha configurado, ela irá prevalecer.
              */
-//            props.putAll(javaPropertyJdbcFile());
+            props.putAll(javaPropertyJdbcFile());
 
             /**
              * VARIAVEIS DE AMBIENTE
              * Se esse método (systemEnv) retornar alguma propriedade, igual a que o método anterior tenha configurado, ela irá prevalecer.
              */
-//            props.putAll(javaProperties());
+            props.putAll(javaProperties());
 
             return props;
         } catch (Exception e) {

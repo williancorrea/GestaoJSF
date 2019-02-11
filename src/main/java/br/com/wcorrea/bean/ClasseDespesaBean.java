@@ -76,12 +76,15 @@ public class ClasseDespesaBean implements Serializable {
                 @Override
                 public List<ClasseDespesa> load(int primeiroRegistro, int quantidadeRegistros, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
 
+                    //Ordenacao
+                    filtro.setPropriedadeOrdenacao("descricao");
+                    filtro.setAscendente(true);
+
+                    //Paginacao
                     filtro.setPrimeiroRegistro(primeiroRegistro);
                     filtro.setQuantidadeRegistros(quantidadeRegistros);
-                    filtro.setPropriedadeOrdenacao(sortField);
-                    filtro.setAscendente(SortOrder.ASCENDING.equals(sortOrder));
 
-                    // Quantidade Maxima de Registros
+                    // Quantidade Maxima de Registros por pagina
                     setRowCount(classeDespesaRepository.quantidadeRegistrosFiltrados(filtro));
                     return classeDespesaRepository.listar(filtro);
                 }
