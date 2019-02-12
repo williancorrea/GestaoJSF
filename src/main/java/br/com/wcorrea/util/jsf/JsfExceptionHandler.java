@@ -51,6 +51,8 @@ public class JsfExceptionHandler extends ExceptionHandlerWrapper {
                     FacesUtils.addMessageErro(negocioException.getMessage(), true);
                 } else {
                     handled = true;
+//                    TODO: MOSTRAR A MENSAGEM DE ERRO QUANDO FOR REDIRECIONADO
+//                    TODO: VERIFICA A POSSIBILIDADE DE ENVIAR EMAIL CONTENDO O TIPO DO ERRO - REPORTAR ERRO AO DESENVOLVEDOR
                     redirect("/error.xhtml");
                 }
             } finally {

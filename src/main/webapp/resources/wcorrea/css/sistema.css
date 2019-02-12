@@ -14,6 +14,13 @@ body .ui-state-error, body .ui-state-default.ui-state-error {
 .lowercase {
 }
 
+@media screen and (min-width: 1024px) {
+    .layout-main-content {
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+}
+
 body .ui-messages .ui-messages-error {
     background-color: #d43145;
 }
