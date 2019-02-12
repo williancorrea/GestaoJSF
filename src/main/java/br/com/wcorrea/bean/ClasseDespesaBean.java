@@ -1,12 +1,13 @@
 package br.com.wcorrea.bean;
 
 import br.com.wcorrea.modelo.ClasseDespesa;
-import br.com.wcorrea.modelo.filtros.FiltroPadrao;
+import br.com.wcorrea.modelo.filtros.FiltroGlobal;
 import br.com.wcorrea.repository.ClasseDespesaRepository;
 import br.com.wcorrea.util.jpa.Transacional;
 import br.com.wcorrea.util.jsf.FacesUtils;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.PrimeFaces;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
@@ -30,7 +31,9 @@ public class ClasseDespesaBean implements Serializable {
     @Getter
     @Setter
     @Inject
-    private FiltroPadrao filtroPadrao;
+    private FiltroGlobal filtro;
+
+    private String pesquisaAnterior;
 
     @Inject
     private ClasseDespesaRepository classeDespesaRepository;
@@ -39,13 +42,18 @@ public class ClasseDespesaBean implements Serializable {
     @Setter
     private LazyDataModel<ClasseDespesa> model;
 
-
     /**
      * METODO EXEXUTADO LOGO APOS A RENDERIZACAO DA TELA
      */
     @PostConstruct
     public void inicio() {
+        pesquisaAnterior = "";
+    }
 
+    public void inicializarCadastro() {
+        if (classeDespesa == null) {
+            classeDespesa = new ClasseDespesa();
+        }
     }
 
     public void carregamentoInicial() {
@@ -68,14 +76,17 @@ public class ClasseDespesaBean implements Serializable {
                 @Override
                 public List<ClasseDespesa> load(int primeiroRegistro, int quantidadeRegistros, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
 
-                    filtroPadrao.setPrimeiroRegistro(primeiroRegistro);
-                    filtroPadrao.setQuantidadeRegistros(quantidadeRegistros);
-                    filtroPadrao.setPropriedadeOrdenacao(sortField);
-                    filtroPadrao.setAscendente(SortOrder.ASCENDING.equals(sortOrder));
+                    //Ordenacao
+                    filtro.setPropriedadeOrdenacao("descricao");
+                    filtro.setAscendente(true);
 
-                    // Quantidade Maxima de Registros
-                    setRowCount(classeDespesaRepository.quantidadeRegistrosFiltrados(filtroPadrao));
-                    return classeDespesaRepository.listar(filtroPadrao);
+                    //Paginacao
+                    filtro.setPrimeiroRegistro(primeiroRegistro);
+                    filtro.setQuantidadeRegistros(quantidadeRegistros);
+
+                    // Quantidade Maxima de Registros por pagina
+                    setRowCount(classeDespesaRepository.quantidadeRegistrosFiltrados(filtro));
+                    return classeDespesaRepository.listar(filtro);
                 }
             };
         }
@@ -86,6 +97,14 @@ public class ClasseDespesaBean implements Serializable {
      */
     public void novo() {
         classeDespesa = new ClasseDespesa();
+    }
+
+    public void limparFiltros() {
+        if (filtro.getPesquisaGlobal().isEmpty()) {
+            return;
+        }
+        filtro.setPesquisaGlobal("");
+        listarClasseDespesasCadastradas();
     }
 
     /**
@@ -99,9 +118,9 @@ public class ClasseDespesaBean implements Serializable {
 
         if (editando) {
             FacesUtils.addMessageinfo(classeDespesa.getDescricao() + " " + FacesUtils.mensagemInternacionalizada("informativo_atualizado_sucesso"), false);
-            return;
+        } else {
+            FacesUtils.addMessageinfo(classeDespesa.getDescricao() + " " + FacesUtils.mensagemInternacionalizada("informativo_cadastrada_sucesso"), false);
         }
-        FacesUtils.addMessageinfo(classeDespesa.getDescricao() + " " + FacesUtils.mensagemInternacionalizada("informativo_cadastrada_sucesso"), false);
         novo();
     }
 

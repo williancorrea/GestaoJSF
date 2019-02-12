@@ -1,23 +1,30 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
     <ui:define name="title">#{app.classe_despesa_titulo}</ui:define>
 
     <ui:define name="content">
 
+        <f:metadata>
+            <o:viewParam name="key" value="#{classeDespesaBean.classeDespesa}"/>
+            <f:event listener="#{classeDespesaBean.inicializarCadastro()}" type="preRenderView"/>
+        </f:metadata>
 
         <div class="ui-g ">
             <div class="ui-g-12">
                 <div class="card" style="padding-top: 1px;">
                     <h:form>
-                        <h1>#{app.classe_despesa_novo}</h1>
+
+                        <h1>#{classeDespesaBean.classeDespesa.editando ? app.classe_despesa_edicao : app.classe_despesa_novo}</h1>
 
                         <p:toolbar styleClass="bloco-titulo-pesquisa">
                             <p:toolbarGroup styleClass="ui-fli">
-                                <p:button value="Novo" outcome="/pages/base/classe-despesa/classe-despesa-cadastro"/>
+                                <p:button value="#{app.btn_novo}" outcome="/pages/base/classe-despesa/classe-despesa-cadastro"/>
                                 <p:commandButton value="#{app.btn_salvar}"
                                                  action="#{classeDespesaBean.salvar}"
                                                  update="pnl"/>
@@ -42,7 +49,9 @@
                                          value="#{classeDespesaBean.classeDespesa.descricao}"/>
 
                             <p:outputLabel value="#{app.campo_inativo}" for="inativo"/>
-                            <p:selectBooleanCheckbox id="inativo"/>
+                            <p:inputSwitch id="inativo"
+                                           value="#{classeDespesaBean.classeDespesa.inativo}"
+                                           offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
                         </p:panelGrid>
 
                     </h:form>

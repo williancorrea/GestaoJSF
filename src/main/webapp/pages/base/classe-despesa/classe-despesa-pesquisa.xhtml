@@ -22,7 +22,7 @@
                                 <h1>#{app.classe_despesa_lista}</h1>
                             </p:toolbarGroup>
                             <p:toolbarGroup align="right">
-                                <p:button value="#{app.btn_novo}"
+                                <p:button id="btnNovo" value="#{app.btn_novo}"
                                           outcome="/pages/base/classe-despesa/classe-despesa-cadastro"/>
                             </p:toolbarGroup>
                         </p:toolbar>
@@ -30,6 +30,26 @@
                         <p:messages closable="true" showIcon="true" escape="true">
                             <p:autoUpdate/>
                         </p:messages>
+
+                        <p:fieldset id="grpFiltro" legend="#{app.lbl_pesquisar}" style="margin-bottom:20px">
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12">
+                                    <div class="ui-inputgroup">
+                                        <p:inputText id="filtroDescricao"
+                                                     value="#{classeDespesaBean.filtro.pesquisaGlobal}"
+                                                     placeholder="#{app.lbl_pesquisar_phaceholcer}"/>
+                                        <p:commandButton id="btnFiltrar" icon="fa fa-filter" styleClass="btn-green"
+                                                         action="#{classeDespesaBean.listarClasseDespesasCadastradas}"
+                                                         update=":frmPesquisa"/>
+
+                                        <p:commandButton id="btnLimparFiltro" icon="fa fa-remove" styleClass="btn-red"
+                                                         rendered="#{not empty classeDespesaBean.filtro.pesquisaGlobal}"
+                                                         action="#{classeDespesaBean.limparFiltros}"
+                                                         update=":frmPesquisa"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </p:fieldset>
 
                         <p:dataTable id="tblDados" var="obj"
                                      value="#{classeDespesaBean.model}"
@@ -42,7 +62,7 @@
                                      paginatorPosition="bottom"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages}"
-                        >
+                                     rowStyleClass="#{obj.inativo ? 'tabela-coluna-inativo-cor': ''}">
 
                             <p:column headerText="#{app.campo_descricao}">
                                 <h:outputText value="#{obj.descricao}"/>
@@ -53,14 +73,19 @@
                             </p:column>
 
                             <p:column width="66" exportable="false">
-                                <p:button title="Editar"
+                                <p:button title="#{app.btn_editar}"
                                           outcome="/pages/base/classe-despesa/classe-despesa-cadastro"
                                           icon="fa fa-edit"
                                           style="height: 20px">
-                                    <f:param name="objID" value="#{obj.id}"/>
+                                    <f:param name="key" value="#{obj.id}"/>
                                 </p:button>
 
-                                <p:commandButton icon="fa fa-trash-o" style="height: 20px" styleClass="red-btn" action="#{classeDespesaBean.excluir(obj)}" update=":frmPesquisa:tblDados">
+                                <p:commandButton title="#{app.btn_excluir}"
+                                                 icon="fa fa-trash-o"
+                                                 style="height: 20px"
+                                                 styleClass="btn-red"
+                                                 action="#{classeDespesaBean.excluir(obj)}"
+                                                 update=":frmPesquisa:tblDados">
                                     <p:confirm header="#{app.dialogo_modal_confirmacao}"
                                                message="#{app.dialogo_modal_mensagem_excluir} (#{obj.descricao})?"
                                                icon="pi pi-exclamation-triangle"/>
@@ -69,9 +94,6 @@
 
                         </p:dataTable>
 
-                        <div>
-
-                        </div>
                     </h:form>
                 </div>
             </div>

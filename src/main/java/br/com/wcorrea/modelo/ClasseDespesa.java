@@ -24,7 +24,6 @@ public class ClasseDespesa extends Comum implements Serializable {
     @Size(min = 3, max = 150)
     @Column(length = 150, nullable = false)
     @NotBlank
-    @EqualsAndHashCode.Include
     private String descricao;
 
     private boolean inativo;
