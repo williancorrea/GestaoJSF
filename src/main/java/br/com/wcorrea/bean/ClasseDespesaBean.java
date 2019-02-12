@@ -94,6 +94,7 @@ public class ClasseDespesaBean implements Serializable {
     @Transacional
     public void salvar() {
         boolean editando = classeDespesa.isEditando();
+        //TODO: Mudar a regra de negocio para o serviço
         classeDespesa = classeDespesaRepository.salvar(classeDespesa);
 
         if (editando) {
