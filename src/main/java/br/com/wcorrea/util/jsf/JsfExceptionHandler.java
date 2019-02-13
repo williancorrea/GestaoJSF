@@ -53,7 +53,7 @@ public class JsfExceptionHandler extends ExceptionHandlerWrapper {
                     handled = true;
 //                    TODO: MOSTRAR A MENSAGEM DE ERRO QUANDO FOR REDIRECIONADO
 //                    TODO: VERIFICA A POSSIBILIDADE DE ENVIAR EMAIL CONTENDO O TIPO DO ERRO - REPORTAR ERRO AO DESENVOLVEDOR
-                    redirect("/error.xhtml");
+                    redirect("/Erro.xhtml");
                 }
             } finally {
                 if (handled) {

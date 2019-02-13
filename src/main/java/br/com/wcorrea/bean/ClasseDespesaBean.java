@@ -7,7 +7,6 @@ import br.com.wcorrea.util.jpa.Transacional;
 import br.com.wcorrea.util.jsf.FacesUtils;
 import lombok.Getter;
 import lombok.Setter;
-import org.primefaces.PrimeFaces;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
