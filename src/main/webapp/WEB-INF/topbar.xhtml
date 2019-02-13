@@ -24,7 +24,7 @@
                         <p:graphicImage name="images/profile-image.png" library="atlantis-layout" />
                     </div>
                     <div class="profile-info">
-                        <span class="topbar-item-name profile-name">Jane White</span>
+                        <span class="topbar-item-name profile-name">#{seguranca.nomeUsuario}</span>
                         <span class="topbar-item-name profile-role">System Admin</span>
                     </div>
                 </a>
@@ -51,7 +51,8 @@
                         </a>
                     </li>
                     <li role="menuitem">
-                        <a href="#">
+                        <!--TODO: VERIFICAR SE O LOGOUT ESTA FUNCIONANDO-->
+                        <a href="/logout">
                             <i class="fa fa-fw fa-sign-out"></i>
                             <span>Logout</span>
                         </a>
