@@ -52,7 +52,8 @@ body .ui-messages .ui-messages-error {
     width: 50px;
     text-align: center;
 }
-.tabela-coluna-inativo-cor{
+
+.tabela-coluna-inativo-cor {
     background-color: #bfbfbf !important;
 }
 
@@ -72,3 +73,11 @@ body .ui-button.btn-green {
 body .ui-button.ui-button-text-icon-left .ui-button-text {
     padding: 4px 15px 4px 15px;
 }
+
+/*DIALOG*/
+body .ui-dialog {min-width: 300px !important; border-radius: 10px;}
+body .ui-dialog .ui-dialog-titlebar {padding: 15px !important;}
+
+
+/*TABELAS*/
+tr:hover{border: #134689 2px solid;}
