@@ -78,6 +78,8 @@ body .ui-button.ui-button-text-icon-left .ui-button-text {
 body .ui-dialog {min-width: 300px !important; border-radius: 10px;}
 body .ui-dialog .ui-dialog-titlebar {padding: 15px !important;}
 
-
-/*TABELAS*/
-/*tr:hover{border: #134689 2px solid;}*/
+/*LOGIN*/
+.login-logo { width: 240px;}
+/*@media (max-width: 640px) {*/
+    /*.login-body .login-panel { width: 300px; padding: 30px 50px; }*/
+/*}*/

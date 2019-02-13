@@ -11,37 +11,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
     </f:facet>
-    <title>PrimeFaces Atlantis</title>
+    <title>#{app.lbl_login}</title>
 </h:head>
 
 <h:body styleClass="login-body">
-    <div class="login-panel ui-fluid">
-        <div class="ui-g">
-            <div class="ui-g-12 logo-container">
-                <p:graphicImage name="images/logo-colored.png" library="atlantis-layout"/>
-                <h1>Login to Your Account</h1>
-                <h2>WELCOME TO ATLANTIS</h2>
-            </div>
+    <h:form>
+        <div class="login-panel ui-fluid">
+            <div class="ui-g">
+                <div class="ui-g-12 logo-container">
+                    <p:graphicImage styleClass="login-logo" name="img/logo.png" library="wcorrea" style="width: 240px"/>
+                    <!--<h1>#{app.login_entre_com_sua_conta}</h1>-->
+                    <!--<h2>#{app.login_bem_vindo}</h2>-->
+                </div>
 
-            <p:messages id="messages" autoUpdate="true" closable="true"/>
+                <p:messages closable="true" showIcon="true" escape="true">
+                    <p:autoUpdate/>
+                </p:messages>
 
-            <div class="ui-g-12">
-                <p:inputText id="username" placeholder="Login" value="#{loginBean.email}"/>
-            </div>
-            <div class="ui-g-12">
-                <p:password id="password" placeholder="Password" feedback="false"/>
-            </div>
-            <div class="ui-g-12 chkbox-container">
-                <p:selectBooleanCheckbox id="remember-me"/>
-                <p:outputLabel for="remember-me" value="Remember Me"/>
-            </div>
-            <div class="ui-g-12 button-container">
-                <p:commandButton action="#{loginBean.login}" value="Sign In" icon="fa fa-user" styleClass="green-btn" ajax="false"/>
-                <p:button outcome="/Dashboard" value="Forgot Password" icon="fa fa-key" styleClass="blue-btn"/>
+                <div class="ui-g-12">
+                    <p:inputText id="username" placeholder="#{app.lbl_login}" value="#{loginBean.email}"/>
+                </div>
+                <div class="ui-g-12">
+                    <p:password id="password" placeholder="#{app.lbl_senhha}" feedback="false"/>
+                </div>
+                <div class="ui-g-12 chkbox-container">
+                    <p:selectBooleanCheckbox id="remember-me"/>
+                    <!--TODO: IMPLEMENTAR O LEMBRAR O LOGIN -->
+                    <p:outputLabel for="remember-me" value="#{app.btn_lembrar_me}"/>
+                </div>
+                <div class="ui-g-12 button-container">
+                    <p:commandButton action="#{loginBean.login}" value="#{app.btn_entrar}" icon="fa fa-user" styleClass="green-btn" ajax="false"/>
+                    <p:button outcome="/Dashboard" value="#{app.btn_esqueci_minha_senha}" icon="fa fa-key" styleClass="blue-btn"/>
+                </div>
             </div>
         </div>
-    </div>
 
+    </h:form>
     <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="atlantis-layout"/>
 </h:body>
 
