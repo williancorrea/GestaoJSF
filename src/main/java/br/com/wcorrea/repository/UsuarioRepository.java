@@ -9,10 +9,10 @@ import javax.persistence.EntityManager;
 import java.io.Serializable;
 
 public class UsuarioRepository extends GenericDao<Usuario, Long> implements Serializable {
-    private static final long serialVersionUID = -4669657125949454834L;
+    private static final long serialVersionUID = -7287545229105230071L;
 
     @Inject
-    transient protected EntityManager m;
+    private EntityManager m;
 
     public UsuarioRepository() {
         super(Usuario.class);

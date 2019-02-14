@@ -120,17 +120,17 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>3.1.4.RELEASE</version>
+            <version>4.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>3.1.4.RELEASE</version>
+            <version>4.2.3.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>3.1.4.RELEASE</version>
+            <version>4.2.3.RELEASE</version>
         </dependency>
 
         <!--LOG4J-->
@@ -156,14 +156,12 @@
         </dependency>
 
 
-
         <!--C3p0-->
         <dependency>
             <groupId>c3p0</groupId>
             <artifactId>c3p0</artifactId>
             <version>0.9.1.2</version>
         </dependency>
-
 
 
         <!-- Apache Commons Lang, a package of Java utility classes for the classes

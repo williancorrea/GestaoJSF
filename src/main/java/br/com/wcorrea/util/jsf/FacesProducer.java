@@ -10,9 +10,6 @@ import java.io.Serializable;
 public class FacesProducer implements Serializable {
     private static final long serialVersionUID = -5467856070129516086L;
 
-    public FacesProducer() {
-    }
-
     @Produces
     @RequestScoped
     public FacesContext getFacesContext() {

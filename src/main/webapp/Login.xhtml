@@ -15,7 +15,13 @@
 </h:head>
 
 <h:body styleClass="login-body">
-    <h:form>
+
+    <f:metadata>
+        <f:viewParam name="dummy"/>
+        <f:event listener="#{loginBean.preRender}" type="preRenderView"/>
+    </f:metadata>
+
+    <h:form id="frm" prependId="false">
         <div class="login-panel ui-fluid">
             <div class="ui-g">
                 <div class="ui-g-12 logo-container">
@@ -29,7 +35,7 @@
                 </p:messages>
 
                 <div class="ui-g-12">
-                    <p:inputText id="username" placeholder="#{app.lbl_login}" value="#{loginBean.email}"/>
+                    <p:inputText id="username" placeholder="#{app.lbl_email}" value="#{loginBean.email}"/>
                 </div>
                 <div class="ui-g-12">
                     <p:password id="password" placeholder="#{app.lbl_senhha}" feedback="false"/>
@@ -40,7 +46,11 @@
                     <p:outputLabel for="remember-me" value="#{app.btn_lembrar_me}"/>
                 </div>
                 <div class="ui-g-12 button-container">
-                    <p:commandButton action="#{loginBean.login}" value="#{app.btn_entrar}" icon="fa fa-user" styleClass="green-btn" ajax="false"/>
+                    <p:commandButton action="#{loginBean.login}"
+                                     value="#{app.btn_entrar}"
+                                     ajax="false"
+                                     icon="fa fa-user"
+                                     styleClass="green-btn"/>
                     <p:button outcome="/Dashboard" value="#{app.btn_esqueci_minha_senha}" icon="fa fa-key" styleClass="blue-btn"/>
                 </div>
             </div>

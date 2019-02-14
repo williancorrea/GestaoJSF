@@ -3,6 +3,7 @@ package br.com.wcorrea.seguranca;
 import br.com.wcorrea.modelo.autenticacao.PermissoesSistema;
 import br.com.wcorrea.modelo.autenticacao.Usuario;
 import br.com.wcorrea.repository.UsuarioRepository;
+import br.com.wcorrea.util.cdi.CDIServiceLocator;
 import br.com.wcorrea.util.jsf.FacesUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,18 +11,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class AppUserDetailsService implements UserDetailsService {
 
-    @Inject
-    private UsuarioRepository usuarioRepository;
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        UsuarioRepository usuarioRepository = CDIServiceLocator.getBean(UsuarioRepository.class);
         Usuario usuario = usuarioRepository.porEmail(email);
 
         UsuarioSistema user = null;

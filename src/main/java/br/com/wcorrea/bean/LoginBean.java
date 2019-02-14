@@ -27,7 +27,7 @@ public class LoginBean implements Serializable {
     @Inject
     private HttpServletResponse response;
 
-
+    //TODO: Adicionar o lombok
     private String email;
 
     public void preRender() {
