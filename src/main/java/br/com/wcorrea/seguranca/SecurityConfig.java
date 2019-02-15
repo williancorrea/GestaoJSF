@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/Dashboard.xhtml", "/AcessoNegado.xhtml", "/dialogos/**").authenticated()
 
 //                CLASSE DE DESPESAS
-                .antMatchers("/pages/base/classe-despesa/**").hasAnyRole("VENDEDORES")
+//                .antMatchers("/pages/base/classe-despesa/**").hasAnyRole("VENDEDORES")
 //                .antMatchers("/pedidos/**").hasAnyRole("VENDEDORES", "AUXILIARES", "ADMINISTRADORES")
 //                .antMatchers("/produtos/**", "/relatorios/**").hasRole("ADMINISTRADORES")
 

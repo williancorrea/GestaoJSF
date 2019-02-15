@@ -74,13 +74,18 @@ body .ui-button.ui-button-text-icon-left .ui-button-text {
     padding: 4px 15px 4px 15px;
 }
 
-/*DIALOG*/
-body .ui-dialog {min-width: 300px !important; border-radius: 10px;}
+/*DIALOGOS*/
+.ui-confirm-dialog { min-width: 300px; }
+body .ui-dialog {border-radius: 10px;}
 body .ui-dialog .ui-dialog-titlebar {padding: 15px !important;}
 
-/*LOGIN*/
+/*PAGINA - LOGIN*/
 .login-body .login-panel img { width: 240px !important;}
-.login-body .login-panel { border-radius: 50px; }
+.login-body .login-panel { border-radius: 15px; }
 @media (max-width: 640px) {
     .login-body .login-panel { width: 300px !important; }
 }
+
+/*PAGINA - ACESSO NEGADO*/
+.exception-panel { border-radius: 15px }
+.exception-panel img { width: 240px; height: 50px !important; }

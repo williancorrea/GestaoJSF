@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
     </f:facet>
-    <h:outputStylesheet library="wcorrea" name="css/sistema.css"/>
+
     <title>#{app.lbl_login}</title>
 </h:head>
 
@@ -23,7 +23,9 @@
     </f:metadata>
 
     <h:form id="frm" prependId="false">
-        <div class="login-panel ui-fluid">
+
+        <p:focus for="username"/>
+        <div id="grpLogin" class="login-panel ui-fluid">
             <div class="ui-g">
                 <div class="ui-g-12 logo-container">
                     <p:graphicImage styleClass="login-logo" name="img/logo.png" library="wcorrea"/>
@@ -35,19 +37,22 @@
                     <p:autoUpdate/>
                 </p:messages>
 
-                <div class="ui-g-12">
+                <div class="ui-g-12 input-group">
                     <p:inputText id="username" placeholder="#{app.lbl_email}" value="#{loginBean.email}"/>
                 </div>
                 <div class="ui-g-12">
                     <p:password id="password" placeholder="#{app.lbl_senhha}" feedback="false"/>
                 </div>
                 <div class="ui-g-12 chkbox-container">
-                    <p:selectBooleanCheckbox id="lembrar_me"/>
-                    <!--TODO: IMPLEMENTAR O LEMBRAR O LOGIN -->
+                    <!--TODO: IMPLEMENTAR O LEMBRAR O LOGIN - COOKIE-->
+                    <p:selectBooleanCheckbox id="lembrar_me" value="#{loginBean.lembreMe}">
+                        <p:ajax update="msg" listener="#{selectBooleanView.addMessage}" />
+                    </p:selectBooleanCheckbox>
                     <p:outputLabel for="lembrar_me" value="#{app.btn_lembrar_me}"/>
                 </div>
                 <div class="ui-g-12 button-container">
                     <p:commandButton action="#{loginBean.login}"
+                                     onclick="PF('statusDialog').show() "
                                      value="#{app.btn_entrar}"
                                      ajax="false"
                                      icon="fa fa-user"
@@ -57,8 +62,18 @@
             </div>
         </div>
 
+
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide();"/>
+        <p:dialog widgetVar="statusDialog"
+                  modal="true" draggable="false"
+                  closable="false" resizable="false" showHeader="false"
+                  style="border-radius: 10px; width: 70px">
+            <p:graphicImage library="wcorrea" name="img/loading.gif"/>
+        </p:dialog>
+
     </h:form>
     <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="atlantis-layout"/>
+    <h:outputStylesheet library="wcorrea" name="css/sistema.css"/>
 </h:body>
 
 </html>

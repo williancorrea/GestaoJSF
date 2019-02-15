@@ -18,16 +18,16 @@
         <div class="ui-g ">
             <div class="ui-g-12">
                 <div class="card" style="padding-top: 1px;">
-                    <h:form>
+                    <h:form id="frm">
 
                         <h1>#{classeDespesaBean.classeDespesa.editando ? app.classe_despesa_edicao : app.classe_despesa_novo}</h1>
 
-                        <p:toolbar styleClass="bloco-titulo-pesquisa">
+                        <p:toolbar id="grpFiltro" styleClass="bloco-titulo-pesquisa">
                             <p:toolbarGroup styleClass="ui-fli">
                                 <p:button value="#{app.btn_novo}" outcome="/pages/base/classe-despesa/classe-despesa-cadastro"/>
-                                <p:commandButton value="#{app.btn_salvar}"
+                                <p:commandButton value="#{classeDespesaBean.classeDespesa.editando ? app.btn_atualizar : app.btn_salvar}"
                                                  action="#{classeDespesaBean.salvar}"
-                                                 update="pnl"/>
+                                                 update="frm:pnl frm:grpFiltro"/>
                             </p:toolbarGroup>
                             <p:toolbarGroup align="right">
                                 <p:button value="#{app.btn_pesquisa}"
@@ -39,6 +39,7 @@
                             <p:autoUpdate/>
                         </p:messages>
 
+                        <p:focus context="pnl"/>
                         <p:panelGrid id="pnl" columns="2"
                                      style="width: 100%; margin-top: 20px"
                                      styleClass="ui-fluid"

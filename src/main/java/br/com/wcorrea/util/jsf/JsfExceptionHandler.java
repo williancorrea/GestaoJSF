@@ -10,6 +10,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -49,6 +50,9 @@ public class JsfExceptionHandler extends ExceptionHandlerWrapper {
                 } else if (negocioException != null) {
                     handled = true;
                     FacesUtils.addMessageErro(negocioException.getMessage(), true);
+                } else if(exception instanceof FileNotFoundException) {
+                    handled = true;
+                    redirect("/NaoEncontrada.xhtml");
                 } else {
                     handled = true;
 //                    TODO: MOSTRAR A MENSAGEM DE ERRO QUANDO FOR REDIRECIONADO

@@ -1,6 +1,8 @@
 package br.com.wcorrea.bean;
 
 import br.com.wcorrea.util.jsf.FacesUtils;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -27,8 +29,13 @@ public class LoginBean implements Serializable {
     @Inject
     private HttpServletResponse response;
 
-    //TODO: Adicionar o lombok
+    @Getter
+    @Setter
     private String email;
+
+    @Setter
+    @Getter
+    private Boolean lembreMe;
 
     public void preRender() {
         if ("true".equals(request.getParameter("invalid"))) {
@@ -44,11 +51,8 @@ public class LoginBean implements Serializable {
         facesContext.responseComplete();
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void adicionarCookie(){
+        //TODO: implementar cookie
+        System.out.println("EXECUTADO");
     }
 }
