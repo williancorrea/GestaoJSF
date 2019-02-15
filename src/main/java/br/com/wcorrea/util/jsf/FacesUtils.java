@@ -37,6 +37,15 @@ public class FacesUtils {
         }
     }
 
+    /**
+     * RECUPERA O CONTEXTO DA APLICACAO
+     * EX: http://www.teste.com.br
+     *
+     * @return
+     */
+    public static String getContextPath() {
+        return FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+    }
 
     /**
      * Adiciona o separador padrão de cada sistema operacional para os diretorios

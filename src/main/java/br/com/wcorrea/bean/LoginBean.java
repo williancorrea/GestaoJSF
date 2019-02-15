@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Named
 @SessionScoped
 public class LoginBean implements Serializable {
-    private static final long serialVersionUID = -7407780979372950392L;
+    private static final long serialVersionUID = 1L;
 
     @Inject
     private FacesContext facesContext;
@@ -37,6 +37,7 @@ public class LoginBean implements Serializable {
     }
 
     public void login() throws ServletException, IOException {
+//        TODO: IMPLEMENTAR COOKIE NO LOGIN
         RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.xhtml");
         dispatcher.forward(request, response);
 

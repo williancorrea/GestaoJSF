@@ -79,7 +79,8 @@ body .ui-dialog {min-width: 300px !important; border-radius: 10px;}
 body .ui-dialog .ui-dialog-titlebar {padding: 15px !important;}
 
 /*LOGIN*/
-.login-logo { width: 240px;}
-/*@media (max-width: 640px) {*/
-    /*.login-body .login-panel { width: 300px; padding: 30px 50px; }*/
-/*}*/
+.login-body .login-panel img { width: 240px !important;}
+.login-body .login-panel { border-radius: 50px; }
+@media (max-width: 640px) {
+    .login-body .login-panel { width: 300px !important; }
+}

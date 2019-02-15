@@ -38,9 +38,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/Login.html", "/Erro.xhtml", "/javax.faces.resource/**").permitAll()
                 .antMatchers("/Dashboard.xhtml", "/AcessoNegado.xhtml", "/dialogos/**").authenticated()
+
+//                CLASSE DE DESPESAS
                 .antMatchers("/pages/base/classe-despesa/**").hasAnyRole("VENDEDORES")
 //                .antMatchers("/pedidos/**").hasAnyRole("VENDEDORES", "AUXILIARES", "ADMINISTRADORES")
 //                .antMatchers("/produtos/**", "/relatorios/**").hasRole("ADMINISTRADORES")
+
+
                 .and()
 
                 .formLogin()
@@ -48,9 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/Login.xhtml?invalid=true")
                 .and()
 
+
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .and()
+
 
                 .exceptionHandling()
                 .accessDeniedPage("/AcessoNegado.xhtml")

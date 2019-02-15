@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 
 public class FacesProducer implements Serializable {
-    private static final long serialVersionUID = -5467856070129516086L;
+    private static final long serialVersionUID = 1L;
 
     @Produces
     @RequestScoped

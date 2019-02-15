@@ -11,6 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
         <meta name="apple-mobile-web-app-capable" content="yes"/>
     </f:facet>
+    <h:outputStylesheet library="wcorrea" name="css/sistema.css"/>
     <title>#{app.lbl_login}</title>
 </h:head>
 
@@ -25,7 +26,7 @@
         <div class="login-panel ui-fluid">
             <div class="ui-g">
                 <div class="ui-g-12 logo-container">
-                    <p:graphicImage styleClass="login-logo" name="img/logo.png" library="wcorrea" style="width: 240px"/>
+                    <p:graphicImage styleClass="login-logo" name="img/logo.png" library="wcorrea"/>
                     <!--<h1>#{app.login_entre_com_sua_conta}</h1>-->
                     <!--<h2>#{app.login_bem_vindo}</h2>-->
                 </div>
@@ -41,9 +42,9 @@
                     <p:password id="password" placeholder="#{app.lbl_senhha}" feedback="false"/>
                 </div>
                 <div class="ui-g-12 chkbox-container">
-                    <p:selectBooleanCheckbox id="remember-me"/>
+                    <p:selectBooleanCheckbox id="lembrar_me"/>
                     <!--TODO: IMPLEMENTAR O LEMBRAR O LOGIN -->
-                    <p:outputLabel for="remember-me" value="#{app.btn_lembrar_me}"/>
+                    <p:outputLabel for="lembrar_me" value="#{app.btn_lembrar_me}"/>
                 </div>
                 <div class="ui-g-12 button-container">
                     <p:commandButton action="#{loginBean.login}"
