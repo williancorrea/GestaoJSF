@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.RequestDispatcher;
@@ -35,7 +36,7 @@ public class LoginBean implements Serializable {
 
     @Setter
     @Getter
-    private Boolean lembreMe;
+    private boolean lembreMe;
 
     public void preRender() {
         if ("true".equals(request.getParameter("invalid"))) {
@@ -51,7 +52,7 @@ public class LoginBean implements Serializable {
         facesContext.responseComplete();
     }
 
-    public void adicionarCookie(){
+    public void adicionarCookie(ValueChangeEvent event){
         //TODO: implementar cookie
         System.out.println("EXECUTADO");
     }

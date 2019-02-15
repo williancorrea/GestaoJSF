@@ -45,17 +45,23 @@
                 </div>
                 <div class="ui-g-12 chkbox-container">
                     <!--TODO: IMPLEMENTAR O LEMBRAR O LOGIN - COOKIE-->
-                    <p:selectBooleanCheckbox id="lembrar_me" value="#{loginBean.lembreMe}">
-                        <p:ajax update="msg" listener="#{selectBooleanView.addMessage}" />
-                    </p:selectBooleanCheckbox>
+                    <p:selectBooleanCheckbox id="lembrar_me" value="#{loginBean.lembreMe}" />
                     <p:outputLabel for="lembrar_me" value="#{app.btn_lembrar_me}"/>
                 </div>
                 <div class="ui-g-12 button-container">
-                    <p:commandButton action="#{loginBean.login}"
+                    <!--<p:commandButton action="#{loginBean.login}"-->
+                                     <!--onclick="PF('statusDialog').show() "-->
+                                     <!--value="#{app.btn_entrar}"-->
+                                     <!--ajax="false"-->
+                                     <!--icon="fa fa-user"-->
+                                     <!--partialSubmit="true"-->
+                                     <!--styleClass="green-btn"/>-->
+
+                    <p:commandButton actionListener="#{loginBean.login}"
                                      onclick="PF('statusDialog').show() "
                                      value="#{app.btn_entrar}"
-                                     ajax="false"
                                      icon="fa fa-user"
+                                     process="@this"
                                      styleClass="green-btn"/>
                     <p:button outcome="/Dashboard" value="#{app.btn_esqueci_minha_senha}" icon="fa fa-key" styleClass="blue-btn"/>
                 </div>
