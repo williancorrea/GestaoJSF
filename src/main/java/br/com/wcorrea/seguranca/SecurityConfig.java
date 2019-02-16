@@ -42,12 +42,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/Login.html", "/Erro.xhtml", "/javax.faces.resource/**").permitAll()
                     .antMatchers("/Dashboard.xhtml", "/AcessoNegado.xhtml", "/dialogos/**").authenticated()
 
-                    .antMatchers("/pages/**").hasAnyRole("GAMBIARRA_PARA_BLOQUEAR_A_PORRA_TODA")
+                    .antMatchers("/pages/**").hasRole("GAMBIARRA_PARA_BLOQUEAR_A_PORRA_TODA")
 
-//                CLASSE DE DESPESAS
-//                .antMatchers("/pages/base/classe-despesa/**").hasAnyRole("VENDEDORES")
-//                .antMatchers("/pedidos/**").hasAnyRole("VENDEDORES", "AUXILIARES", "ADMINISTRADORES")
-//                .antMatchers("/produtos/**", "/relatorios/**").hasRole("ADMINISTRADORES")
+//                  CLASSE DE DESPESAS
+                    .antMatchers("/pages/base/classe-despesa/classe-despesa-cadastro.xhtml").hasAnyRole("CLASSE_DESPESA_SALVAR")
+                    .antMatchers("/pages/base/classe-despesa/classe-despesa-pesquisa.xhtml").hasAnyRole("CLASSE_DESPESA_PESQUISAR", "CLASSE_DESPESA_EXCLUIR")
+
+//                  .antMatchers("/pedidos/**").hasAnyRole("VENDEDORES", "AUXILIARES", "ADMINISTRADORES")
+//                  .antMatchers("/produtos/**", "/relatorios/**").hasRole("ADMINISTRADORES")
 
                     .and()
 
