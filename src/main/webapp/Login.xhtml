@@ -33,23 +33,30 @@
                     <!--<h2>#{app.login_bem_vindo}</h2>-->
                 </div>
 
-                <!--<p:messages closable="true" showIcon="true" escape="true">-->
-                    <!--<p:autoUpdate/>-->
-                <!--</p:messages>-->
+                <p:messages closable="true" showIcon="true" escape="true">
+                    <p:autoUpdate/>
+                </p:messages>
 
                 <div class="ui-g-12 input-group">
-                    <p:inputText id="username" placeholder="#{app.lbl_email}" value="#{loginBean.email}"/>
+                    <p:inputText id="username"
+                                 placeholder="#{app.lbl_email}"
+                                 value="#{loginBean.email}"
+                                 required="true"/>
                 </div>
                 <div class="ui-g-12">
-                    <p:password id="password" placeholder="#{app.lbl_senhha}" feedback="false"/>
+                    <p:password id="password"
+                                placeholder="#{app.lbl_senhha}"
+                                feedback="false"
+                                required="true"/>
                 </div>
                 <div class="ui-g-12 chkbox-container">
                     <!--TODO: IMPLEMENTAR O LEMBRAR O LOGIN - COOKIE-->
                     <!--<p:selectBooleanCheckbox id="lembrar_me" value="#{loginBean.lembreMe}" />-->
                     <!--<p:outputLabel for="lembrar_me" value="#{app.btn_lembrar_me}"/>-->
                 </div>
+                <!-- TODO: VERIFICAR O PQ NAO ESTOU CONSEGUINDO DEIXAR O LOGIN NO ESCOPO DE SESSAO E TB NAO CONSIGO ACESSAR O METODO DE LOGIN DO MANAGER BEM, QUALQUER AJAX FEITO, JA ENVIA A SOLICITACAO PARA O SPRING SECURITY -->
                 <div class="ui-g-12 button-container">
-                    <p:commandButton action="#{loginBean.login}"
+                    <p:commandButton actionListener="#{loginBean.login}"
                                      onclick="PF('statusDialog').show() "
                                      value="#{app.btn_entrar}"
                                      ajax="false"

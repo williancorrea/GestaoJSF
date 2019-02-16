@@ -49,7 +49,6 @@ public class LoginBean implements Serializable {
         System.out.println("ENTROU NO METODO DE LOGIN");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.xhtml");
         dispatcher.forward(request, response);
-
         facesContext.responseComplete();
     }
 
@@ -57,4 +56,6 @@ public class LoginBean implements Serializable {
         //TODO: implementar cookie
         System.out.println("EXECUTADO");
     }
+
+
 }

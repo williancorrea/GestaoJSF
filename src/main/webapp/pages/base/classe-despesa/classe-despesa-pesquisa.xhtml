@@ -11,6 +11,7 @@
 
     <ui:define name="title">#{app.classe_despesa_titulo}</ui:define>
     <ui:define name="content">
+        <p:importEnum type="br.com.wcorrea.seguranca.Permissoes" var="PERMISSOES" allSuffix="ALL_ENUM_VALUES"/>
 
         <div class="ui-g ">
             <div class="ui-g-12">
@@ -27,7 +28,6 @@
                             </p:toolbarGroup>
                         </p:toolbar>
 
-                        <!--TODO: COLOCAR ICONE NA MENSAGEM DE ERRO-->
                         <p:messages closable="true" showIcon="true" escape="true">
                             <p:autoUpdate/>
                         </p:messages>
@@ -78,7 +78,8 @@
                                 <p:button title="#{app.btn_editar}"
                                           outcome="/pages/base/classe-despesa/classe-despesa-cadastro"
                                           icon="fa fa-edit"
-                                          style="height: 20px">
+                                          style="height: 20px"
+                                          disabled="#{seguranca.naoTemPermissao(PERMISSOES.CLASSE_DESPESA_SALVAR)}">
                                     <f:param name="key" value="#{obj.id}"/>
                                 </p:button>
 
@@ -87,7 +88,8 @@
                                                  style="height: 20px"
                                                  styleClass="btn-red"
                                                  action="#{classeDespesaBean.excluir(obj)}"
-                                                 update=":frmPesquisa:tblDados">
+                                                 update=":frmPesquisa:tblDados"
+                                                 disabled="#{seguranca.naoTemPermissao(PERMISSOES.CLASSE_DESPESA_EXCLUIR)}">
                                     <p:confirm header="#{app.dialogo_modal_confirmacao}"
                                                message="#{app.dialogo_modal_mensagem_excluir} (#{obj.descricao})?"
                                                icon="pi pi-exclamation-triangle"/>

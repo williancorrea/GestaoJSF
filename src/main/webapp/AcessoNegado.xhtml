@@ -1,31 +1,19 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
 
-    <h:head>
-        <f:facet name="first">a
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-        </f:facet>
-        <title>#{app.lbl_acesso_negado}</title>
-    </h:head>
+    <ui:define name="title">#{app.lbl_acesso_negado}</ui:define>
 
-    <h:body styleClass="exception-body">
-        <div class="exception-panel">
-            <p:graphicImage styleClass="login-logo" name="img/logo.png" library="wcorrea"/>
-
-            <h1>#{app.lbl_acesso_negado}</h1>
-            <p>#{app.lbl_acesso_negado_sem_permissoes}</p>
-            <p:button value="#{app.lbl_pagina_inicial}" styleClass="green-btn" outcome="/Dashboard" />
+    <ui:define name="content">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card">
+                    <h1>#{app.lbl_acesso_negado}</h1>
+                    <p>#{app.lbl_acesso_negado_sem_permissoes}</p>
+                    <p:button value="#{app.lbl_pagina_inicial}" styleClass="green-btn" outcome="/Dashboard"/>
+                </div>
+            </div>
         </div>
-
-        <h:outputStylesheet name="css/layout-#{guestPreferences.layout}.css" library="atlantis-layout" />
-        <h:outputStylesheet library="wcorrea" name="css/sistema.css"/>
-    </h:body>
-
-</html>
+    </ui:define>
+</ui:composition>

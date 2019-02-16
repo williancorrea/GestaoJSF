@@ -40,17 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
                     .antMatchers("/Login.html", "/Erro.xhtml", "/javax.faces.resource/**").permitAll()
-                    .antMatchers("/Dashboard.xhtml", "/AcessoNegado.xhtml", "/dialogos/**").authenticated()
-
-                    .antMatchers("/pages/**").hasRole("GAMBIARRA_PARA_BLOQUEAR_A_PORRA_TODA")
+                    .antMatchers("/Dashboard.xhtml", "/AcessoNegado.xhtml", "/NaoEncontrada.xhtml", "/dialogos/**").authenticated()
 
 //                  CLASSE DE DESPESAS
                     .antMatchers("/pages/base/classe-despesa/classe-despesa-cadastro.xhtml").hasAnyRole("CLASSE_DESPESA_SALVAR")
                     .antMatchers("/pages/base/classe-despesa/classe-despesa-pesquisa.xhtml").hasAnyRole("CLASSE_DESPESA_PESQUISAR", "CLASSE_DESPESA_EXCLUIR")
 
-//                  .antMatchers("/pedidos/**").hasAnyRole("VENDEDORES", "AUXILIARES", "ADMINISTRADORES")
-//                  .antMatchers("/produtos/**", "/relatorios/**").hasRole("ADMINISTRADORES")
 
+                    .antMatchers("/pages/**").hasRole("GAMBIARRA_PARA_BLOQUEAR_A_PORRA_TODA")
                     .and()
 
                 .formLogin()
@@ -61,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .invalidateHttpSession(true)
+                    .logoutSuccessUrl("/Login.xhtml")
                     .and()
 
                 .exceptionHandling()

@@ -19,8 +19,13 @@ public class AppUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UsuarioRepository usuarioRepository = CDIServiceLocator.getBean(UsuarioRepository.class);
-        Usuario usuario = usuarioRepository.porEmail(email);
+        UsuarioRepository usuarioRepository;
+        Usuario usuario = null;
+
+        if (!email.trim().isEmpty()) {
+            usuarioRepository = CDIServiceLocator.getBean(UsuarioRepository.class);
+            usuario = usuarioRepository.porEmail(email);
+        }
 
         UsuarioSistema user = null;
         if (usuario != null) {

@@ -9,6 +9,7 @@
     <ui:define name="title">#{app.classe_despesa_titulo}</ui:define>
 
     <ui:define name="content">
+        <p:importEnum type="br.com.wcorrea.seguranca.Permissoes" var="PERMISSOES" allSuffix="ALL_ENUM_VALUES"/>
 
         <f:metadata>
             <o:viewParam name="key" value="#{classeDespesaBean.classeDespesa}"/>
@@ -27,7 +28,8 @@
                                 <p:button value="#{app.btn_novo}" outcome="/pages/base/classe-despesa/classe-despesa-cadastro"/>
                                 <p:commandButton value="#{classeDespesaBean.classeDespesa.editando ? app.btn_atualizar : app.btn_salvar}"
                                                  action="#{classeDespesaBean.salvar}"
-                                                 update="frm:pnl frm:grpFiltro"/>
+                                                 update="frm:pnl frm:grpFiltro"
+                                                 disabled="#{seguranca.naoTemPermissao(PERMISSOES.CLASSE_DESPESA_SALVAR)}"/>
                             </p:toolbarGroup>
                             <p:toolbarGroup align="right">
                                 <p:button value="#{app.btn_pesquisa}"
