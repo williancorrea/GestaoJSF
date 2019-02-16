@@ -46,6 +46,7 @@ public class LoginBean implements Serializable {
 
     public void login() throws ServletException, IOException {
 //        TODO: IMPLEMENTAR COOKIE NO LOGIN
+        System.out.println("ENTROU NO METODO DE LOGIN");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.xhtml");
         dispatcher.forward(request, response);
 

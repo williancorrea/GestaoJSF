@@ -31,36 +31,39 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         jsfDeniedEntry.setContextRelative(true);
 
         http
-                .csrf().disable()
-                .headers().frameOptions().sameOrigin()
-                .and()
+                .csrf()
+                    .disable()
+                .headers()
+                    .frameOptions()
+                    .sameOrigin()
+                    .and()
 
                 .authorizeRequests()
-                .antMatchers("/Login.html", "/Erro.xhtml", "/javax.faces.resource/**").permitAll()
-                .antMatchers("/Dashboard.xhtml", "/AcessoNegado.xhtml", "/dialogos/**").authenticated()
+                    .antMatchers("/Login.html", "/Erro.xhtml", "/javax.faces.resource/**").permitAll()
+                    .antMatchers("/Dashboard.xhtml", "/AcessoNegado.xhtml", "/dialogos/**").authenticated()
+
+                    .antMatchers("/pages/**").hasAnyRole("GAMBIARRA_PARA_BLOQUEAR_A_PORRA_TODA")
 
 //                CLASSE DE DESPESAS
 //                .antMatchers("/pages/base/classe-despesa/**").hasAnyRole("VENDEDORES")
 //                .antMatchers("/pedidos/**").hasAnyRole("VENDEDORES", "AUXILIARES", "ADMINISTRADORES")
 //                .antMatchers("/produtos/**", "/relatorios/**").hasRole("ADMINISTRADORES")
 
-
-                .and()
+                    .and()
 
                 .formLogin()
-                .loginPage("/Login.xhtml")
-                .failureUrl("/Login.xhtml?invalid=true")
-                .and()
-
+                    .loginPage("/Login.xhtml")
+                    .failureUrl("/Login.xhtml?invalid=true")
+                    .and()
 
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .and()
-
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .invalidateHttpSession(true)
+                    .and()
 
                 .exceptionHandling()
-                .accessDeniedPage("/AcessoNegado.xhtml")
-                .authenticationEntryPoint(jsfLoginEntry)
-                .accessDeniedHandler(jsfDeniedEntry);
+                    .accessDeniedPage("/AcessoNegado.xhtml")
+                    .authenticationEntryPoint(jsfLoginEntry)
+                    .accessDeniedHandler(jsfDeniedEntry);
     }
 }
