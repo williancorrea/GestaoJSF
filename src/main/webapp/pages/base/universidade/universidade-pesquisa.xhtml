@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template.xhtml">
+
+    <f:metadata>
+        <f:event listener="#{universidadeBean.listarUniversidadesCadastradas()}" type="preRenderView"/>
+    </f:metadata>
+
+    <ui:define name="title">#{app.universidade_titulo}</ui:define>
+    <ui:define name="content">
+        <p:importEnum type="br.com.wcorrea.seguranca.Permissoes" var="PERMISSOES" allSuffix="ALL_ENUM_VALUES"/>
+
+        <div class="ui-g ">
+            <div class="ui-g-12">
+                <div class="card" style="padding-top: 1px;">
+                    <h:form id="frmPesquisa">
+
+                        <p:toolbar styleClass="bloco-titulo-pesquisa">
+                            <p:toolbarGroup>
+                                <h1>#{app.universidade_lista}</h1>
+                            </p:toolbarGroup>
+                            <p:toolbarGroup align="right">
+                                <p:button id="btnNovo" value="#{app.btn_novo}"
+                                          outcome="/pages/base/universidade/universidade-cadastro"/>
+                            </p:toolbarGroup>
+                        </p:toolbar>
+
+                        <p:messages closable="true" showIcon="true" escape="true">
+                            <p:autoUpdate/>
+                        </p:messages>
+
+                        <p:focus context="grpFiltro"/>
+                        <p:fieldset id="grpFiltro" legend="#{app.lbl_pesquisar}" style="margin-bottom:20px">
+                            <div class="ui-g ui-fluid">
+                                <div class="ui-g-12">
+                                    <div class="ui-inputgroup">
+                                        <p:inputText id="filtroDescricao"
+                                                     value="#{universidadeBean.filtro.pesquisaGlobal}"
+                                                     placeholder="#{app.lbl_pesquisar_phaceholcer}"/>
+                                        <p:commandButton id="btnFiltrar" icon="fa fa-filter" styleClass="btn-green"
+                                                         action="#{universidadeBean.listarUniversidadesCadastradas}"
+                                                         update=":frmPesquisa"/>
+
+                                        <p:commandButton id="btnLimparFiltro" icon="fa fa-remove" styleClass="btn-red"
+                                                         rendered="#{not empty universidadeBean.filtro.pesquisaGlobal}"
+                                                         action="#{universidadeBean.limparFiltros}"
+                                                         update=":frmPesquisa"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </p:fieldset>
+
+                        <p:dataTable id="tblDados" var="obj"
+                                     value="#{universidadeBean.model}"
+                                     paginator="true"
+                                     rows="10"
+                                     lazy="true"
+                                     emptyMessage="#{app.tabela_nenhum_item_encontrado}"
+                                     rowsPerPageTemplate="5,10,15,20,200"
+                                     paginatorAlwaysVisible="false"
+                                     paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     currentPageReportTemplate="Exibindo de {startRecord} a {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages}"
+                                     rowStyleClass="#{obj.inativo ? 'tabela-coluna-inativo-cor': ''}">
+
+                            <p:column headerText="#{app.lbl_nome}">
+                                <h:outputText value="#{obj.nome}"/>
+                            </p:column>
+
+                            <p:column headerText="#{app.campo_inativo}" styleClass="tabela-coluna-inativo">
+                                <h:outputText value="#{obj.inativo eq true ? app.campo_sim : app.campo_nao}"/>
+                            </p:column>
+
+                            <p:column width="66" exportable="false">
+                                <p:button title="#{app.btn_editar}"
+                                          outcome="/pages/base/universidade/universidade-cadastro"
+                                          icon="fa fa-edit"
+                                          style="height: 20px"
+                                          disabled="#{seguranca.naoTemPermissao(PERMISSOES.UNIVERSIDADE_SALVAR)}">
+                                    <f:param name="key" value="#{obj.id}"/>
+                                </p:button>
+
+                                <p:commandButton title="#{app.btn_excluir}"
+                                                 icon="fa fa-trash-o"
+                                                 style="height: 20px"
+                                                 styleClass="btn-red"
+                                                 action="#{universidadeBean.excluir(obj)}"
+                                                 update=":frmPesquisa:tblDados"
+                                                 disabled="#{seguranca.naoTemPermissao(PERMISSOES.UNIVERSIDADE_EXCLUIR)}">
+                                    <p:confirm header="#{app.dialogo_modal_confirmacao}"
+                                               message="#{app.dialogo_modal_mensagem_excluir} (#{obj.nome})?"
+                                               icon="pi pi-exclamation-triangle"/>
+                                </p:commandButton>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+
+    </ui:define>
+
+</ui:composition>

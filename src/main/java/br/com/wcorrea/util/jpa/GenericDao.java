@@ -1,5 +1,9 @@
 package br.com.wcorrea.util.jpa;
 
+import br.com.wcorrea.modelo.filtros.FiltroGlobal;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -64,5 +68,16 @@ public abstract class GenericDao <T, I extends Serializable> {
         return entityManager.createQuery(query).getResultList();
     }
 
+    protected Criteria gerarCriteriosFiltros(FiltroGlobal filtro, Criteria criteria) {
+        criteria.setFirstResult(filtro.getPrimeiroRegistro());
+        criteria.setMaxResults(filtro.getQuantidadeRegistros());
+
+        if (filtro.isAscendente() && filtro.getPropriedadeOrdenacao() != null) {
+            criteria.addOrder(Order.asc(filtro.getPropriedadeOrdenacao()));
+        } else if (filtro.getPropriedadeOrdenacao() != null) {
+            criteria.addOrder(Order.desc(filtro.getPropriedadeOrdenacao()));
+        }
+        return criteria;
+    }
 
 }

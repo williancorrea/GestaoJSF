@@ -4,9 +4,14 @@ insert into usuario (nome, email, senha, data_criacao, data_alteracao) values ('
 # PERMISSOES
 insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('DESENVOLVEDOR', 'Desenvolvedor do Sistema', now(), now());
 insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('ADMINISTRADOR', 'Usuário administrador do sistema', now(), now());
+
 insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('CLASSE_DESPESA_SALVAR', '', now(), now());
 insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('CLASSE_DESPESA_EXCLUIR', '', now(), now());
 insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('CLASSE_DESPESA_PESQUISAR', '', now(), now());
+
+insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('UNIVERSIDADE_SALVAR', '', now(), now());
+insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('UNIVERSIDADE_EXCLUIR', '', now(), now());
+insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('UNIVERSIDADE_PESQUISAR', '', now(), now());
 
 
 

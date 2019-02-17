@@ -44,7 +44,7 @@ public class Seguranca {
      * @return
      */
     public boolean temPermissao(String permissao) {
-        return externalContext.isUserInRole("ROLE_" + permissao);
+        return externalContext.isUserInRole("ROLE_" + Permissoes.ADMINISTRADOR) || externalContext.isUserInRole("ROLE_" + permissao);
     }
 
 

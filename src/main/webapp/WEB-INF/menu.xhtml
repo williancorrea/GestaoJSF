@@ -15,7 +15,8 @@
                     <pa:menu widgetVar="me">
                         <p:menuitem id="om_dashboard" value="Dashboard" icon="fa fa-fw fa-home" outcome="/Dashboard"/>
                         <p:submenu id="base" label="Base" icon="fa fa-fw fa-bars">
-                            <p:menuitem id="classe-despesa-novo" value="Classe de Despesa" icon="fa fa-fw fa-columns" outcome="/pages/base/classe-despesa/classe-despesa-cadastro" />
+                            <p:menuitem id="classe-despesa-novo" value="#{app.classe_despesa_titulo}" icon="fa fa-fw fa-columns" outcome="/pages/base/classe-despesa/classe-despesa-cadastro" rendered="#{seguranca.temPermissao(PERMISSOES.CLASSE_DESPESA_SALVAR)}"/>
+                            <p:menuitem id="universidade-novo" value="#{app.universidade_titulo}" icon="fa fa-fw fa-columns" outcome="/pages/base/universidade/universidade-cadastro" rendered="#{seguranca.temPermissao(PERMISSOES.UNIVERSIDADE_SALVAR)}"/>
                         </p:submenu>
                         <p:submenu id="um_customization2" label="Menu Modes" icon="fa fa-fw fa-bars">
                             <p:menuitem id="menu1" value="Light Menu" icon="fa fa-fw fa-bars" actionListener="#{guestPreferences.setDarkMenu(false)}" ajax="false"/>

@@ -1,8 +1,8 @@
 package br.com.wcorrea.bean;
 
-import br.com.wcorrea.modelo.ClasseDespesa;
+import br.com.wcorrea.modelo.Universidade;
 import br.com.wcorrea.modelo.filtros.FiltroGlobal;
-import br.com.wcorrea.repository.ClasseDespesaRepository;
+import br.com.wcorrea.repository.UniversidadeRepository;
 import br.com.wcorrea.util.jpa.Transacional;
 import br.com.wcorrea.util.jsf.FacesUtils;
 import lombok.Getter;
@@ -20,12 +20,12 @@ import java.util.Map;
 
 @Named
 @ViewScoped
-public class ClasseDespesaBean implements Serializable {
+public class UniversidadeBean implements Serializable {
 
     @Getter
     @Setter
     @Inject
-    private ClasseDespesa classeDespesa;
+    private Universidade universidade;
 
     @Getter
     @Setter
@@ -33,11 +33,11 @@ public class ClasseDespesaBean implements Serializable {
     private FiltroGlobal filtro;
 
     @Inject
-    private ClasseDespesaRepository classeDespesaRepository;
+    private UniversidadeRepository universidadeRepository;
 
     @Getter
     @Setter
-    private LazyDataModel<ClasseDespesa> model;
+    private LazyDataModel<Universidade> model;
 
     /**
      * METODO EXEXUTADO LOGO APOS A RENDERIZACAO DA TELA
@@ -47,8 +47,8 @@ public class ClasseDespesaBean implements Serializable {
     }
 
     public void inicializarCadastro() {
-        if (classeDespesa == null) {
-            classeDespesa = new ClasseDespesa();
+        if (universidade == null) {
+            universidade = new Universidade();
         }
     }
 
@@ -60,20 +60,19 @@ public class ClasseDespesaBean implements Serializable {
         }
     }
 
-    public void listarClasseDespesasCadastradas() {
+    public void listarUniversidadesCadastradas() {
         if (FacesUtils.isNotPostback()) {
             /**
-             * FAZ O CARREGAMENTO LAZYLOADING DE TODAS AS AUDITORIAS
-             * CADASTRADAS
+             * FAZ O CARREGAMENTO LAZYLOADING DE TODAS AS AUDITORIAS CADASTRADAS
              */
-            model = new LazyDataModel<ClasseDespesa>() {
+            model = new LazyDataModel<Universidade>() {
                 private static final long serialVersionUID = 1L;
 
                 @Override
-                public List<ClasseDespesa> load(int primeiroRegistro, int quantidadeRegistros, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+                public List<Universidade> load(int primeiroRegistro, int quantidadeRegistros, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
 
                     //Ordenacao
-                    filtro.setPropriedadeOrdenacao("descricao");
+                    filtro.setPropriedadeOrdenacao("nome");
                     filtro.setAscendente(true);
 
                     //Paginacao
@@ -81,8 +80,8 @@ public class ClasseDespesaBean implements Serializable {
                     filtro.setQuantidadeRegistros(quantidadeRegistros);
 
                     // Quantidade Maxima de Registros por pagina
-                    setRowCount(classeDespesaRepository.quantidadeRegistrosFiltrados(filtro));
-                    return classeDespesaRepository.listar(filtro);
+                    setRowCount(universidadeRepository.quantidadeRegistrosFiltrados(filtro));
+                    return universidadeRepository.listar(filtro);
                 }
             };
         }
@@ -92,7 +91,7 @@ public class ClasseDespesaBean implements Serializable {
      * CRIAR UM NOVO ITEM
      */
     public void novo() {
-        classeDespesa = new ClasseDespesa();
+        universidade = new Universidade();
     }
 
     public void limparFiltros() {
@@ -100,7 +99,7 @@ public class ClasseDespesaBean implements Serializable {
             return;
         }
         filtro.setPesquisaGlobal("");
-        listarClasseDespesasCadastradas();
+        listarUniversidadesCadastradas();
     }
 
     /**
@@ -108,13 +107,13 @@ public class ClasseDespesaBean implements Serializable {
      */
     @Transacional
     public void salvar() {
-        boolean editando = classeDespesa.isEditando();
-        classeDespesa = classeDespesaRepository.salvar(classeDespesa);
+        boolean editando = universidade.isEditando();
+        universidade = universidadeRepository.salvar(universidade);
 
         if (editando) {
-            FacesUtils.addMessageinfo(classeDespesa.getDescricao() + " " + FacesUtils.mensagemInternacionalizada("informativo_atualizado_sucesso"), false);
+            FacesUtils.addMessageinfo(universidade.getNome() + " " + FacesUtils.mensagemInternacionalizada("informativo_atualizado_sucesso"), false);
         } else {
-            FacesUtils.addMessageinfo(classeDespesa.getDescricao() + " " + FacesUtils.mensagemInternacionalizada("informativo_cadastrada_sucesso"), false);
+            FacesUtils.addMessageinfo(universidade.getNome() + " " + FacesUtils.mensagemInternacionalizada("informativo_cadastrada_sucesso"), false);
         }
         novo();
     }
@@ -125,10 +124,10 @@ public class ClasseDespesaBean implements Serializable {
      * @param obj
      */
     @Transacional
-    public void excluir(ClasseDespesa obj) {
-        classeDespesaRepository.remover(obj.getId());
-        FacesUtils.addMessageinfo(obj.getDescricao() + " " + FacesUtils.mensagemInternacionalizada("informativo_exlusao_sucesso"), false);
-        listarClasseDespesasCadastradas();
+    public void excluir(Universidade obj) {
+        universidadeRepository.remover(obj.getId());
+        FacesUtils.addMessageinfo(obj.getNome() + " " + FacesUtils.mensagemInternacionalizada("informativo_exlusao_sucesso"), false);
+        listarUniversidadesCadastradas();
     }
 
 }

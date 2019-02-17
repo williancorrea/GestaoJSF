@@ -43,8 +43,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/Dashboard.xhtml", "/AcessoNegado.xhtml", "/NaoEncontrada.xhtml", "/dialogos/**").authenticated()
 
 //                  CLASSE DE DESPESAS
-                    .antMatchers("/pages/base/classe-despesa/classe-despesa-cadastro.xhtml").hasAnyRole("CLASSE_DESPESA_SALVAR")
-                    .antMatchers("/pages/base/classe-despesa/classe-despesa-pesquisa.xhtml").hasAnyRole("CLASSE_DESPESA_PESQUISAR", "CLASSE_DESPESA_EXCLUIR")
+                    .antMatchers("/pages/base/classe-despesa/classe-despesa-cadastro.xhtml").hasAnyRole("ADMINISTRADOR","CLASSE_DESPESA_SALVAR")
+                    .antMatchers("/pages/base/classe-despesa/classe-despesa-pesquisa.xhtml").hasAnyRole("ADMINISTRADOR","CLASSE_DESPESA_PESQUISAR", "CLASSE_DESPESA_EXCLUIR")
+
+//                  UNIVERSIDADE
+                    .antMatchers("/pages/base/universidade/universidade-cadastro.xhtml").hasAnyRole("ADMINISTRADOR","UNIVERSIDADE_SALVAR")
+                    .antMatchers("/pages/base/universidade/universidade-pesquisa.xhtml").hasAnyRole("ADMINISTRADOR","UNIVERSIDADE_PESQUISAR", "UNIVERSIDADE_EXCLUIR")
+
+
 
 
                     .antMatchers("/pages/**").hasRole("GAMBIARRA_PARA_BLOQUEAR_A_PORRA_TODA")
