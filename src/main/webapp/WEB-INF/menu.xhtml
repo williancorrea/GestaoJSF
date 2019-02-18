@@ -17,6 +17,7 @@
                         <p:submenu id="base" label="Base" icon="fa fa-fw fa-bars">
                             <p:menuitem id="classe-despesa-novo" value="#{app.classe_despesa_titulo}" icon="fa fa-fw fa-columns" outcome="/pages/base/classe-despesa/classe-despesa-cadastro" rendered="#{seguranca.temPermissao(PERMISSOES.CLASSE_DESPESA_SALVAR)}"/>
                             <p:menuitem id="universidade-novo" value="#{app.universidade_titulo}" icon="fa fa-fw fa-columns" outcome="/pages/base/universidade/universidade-cadastro" rendered="#{seguranca.temPermissao(PERMISSOES.UNIVERSIDADE_SALVAR)}"/>
+                            <p:menuitem id="alterar_permissoes_usuario" value="#{app.alterar_permissoes_usuario_titulo}" icon="fa fa-fw fa-columns" outcome="/pages/base/seguranca/permissoes_usuarios" rendered="#{seguranca.temPermissao(PERMISSOES.ALTERAR_PERMISSOES_USUARIO)}"/>
                         </p:submenu>
                         <p:submenu id="um_customization2" label="Menu Modes" icon="fa fa-fw fa-bars">
                             <p:menuitem id="menu1" value="Light Menu" icon="fa fa-fw fa-bars" actionListener="#{guestPreferences.setDarkMenu(false)}" ajax="false"/>

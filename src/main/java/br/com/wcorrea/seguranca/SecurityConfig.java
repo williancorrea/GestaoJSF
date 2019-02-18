@@ -42,6 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/Login.html", "/Erro.xhtml", "/javax.faces.resource/**").permitAll()
                     .antMatchers("/Dashboard.xhtml", "/AcessoNegado.xhtml", "/NaoEncontrada.xhtml", "/dialogos/**").authenticated()
 
+//                  PERMISSOES DE USUARIOS
+                    .antMatchers("/pages/base/seguranca/permissoes_usuarios.xhtml").hasAnyRole("ADMINISTRADOR","ALTERAR_PERMISSOES_USUARIO")
+
 //                  CLASSE DE DESPESAS
                     .antMatchers("/pages/base/classe-despesa/classe-despesa-cadastro.xhtml").hasAnyRole("ADMINISTRADOR","CLASSE_DESPESA_SALVAR")
                     .antMatchers("/pages/base/classe-despesa/classe-despesa-pesquisa.xhtml").hasAnyRole("ADMINISTRADOR","CLASSE_DESPESA_PESQUISAR", "CLASSE_DESPESA_EXCLUIR")

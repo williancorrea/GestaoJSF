@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">#{app.alterar_permissoes_usuario_titulo}</ui:define>
+
+    <ui:define name="content">
+        <p:importEnum type="br.com.wcorrea.seguranca.Permissoes" var="PERMISSOES" allSuffix="ALL_ENUM_VALUES"/>
+
+        <div class="ui-g ">
+            <div class="ui-g-12">
+                <div class="card" style="padding-top: 1px;">
+                    <h:form id="frm">
+
+                        <h1>#{app.alterar_permissoes_usuario_titulo}</h1>
+
+                        <p:messages closable="true" showIcon="true" escape="true">
+                            <p:autoUpdate/>
+                        </p:messages>
+
+                        <p:panelGrid columns="4">
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column>Permissão</p:column>
+                                    <p:column>Listar</p:column>
+                                    <p:column>Salvar/Atualizar</p:column>
+                                    <p:column>Excluir</p:column>
+                                </p:row>
+                            </f:facet>
+
+                            <p:row>
+                                <p:column style="font-weight: bold;">
+                                    <h:outputText value="TESTE"/>
+                                </p:column>
+                                <p:column>
+                                    <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
