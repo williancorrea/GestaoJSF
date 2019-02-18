@@ -9,7 +9,7 @@
     <ui:define name="content">
         <p:importEnum type="br.com.wcorrea.seguranca.Permissoes" var="PERMISSOES" allSuffix="ALL_ENUM_VALUES"/>
 
-        <div class="ui-g ">
+        <div class="ui-g ui-fluid">
             <div class="ui-g-12">
                 <div class="card" style="padding-top: 1px;">
                     <h:form id="frm">
@@ -20,31 +20,31 @@
                             <p:autoUpdate/>
                         </p:messages>
 
-                        <p:panelGrid columns="4">
+
+
+                        <h:panelGrid columns="4" layout="grid"
+                                     styleClass="ui-fluid"
+                                     style="width: 100%; margin-top: 20px; text-align: center;"
+                                     columnClasses="ui-g-6, ui-g-2, ui-g-2, ui-g-2">
                             <f:facet name="header">
-                                <p:row>
-                                    <p:column>Permissão</p:column>
-                                    <p:column>Listar</p:column>
-                                    <p:column>Salvar/Atualizar</p:column>
-                                    <p:column>Excluir</p:column>
-                                </p:row>
+                                <div class="ui-g ui-fluid;" style="border-bottom: 1px solid;">
+                                    <div class="ui-g-6"><h:outputText value="#{app.lbl_permissoes}" styleClass="rotulo" style="color: #bd2828"/></div>
+                                    <div class="ui-g-2"><h:outputText value="#{app.lbl_Listar}" styleClass="rotulo" style="color: #bd2828"/></div>
+                                    <div class="ui-g-2"><h:outputText value="#{app.lbl_salvar_atualizar}" styleClass="rotulo" style="color: #bd2828"/></div>
+                                    <div class="ui-g-2"><h:outputText value="#{app.lbl_excluir}" styleClass="rotulo" style="color: #bd2828"/></div>
+                                </div>
                             </f:facet>
 
-                            <p:row>
-                                <p:column style="font-weight: bold;">
-                                    <h:outputText value="TESTE"/>
-                                </p:column>
-                                <p:column>
-                                    <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
-                                </p:column>
-                                <p:column>
-                                    <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
-                                </p:column>
-                                <p:column>
-                                    <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
-                                </p:column>
-                            </p:row>
-                        </p:panelGrid>
+                            <h:outputText value="#{app.classe_despesa_titulo}" style="font-weight: bolder"/>
+                            <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.handleChange}"/>
+                            <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
+                            <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
+
+                            <h:outputText value="#{app.universidade_titulo}" style="font-weight: bolder"/>
+                            <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
+                            <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
+                            <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
+                        </h:panelGrid>
                     </h:form>
                 </div>
             </div>

@@ -23,4 +23,4 @@ insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) v
 
 # USUARIOS E PERMISSOES
 INSERT INTO usuario_permissao (id_permissao_sistema, id_usuario) VALUES ((select id from permissoes_sistema p where p.nome = 'DESENVOLVEDOR'), (select id from usuario u where u.email='willian.vag@gmail.com'));
-INSERT INTO usuario_permissao (id_permissao_sistema, id_usuario) VALUES ((select id from permissoes_sistema p where p.nome = 'ADMINISTRADOR'), (select id from usuario u where u.email='willian.vag@gmail.com'));
+INSERT INTO usuario_permissao (id_permissao_sistema, id_usuario) VALUES ((select id from permissoes_sistema p where p.nome = 'ALTERAR_PERMISSOES_USUARIO'), (select id from usuario u where u.email='willian.vag@gmail.com'));

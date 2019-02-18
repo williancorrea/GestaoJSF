@@ -3,9 +3,12 @@ package br.com.wcorrea.repository;
 import br.com.wcorrea.modelo.autenticacao.PermissoesSistema;
 import br.com.wcorrea.modelo.autenticacao.Usuario;
 import br.com.wcorrea.util.jpa.GenericDao;
+import br.com.wcorrea.util.jsf.exception.NegocioException;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 
 public class UsuarioRepository extends GenericDao<Usuario, Long> implements Serializable {
@@ -27,6 +30,8 @@ public class UsuarioRepository extends GenericDao<Usuario, Long> implements Seri
 //                    .getResultList();
 //        }
 //    }
+
+
 
 //    @Transactional
 //    public void excluir(Usuario obj) {
