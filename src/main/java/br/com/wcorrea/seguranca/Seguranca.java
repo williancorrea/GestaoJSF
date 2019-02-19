@@ -7,6 +7,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
 
 @Named
 @RequestScoped
@@ -47,6 +48,19 @@ public class Seguranca {
         return externalContext.isUserInRole("ROLE_" + Permissoes.ADMINISTRADOR) || externalContext.isUserInRole("ROLE_" + permissao);
     }
 
+    /**
+     * VERIFICA SE TEM ALGUMAS DAS PERMISSOES PASSADAS POR PARAMETRO
+     * @param lista
+     * @return
+     */
+    public boolean temPermissoes(ArrayList<Permissoes> lista){
+        for( Permissoes permissao : lista){
+            if(externalContext.isUserInRole("ROLE_" + permissao)){
+                return true;
+            }
+        }
+        return externalContext.isUserInRole("ROLE_" + Permissoes.ADMINISTRADOR);
+    }
 
     public boolean naoTemPermissao(String permissao){
         return !temPermissao(permissao);

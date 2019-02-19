@@ -14,26 +14,44 @@
                 <h:form id="menu-form">
                     <pa:menu widgetVar="me">
                         <p:menuitem id="om_dashboard" value="Dashboard" icon="fa fa-fw fa-home" outcome="/Dashboard"/>
-                        <p:submenu id="base" label="Base" icon="fa fa-fw fa-bars">
-                            <p:menuitem id="classe-despesa-novo" value="#{app.classe_despesa_titulo}" icon="fa fa-fw fa-columns" outcome="/pages/base/classe-despesa/classe-despesa-cadastro" rendered="#{seguranca.temPermissao(PERMISSOES.CLASSE_DESPESA_SALVAR)}"/>
+                        <p:submenu id="base" label="Base" icon="fa fa-fw fa-bars"
+                                   rendered="#{seguranca.temPermissoes([
+                                   PERMISSOES.CLASSE_DESPESA_PESQUISAR, PERMISSOES.CLASSE_DESPESA_SALVAR,
+                                   PERMISSOES.UNIVERSIDADE_PESQUISAR, PERMISSOES.UNIVERSIDADE_SALVAR
+                                   ])}">
+
+                            <p:submenu label="#{app.classe_despesa_titulo}" icon="fa fa-fw fa-columns"
+                                       rendered="#{seguranca.temPermissoes([PERMISSOES.CLASSE_DESPESA_PESQUISAR, PERMISSOES.CLASSE_DESPESA_SALVAR])}">
+                                <p:menuitem id="classe_despesa_novo" icon="fa fa-fw fa-columns"
+                                            value="#{app.lbl_novo}"
+                                            outcome="/pages/base/classe-despesa/classe-despesa-cadastro"
+                                            rendered="#{seguranca.temPermissao(PERMISSOES.CLASSE_DESPESA_SALVAR)}"/>
+                                <p:menuitem id="classe_despesa_listar" icon="fa fa-fw fa-columns"
+                                            value="#{app.lbl_Listar}"
+                                            outcome="/pages/base/classe-despesa/classe-despesa-pesquisa"
+                                            rendered="#{seguranca.temPermissao(PERMISSOES.CLASSE_DESPESA_PESQUISAR)}"/>
+                            </p:submenu>
+
+
+
                             <p:menuitem id="universidade-novo" value="#{app.universidade_titulo}" icon="fa fa-fw fa-columns" outcome="/pages/base/universidade/universidade-cadastro" rendered="#{seguranca.temPermissao(PERMISSOES.UNIVERSIDADE_SALVAR)}"/>
                         </p:submenu>
 
-                        <p:submenu id="seguranca" label="Segurança" icon="fa fa-fw fa-bars">
+                        <p:submenu id="seguranca" label="Segurança" icon="fa fa-fw fa-bars" rendered="#{seguranca.temPermissao(PERMISSOES.ALTERAR_PERMISSOES_USUARIO)}">
                             <p:menuitem id="alterar_permissoes_usuario" value="#{app.lbl_permissoes}" icon="fa fa-fw fa-columns" outcome="/pages/base/seguranca/permissoes_usuarios" rendered="#{seguranca.temPermissao(PERMISSOES.ALTERAR_PERMISSOES_USUARIO)}"/>
                         </p:submenu>
 
-                        <p:submenu id="um_customization2" label="Menu Modes" icon="fa fa-fw fa-bars">
+                        <p:submenu id="um_customization2" label="Menu Modes" icon="fa fa-fw fa-bars" rendered="#{seguranca.temPermissao(PERMISSOES.DESENVOLVEDOR)}">
                             <p:menuitem id="menu1" value="Light Menu" icon="fa fa-fw fa-bars" actionListener="#{guestPreferences.setDarkMenu(false)}" ajax="false"/>
                             <p:menuitem id="menu2" value="Dark Menu" icon="fa fa-fw fa-bars" actionListener="#{guestPreferences.setDarkMenu(true)}" ajax="false"/>
                             <p:menuitem id="menu3" value="Inline Menu" icon="fa fa-fw fa-bars" actionListener="#{guestPreferences.setOverlayMenu(false)}" ajax="false"/>
                             <p:menuitem id="menu4" value="Overlay Menu" icon="fa fa-fw fa-bars" actionListener="#{guestPreferences.setOverlayMenu(true)}" ajax="false"/>
                         </p:submenu>
-                        <p:submenu id="om_orientation" label="Orientation" icon="fa fa-fw fa-align-right">
+                        <p:submenu id="om_orientation" label="Orientation" icon="fa fa-fw fa-align-right" rendered="#{seguranca.temPermissao(PERMISSOES.DESENVOLVEDOR)}">
                             <p:menuitem id="om_rtl" value="RTL" icon="fa fa-fw fa-align-right" actionListener="#{guestPreferences.setOrientationRTL(true)}" ajax="false" />
                             <p:menuitem id="om_ltr" value="LTR" icon="fa fa-fw fa-align-left" actionListener="#{guestPreferences.setOrientationRTL(false)}" ajax="false" />
                         </p:submenu>
-                        <p:submenu id="um_customization1" label="Layout Colors" icon="fa fa-fw fa-paint-brush">
+                        <p:submenu id="um_customization1" label="Layout Colors" icon="fa fa-fw fa-paint-brush" rendered="#{seguranca.temPermissao(PERMISSOES.DESENVOLVEDOR)}">
                             <p:menuitem id="layout-color1" value="Dark" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setLayout('dark')}" ajax="false"/>
                             <p:menuitem id="layout-color2" value="Blue" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setLayout('blue')}" ajax="false"/>
                             <p:menuitem id="layout-color3" value="Pink" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setLayout('pink')}" ajax="false"/>
@@ -44,7 +62,7 @@
                             <p:menuitem id="layout-color8" value="Purple" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setLayout('purple')}" ajax="false"/>
                             <p:menuitem id="layout-color9" value="Cyan" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setLayout('cyan')}" ajax="false"/>
                         </p:submenu>
-                        <p:submenu id="um_themes" label="Themes" icon="fa fa-fw fa-paint-brush">
+                        <p:submenu id="um_themes" label="Themes" icon="fa fa-fw fa-paint-brush" rendered="#{seguranca.temPermissao(PERMISSOES.DESENVOLVEDOR)}">
                             <p:menuitem id="theme1" value="Blue" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('blue')}" ajax="false" />
                             <p:menuitem id="theme2" value="Pink" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('pink')}" ajax="false" />
                             <p:menuitem id="theme3" value="Steel" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('steel')}" ajax="false" />

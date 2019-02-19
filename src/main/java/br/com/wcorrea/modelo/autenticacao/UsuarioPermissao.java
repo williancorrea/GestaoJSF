@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "usuario_permissao")
 public class UsuarioPermissao implements Serializable {
 
