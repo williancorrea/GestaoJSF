@@ -3,13 +3,11 @@ package br.com.wcorrea.repository;
 import br.com.wcorrea.modelo.autenticacao.PermissoesSistema;
 import br.com.wcorrea.modelo.autenticacao.Usuario;
 import br.com.wcorrea.util.jpa.GenericDao;
-import br.com.wcorrea.util.jsf.exception.NegocioException;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
-import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.util.List;
 
 public class UsuarioRepository extends GenericDao<Usuario, Long> implements Serializable {
     private static final long serialVersionUID = -7287545229105230071L;
@@ -30,7 +28,6 @@ public class UsuarioRepository extends GenericDao<Usuario, Long> implements Seri
 //                    .getResultList();
 //        }
 //    }
-
 
 
 //    @Transactional
@@ -70,6 +67,10 @@ public class UsuarioRepository extends GenericDao<Usuario, Long> implements Seri
             //Nenhum resultado encontrado com o login informado
         }
         return permissoes;
+    }
+
+    public List<PermissoesSistema> buscarTodasPermissaoSistema() {
+        return this.m.createQuery("select m from PermissoesSistema m", PermissoesSistema.class).getResultList();
     }
 
     public Usuario porEmail(String login) {

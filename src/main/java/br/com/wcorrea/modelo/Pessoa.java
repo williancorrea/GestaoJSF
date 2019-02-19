@@ -14,7 +14,7 @@ import java.io.Serializable;
 @ToString
 @Entity
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class Pessoa extends Comum implements Serializable {
     private static final long serialVersionUID = -8977509125836117620L;
 

@@ -9,6 +9,10 @@
     <ui:define name="content">
         <p:importEnum type="br.com.wcorrea.seguranca.Permissoes" var="PERMISSOES" allSuffix="ALL_ENUM_VALUES"/>
 
+        <f:metadata>
+            <f:event listener="#{permissaoUsuarioBean.inicializarCadastro()}" type="preRenderView"/>
+        </f:metadata>
+
         <div class="ui-g ui-fluid">
             <div class="ui-g-12">
                 <div class="card" style="padding-top: 1px;">
@@ -19,7 +23,6 @@
                         <p:messages closable="true" showIcon="true" escape="true">
                             <p:autoUpdate/>
                         </p:messages>
-
 
 
                         <h:panelGrid columns="4" layout="grid"
@@ -36,14 +39,26 @@
                             </f:facet>
 
                             <h:outputText value="#{app.classe_despesa_titulo}" style="font-weight: bolder"/>
-                            <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.handleChange}"/>
-                            <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
-                            <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.CLASSE_DESPESA_PESQUISAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                                <f:attribute name="permissao" value="#{PERMISSOES.CLASSE_DESPESA_PESQUISAR}"/> <p:ajax/>
+                            </p:inputSwitch>
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.CLASSE_DESPESA_SALVAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                                <f:attribute name="permissao" value="#{PERMISSOES.CLASSE_DESPESA_SALVAR}"/> <p:ajax/>
+                            </p:inputSwitch>
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.CLASSE_DESPESA_EXCLUIR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                                <f:attribute name="permissao" value="#{PERMISSOES.CLASSE_DESPESA_EXCLUIR}"/> <p:ajax/>
+                            </p:inputSwitch>
 
                             <h:outputText value="#{app.universidade_titulo}" style="font-weight: bolder"/>
-                            <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
-                            <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
-                            <p:inputSwitch offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"/>
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.UNIVERSIDADE_PESQUISAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                                <f:attribute name="permissao" value="#{PERMISSOES.UNIVERSIDADE_PESQUISAR}"/> <p:ajax/>
+                            </p:inputSwitch>
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.UNIVERSIDADE_SALVAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                                <f:attribute name="permissao" value="#{PERMISSOES.UNIVERSIDADE_SALVAR}"/> <p:ajax/>
+                            </p:inputSwitch>
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.UNIVERSIDADE_EXCLUIR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                                <f:attribute name="permissao" value="#{PERMISSOES.UNIVERSIDADE_EXCLUIR}"/> <p:ajax/>
+                            </p:inputSwitch>
                         </h:panelGrid>
                     </h:form>
                 </div>

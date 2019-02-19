@@ -1,28 +1,20 @@
 package br.com.wcorrea.bean;
 
-import br.com.wcorrea.modelo.Universidade;
 import br.com.wcorrea.modelo.autenticacao.PermissoesSistema;
 import br.com.wcorrea.modelo.autenticacao.Usuario;
-import br.com.wcorrea.modelo.filtros.FiltroGlobal;
-import br.com.wcorrea.repository.UniversidadeRepository;
 import br.com.wcorrea.repository.UsuarioRepository;
 import br.com.wcorrea.seguranca.Permissoes;
-import br.com.wcorrea.seguranca.Seguranca;
-import br.com.wcorrea.seguranca.UsuarioSistema;
 import br.com.wcorrea.util.jpa.Transacional;
-import br.com.wcorrea.util.jsf.FacesUtils;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import org.primefaces.model.LazyDataModel;
-import org.primefaces.model.SortOrder;
 
 import javax.annotation.PostConstruct;
+import javax.faces.component.UIInput;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,62 +27,70 @@ public class PermissaoUsuarioBean implements Serializable {
     private Usuario usuario;
 
     @Inject
-    private UsuarioRepository usuarioRepository;
+    protected UsuarioRepository usuarioRepository;
+
+    protected List<PermissoesSistema> permissoesSistemaList;
+
 
 //    private Seguranca seguranca;
 
+    private boolean CLASSE_DESPESA_PESQUISAR;
     private boolean CLASSE_DESPESA_SALVAR;
     private boolean CLASSE_DESPESA_EXCLUIR;
-    private boolean CLASSE_DESPESA_PESQUISAR;
 
+    private boolean UNIVERSIDADE_PESQUISAR;
     private boolean UNIVERSIDADE_SALVAR;
     private boolean UNIVERSIDADE_EXCLUIR;
-    private boolean UNIVERSIDADE_PESQUISAR;
+
+    private Map<String, Boolean> map;
 
     /**
      * METODO EXEXUTADO LOGO APOS A RENDERIZACAO DA TELA
      */
     @PostConstruct
     public void inicio() {
-        //TODO: PEGAR A PERMISSAO DO USUARIO QUE FOR ESCOLHIDO NA TELA
-//        usuario = seguranca..getUsuario();
+        permissoesSistemaList = usuarioRepository.buscarTodasPermissaoSistema();
+        usuario = usuarioRepository.buscarLogin("willian.vag@gmail.com");
+        System.out.println("EXECUTOU O METODO INICIAL");
+        carregarPermissoesIniciaisTela(usuario);
     }
 
     public void inicializarCadastro() {
-
     }
 
-    public void carregamentoInicial() {
-        if (FacesUtils.isNotPostback()) {
-            System.out.println("nao é um postback");
-        } else {
-            System.out.println("ë um postback");
-        }
-    }
+    public void carregarPermissoesIniciaisTela(Usuario user) {
+//        TODO: FAZER A TRATATIVA PARA COLOCAR OS INPUTS NA TELA DE PERMISSOES DE - ADMINISTRADOR E PERMISSSOES DE USUARIO
 
-    public void alterarPermissaoUsuario(Permissoes permissao, boolean valor){
-
-//        Verifica se a permissao foi adicionada
-        for(PermissoesSistema permissaoSistema : usuario.getListaPermissoesSistema()){
-            if(permissaoSistema.getNome().equalsIgnoreCase(permissao.toString())){
-
-                if(valor){
-                    usuario.getListaPermissoesSistema().add(permissaoSistema);
-                    usuarioRepository.salvar(usuario);
-
-                }else{
-                    usuario.getListaPermissoesSistema().remove(permissaoSistema);
-                    usuarioRepository.salvar(usuario);
+        map = new HashMap<>();
+        for (Permissoes permissao : Permissoes.values()) {
+            boolean adicionado = false;
+            for (PermissoesSistema permissoesSistema : user.getListaPermissoesSistema()) {
+                if (permissoesSistema.getNome().equalsIgnoreCase(permissao.toString())) {
+                    map.put(permissao.toString(), true);
+                    adicionado = true;
+                    break;
                 }
-
-                break;
+            }
+            if (adicionado == false) {
+                map.put(permissao.toString(), false);
             }
         }
     }
 
-    public void handleChange(ValueChangeEvent event){
-        System.out.println("New value: " + event.getNewValue());
+    @Transacional
+    public void alterarPermissaoUsuario(ValueChangeEvent event) {
+        String permissao = ((UIInput) event.getSource()).getAttributes().get("permissao").toString();
+        for (PermissoesSistema permissoesSistema : permissoesSistemaList) {
+            if (permissoesSistema.getNome().equalsIgnoreCase(permissao)) {
+                if (((Boolean) event.getNewValue()) == true) {
+                    usuario.getListaPermissoesSistema().add(permissoesSistema);
+                } else {
+                    usuario.getListaPermissoesSistema().remove(permissoesSistema);
+                }
+                map.replace(permissao, ((Boolean) event.getNewValue()));
+                usuarioRepository.salvar(usuario);
+            }
+        }
     }
-
 
 }

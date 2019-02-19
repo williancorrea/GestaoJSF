@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Table(name = "permissoes_sistema")
 public class PermissoesSistema extends Comum implements Serializable {
     private static final long serialVersionUID = 1L;

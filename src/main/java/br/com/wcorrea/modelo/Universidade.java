@@ -14,7 +14,7 @@ import java.io.Serializable;
 @ToString
 @Entity
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class Universidade extends Comum implements Serializable {
     private static final long serialVersionUID = 7180271019059228253L;
 
