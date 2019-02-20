@@ -9,26 +9,34 @@
     <ui:define name="content">
         <p:importEnum type="br.com.wcorrea.seguranca.Permissoes" var="PERMISSOES" allSuffix="ALL_ENUM_VALUES"/>
 
-        <f:metadata>
-            <f:event listener="#{permissaoUsuarioBean.inicializarCadastro()}" type="preRenderView"/>
-        </f:metadata>
-
         <div class="ui-g ui-fluid">
             <div class="ui-g-12">
-                <div class="card" style="padding-top: 1px;">
+                <div class="card" style="padding-top: 1px; min-height: 150px;">
                     <h:form id="frm">
 
                         <h1>#{app.alterar_permissoes_usuario_titulo}</h1>
 
-                        <p:messages closable="true" showIcon="true" escape="true">
-                            <p:autoUpdate/>
-                        </p:messages>
+                        <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ">
+                            <p:outputLabel value="#{app.lbl_usuario}" for="cmbUsuario"/>
+                            <p:selectOneMenu id="cmbUsuario" value="#{permissaoUsuarioBean.usuario}"
+                                             effect="drop"
+                                             filter="true"
+                                             filterMatchMode="contains">
+                                <f:selectItem itemLabel="#{app.lbl_selecione}" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems value="#{permissaoUsuarioBean.usuarioList}"
+                                               var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}"/>
+                                <p:ajax listener="#{permissaoUsuarioBean.carregarPermissoesIniciaisTela}" update="@form" partialSubmit="true"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <h:panelGrid class="ui-g-12" style="text-align: center;" rendered="#{!permissaoUsuarioBean.usuarioSelecionado}">
+                            <p:graphicImage library="wcorrea" name="img/investigação.png"/>
+                        </h:panelGrid>
 
-
-                        <h:panelGrid columns="4" layout="grid"
+                        <h:panelGrid id="pnlPermissoes" columns="4" layout="grid"
                                      styleClass="ui-fluid"
                                      style="width: 100%; margin-top: 20px; text-align: center;"
-                                     columnClasses="ui-g-6, ui-g-2, ui-g-2, ui-g-2">
+                                     columnClasses="ui-g-6, ui-g-2, ui-g-2, ui-g-2"
+                                     rendered="#{permissaoUsuarioBean.usuarioSelecionado}">
                             <f:facet name="header">
                                 <div class="ui-g ui-fluid;" style="border-bottom: 1px solid;">
                                     <div class="ui-g-6"><h:outputText value="#{app.lbl_permissoes}" styleClass="rotulo" style="color: #bd2828"/></div>
@@ -39,28 +47,35 @@
                             </f:facet>
 
                             <h:outputText value="#{app.classe_despesa_titulo}" style="font-weight: bolder"/>
-                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.CLASSE_DESPESA_PESQUISAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.CLASSE_DESPESA_PESQUISAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"
+                                           valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
                                 <f:attribute name="permissao" value="#{PERMISSOES.CLASSE_DESPESA_PESQUISAR}"/> <p:ajax/>
                             </p:inputSwitch>
-                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.CLASSE_DESPESA_SALVAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.CLASSE_DESPESA_SALVAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"
+                                           valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
                                 <f:attribute name="permissao" value="#{PERMISSOES.CLASSE_DESPESA_SALVAR}"/> <p:ajax/>
                             </p:inputSwitch>
-                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.CLASSE_DESPESA_EXCLUIR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.CLASSE_DESPESA_EXCLUIR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"
+                                           valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
                                 <f:attribute name="permissao" value="#{PERMISSOES.CLASSE_DESPESA_EXCLUIR}"/> <p:ajax/>
                             </p:inputSwitch>
 
                             <h:outputText value="#{app.universidade_titulo}" style="font-weight: bolder"/>
-                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.UNIVERSIDADE_PESQUISAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.UNIVERSIDADE_PESQUISAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"
+                                           valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
                                 <f:attribute name="permissao" value="#{PERMISSOES.UNIVERSIDADE_PESQUISAR}"/> <p:ajax/>
                             </p:inputSwitch>
-                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.UNIVERSIDADE_SALVAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.UNIVERSIDADE_SALVAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"
+                                           valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
                                 <f:attribute name="permissao" value="#{PERMISSOES.UNIVERSIDADE_SALVAR}"/> <p:ajax/>
                             </p:inputSwitch>
-                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.UNIVERSIDADE_EXCLUIR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}" valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.UNIVERSIDADE_EXCLUIR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"
+                                           valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
                                 <f:attribute name="permissao" value="#{PERMISSOES.UNIVERSIDADE_EXCLUIR}"/> <p:ajax/>
                             </p:inputSwitch>
                         </h:panelGrid>
                     </h:form>
+
                 </div>
             </div>
         </div>

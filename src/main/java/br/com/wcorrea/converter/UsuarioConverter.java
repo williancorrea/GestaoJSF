@@ -1,7 +1,7 @@
 package br.com.wcorrea.converter;
 
-import br.com.wcorrea.modelo.ClasseDespesa;
-import br.com.wcorrea.repository.ClasseDespesaRepository;
+import br.com.wcorrea.modelo.autenticacao.Usuario;
+import br.com.wcorrea.repository.UsuarioRepository;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -9,15 +9,15 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
-@FacesConverter(forClass = ClasseDespesa.class)
-public class ClasseDespesaConverte implements Converter {
+@FacesConverter(forClass = Usuario.class)
+public class UsuarioConverter implements Converter {
 
     @Inject
-    private ClasseDespesaRepository objDao;
+    private UsuarioRepository objDao;
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        ClasseDespesa retorno = null;
+        Usuario retorno = null;
 
         if (!value.isEmpty()) {
             Long id = new Long(value);
@@ -29,7 +29,7 @@ public class ClasseDespesaConverte implements Converter {
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value != null) {
-            ClasseDespesa obj = (ClasseDespesa) value;
+            Usuario obj = (Usuario) value;
             return obj.getId() != null && obj.getId() == 0 ? null : String.valueOf(obj.getId());
         }
         return "";

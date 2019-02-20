@@ -30,19 +30,8 @@ public class PermissaoUsuarioBean implements Serializable {
     protected UsuarioRepository usuarioRepository;
 
     protected List<PermissoesSistema> permissoesSistemaList;
-
-
-//    private Seguranca seguranca;
-
-    private boolean CLASSE_DESPESA_PESQUISAR;
-    private boolean CLASSE_DESPESA_SALVAR;
-    private boolean CLASSE_DESPESA_EXCLUIR;
-
-    private boolean UNIVERSIDADE_PESQUISAR;
-    private boolean UNIVERSIDADE_SALVAR;
-    private boolean UNIVERSIDADE_EXCLUIR;
-
     private Map<String, Boolean> map;
+    private List<Usuario> usuarioList;
 
     /**
      * METODO EXEXUTADO LOGO APOS A RENDERIZACAO DA TELA
@@ -50,29 +39,27 @@ public class PermissaoUsuarioBean implements Serializable {
     @PostConstruct
     public void inicio() {
         permissoesSistemaList = usuarioRepository.buscarTodasPermissaoSistema();
-        usuario = usuarioRepository.buscarLogin("willian.vag@gmail.com");
-        System.out.println("EXECUTOU O METODO INICIAL");
-        carregarPermissoesIniciaisTela(usuario);
+        usuarioList = usuarioRepository.listarTudo();
+        usuario = null;
     }
 
-    public void inicializarCadastro() {
-    }
-
-    public void carregarPermissoesIniciaisTela(Usuario user) {
+    public void carregarPermissoesIniciaisTela() {
 //        TODO: FAZER A TRATATIVA PARA COLOCAR OS INPUTS NA TELA DE PERMISSOES DE - ADMINISTRADOR E PERMISSSOES DE USUARIO
 
-        map = new HashMap<>();
-        for (Permissoes permissao : Permissoes.values()) {
-            boolean adicionado = false;
-            for (PermissoesSistema permissoesSistema : user.getListaPermissoesSistema()) {
-                if (permissoesSistema.getNome().equalsIgnoreCase(permissao.toString())) {
-                    map.put(permissao.toString(), true);
-                    adicionado = true;
-                    break;
+        if (usuario != null) {
+            map = new HashMap<>();
+            for (Permissoes permissao : Permissoes.values()) {
+                boolean adicionado = false;
+                for (PermissoesSistema permissoesSistema : usuario.getListaPermissoesSistema()) {
+                    if (permissoesSistema.getNome().equalsIgnoreCase(permissao.toString())) {
+                        map.put(permissao.toString(), true);
+                        adicionado = true;
+                        break;
+                    }
                 }
-            }
-            if (adicionado == false) {
-                map.put(permissao.toString(), false);
+                if (adicionado == false) {
+                    map.put(permissao.toString(), false);
+                }
             }
         }
     }
@@ -88,9 +75,13 @@ public class PermissaoUsuarioBean implements Serializable {
                     usuario.getListaPermissoesSistema().remove(permissoesSistema);
                 }
                 map.replace(permissao, ((Boolean) event.getNewValue()));
+                //TODO: Verificar se vai manter as permissoes quando trocar de usuario e voltar para o mesmo
                 usuarioRepository.salvar(usuario);
             }
         }
     }
 
+    public boolean isUsuarioSelecionado() {
+        return usuario != null;
+    }
 }
