@@ -1,6 +1,5 @@
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
@@ -32,13 +31,24 @@
                                             rendered="#{seguranca.temPermissao(PERMISSOES.CLASSE_DESPESA_PESQUISAR)}"/>
                             </p:submenu>
 
+                            <p:submenu label="#{app.universidade_titulo}" icon="fa fa-fw fa-columns"
+                                       rendered="#{seguranca.temPermissoes([PERMISSOES.UNIVERSIDADE_PESQUISAR, PERMISSOES.UNIVERSIDADE_SALVAR])}">
+                                <p:menuitem id="universidade-novo" icon="fa fa-fw fa-columns"
+                                            value="#{app.lbl_novo}"
+                                            outcome="/pages/base/universidade/universidade-cadastro"
+                                            rendered="#{seguranca.temPermissao(PERMISSOES.UNIVERSIDADE_SALVAR)}"/>
+                                <p:menuitem id="universidade_listar" icon="fa fa-fw fa-columns"
+                                            value="#{app.lbl_Listar}"
+                                            outcome="/pages/base/universidade/universidade-pesquisa"
+                                            rendered="#{seguranca.temPermissao(PERMISSOES.UNIVERSIDADE_PESQUISAR)}"/>
+                            </p:submenu>
 
-
-                            <p:menuitem id="universidade-novo" value="#{app.universidade_titulo}" icon="fa fa-fw fa-columns" outcome="/pages/base/universidade/universidade-cadastro" rendered="#{seguranca.temPermissao(PERMISSOES.UNIVERSIDADE_SALVAR)}"/>
                         </p:submenu>
 
                         <p:submenu id="seguranca" label="Segurança" icon="fa fa-fw fa-bars" rendered="#{seguranca.temPermissao(PERMISSOES.ALTERAR_PERMISSOES_USUARIO)}">
-                            <p:menuitem id="alterar_permissoes_usuario" value="#{app.lbl_permissoes}" icon="fa fa-fw fa-columns" outcome="/pages/base/seguranca/permissoes_usuarios" rendered="#{seguranca.temPermissao(PERMISSOES.ALTERAR_PERMISSOES_USUARIO)}"/>
+                            <p:menuitem id="alterar_permissoes_usuario" value="#{app.lbl_permissoes}" icon="fa fa-fw fa-columns"
+                                        outcome="/pages/base/seguranca/permissoes_usuarios"
+                                        rendered="#{seguranca.temPermissao(PERMISSOES.ALTERAR_PERMISSOES_USUARIO)}"/>
                         </p:submenu>
 
                         <p:submenu id="um_customization2" label="Menu Modes" icon="fa fa-fw fa-bars" rendered="#{seguranca.temPermissao(PERMISSOES.DESENVOLVEDOR)}">
@@ -48,8 +58,8 @@
                             <p:menuitem id="menu4" value="Overlay Menu" icon="fa fa-fw fa-bars" actionListener="#{guestPreferences.setOverlayMenu(true)}" ajax="false"/>
                         </p:submenu>
                         <p:submenu id="om_orientation" label="Orientation" icon="fa fa-fw fa-align-right" rendered="#{seguranca.temPermissao(PERMISSOES.DESENVOLVEDOR)}">
-                            <p:menuitem id="om_rtl" value="RTL" icon="fa fa-fw fa-align-right" actionListener="#{guestPreferences.setOrientationRTL(true)}" ajax="false" />
-                            <p:menuitem id="om_ltr" value="LTR" icon="fa fa-fw fa-align-left" actionListener="#{guestPreferences.setOrientationRTL(false)}" ajax="false" />
+                            <p:menuitem id="om_rtl" value="RTL" icon="fa fa-fw fa-align-right" actionListener="#{guestPreferences.setOrientationRTL(true)}" ajax="false"/>
+                            <p:menuitem id="om_ltr" value="LTR" icon="fa fa-fw fa-align-left" actionListener="#{guestPreferences.setOrientationRTL(false)}" ajax="false"/>
                         </p:submenu>
                         <p:submenu id="um_customization1" label="Layout Colors" icon="fa fa-fw fa-paint-brush" rendered="#{seguranca.temPermissao(PERMISSOES.DESENVOLVEDOR)}">
                             <p:menuitem id="layout-color1" value="Dark" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setLayout('dark')}" ajax="false"/>
@@ -63,23 +73,23 @@
                             <p:menuitem id="layout-color9" value="Cyan" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setLayout('cyan')}" ajax="false"/>
                         </p:submenu>
                         <p:submenu id="um_themes" label="Themes" icon="fa fa-fw fa-paint-brush" rendered="#{seguranca.temPermissao(PERMISSOES.DESENVOLVEDOR)}">
-                            <p:menuitem id="theme1" value="Blue" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('blue')}" ajax="false" />
-                            <p:menuitem id="theme2" value="Pink" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('pink')}" ajax="false" />
-                            <p:menuitem id="theme3" value="Steel" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('steel')}" ajax="false" />
-                            <p:menuitem id="theme4" value="Orange" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('orange')}" ajax="false" />
-                            <p:menuitem id="theme5" value="Green" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('green')}" ajax="false" />
-                            <p:menuitem id="theme6" value="Turquoise" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('turquoise')}" ajax="false" />
-                            <p:menuitem id="theme7" value="Purple" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('purple')}" ajax="false" />
-                            <p:menuitem id="theme8" value="Cyan" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('cyan')}" ajax="false" />
+                            <p:menuitem id="theme1" value="Blue" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('blue')}" ajax="false"/>
+                            <p:menuitem id="theme2" value="Pink" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('pink')}" ajax="false"/>
+                            <p:menuitem id="theme3" value="Steel" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('steel')}" ajax="false"/>
+                            <p:menuitem id="theme4" value="Orange" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('orange')}" ajax="false"/>
+                            <p:menuitem id="theme5" value="Green" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('green')}" ajax="false"/>
+                            <p:menuitem id="theme6" value="Turquoise" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('turquoise')}" ajax="false"/>
+                            <p:menuitem id="theme7" value="Purple" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('purple')}" ajax="false"/>
+                            <p:menuitem id="theme8" value="Cyan" icon="fa fa-fw fa-paint-brush" actionListener="#{guestPreferences.setTheme('cyan')}" ajax="false"/>
                         </p:submenu>
 
                         <p:submenu id="om_default" label="Template Pages" icon="fa fa-fw fa-life-saver" rendered="#{seguranca.temPermissao(PERMISSOES.DESENVOLVEDOR)}">
-                            <p:menuitem id="om_empty" value="Empty Page" icon="fa fa-fw fa-square-o" outcome="/NaoEncontrada" />
-                            <p:menuitem id="om_login" value="Login Page" icon="fa fa-fw fa-sign-in" outcome="/Login" />
-                            <p:menuitem id="om_error" value="Error Page" icon="fa fa-fw fa-exclamation-circle" outcome="/Erro" />
-                            <p:menuitem id="om_404" value="404 Page" icon="fa fa-fw fa-times" outcome="/Erro404" />
-                            <p:menuitem id="om_access" value="Access Denied Page" icon="fa fa-fw fa-exclamation-triangle" outcome="/AcessoNegado" />
-                            <p:menuitem id="om_access2" value="Access Denied Page 2" icon="fa fa-fw fa-exclamation-triangle" outcome="/AcessoNegado2" />
+                            <p:menuitem id="om_empty" value="Empty Page" icon="fa fa-fw fa-square-o" outcome="/NaoEncontrada"/>
+                            <p:menuitem id="om_login" value="Login Page" icon="fa fa-fw fa-sign-in" outcome="/Login"/>
+                            <p:menuitem id="om_error" value="Error Page" icon="fa fa-fw fa-exclamation-circle" outcome="/Erro"/>
+                            <p:menuitem id="om_404" value="404 Page" icon="fa fa-fw fa-times" outcome="/Erro404"/>
+                            <p:menuitem id="om_access" value="Access Denied Page" icon="fa fa-fw fa-exclamation-triangle" outcome="/AcessoNegado"/>
+                            <p:menuitem id="om_access2" value="Access Denied Page 2" icon="fa fa-fw fa-exclamation-triangle" outcome="/AcessoNegado2"/>
                         </p:submenu>
                     </pa:menu>
                 </h:form>
