@@ -11,8 +11,7 @@ import java.util.Date;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @MappedSuperclass
 public abstract class Comum implements Serializable {
-
-    private static final long serialVersionUID = 5281788002420675899L;
+	private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

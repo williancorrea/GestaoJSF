@@ -13,19 +13,20 @@ import java.io.Serializable;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "usuario_permissao")
 public class UsuarioPermissao implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario", nullable = false)
-    @Fetch(FetchMode.JOIN)
-    private Usuario fkUsuario;
+	@Id
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_usuario", nullable = false)
+	@Fetch(FetchMode.JOIN)
+	private Usuario fkUsuario;
 
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_permissao_sistema", nullable = false)
-    @Fetch(FetchMode.JOIN)
-    private PermissoesSistema fkPermissoesSistema;
+	@Id
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_permissao_sistema", nullable = false)
+	@Fetch(FetchMode.JOIN)
+	private PermissoesSistema fkPermissoesSistema;
 
-    public UsuarioPermissao() {
-    }
+	public UsuarioPermissao() {
+	}
 }

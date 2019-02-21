@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class Universidade extends Comum implements Serializable {
-    private static final long serialVersionUID = 7180271019059228253L;
+	private static final long serialVersionUID = 1L;
 
     @Size(min = 3, max = 150)
     @Column(length = 150, nullable = false)

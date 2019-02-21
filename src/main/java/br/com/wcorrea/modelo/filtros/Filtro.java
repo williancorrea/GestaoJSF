@@ -6,11 +6,10 @@ import java.io.Serializable;
 
 @Data
 public class Filtro implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = -1305167199759520660L;
-
-    private int primeiroRegistro;
-    private int quantidadeRegistros;
-    private String propriedadeOrdenacao;
-    private boolean ascendente;
+	private int primeiroRegistro;
+	private int quantidadeRegistros;
+	private String propriedadeOrdenacao;
+	private boolean ascendente;
 }

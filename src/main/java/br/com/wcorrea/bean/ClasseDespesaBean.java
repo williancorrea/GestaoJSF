@@ -21,8 +21,9 @@ import java.util.Map;
 @Named
 @ViewScoped
 public class ClasseDespesaBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Getter
+	@Getter
     @Setter
     @Inject
     private ClasseDespesa classeDespesa;

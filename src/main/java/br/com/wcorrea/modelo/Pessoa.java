@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class Pessoa extends Comum implements Serializable {
-    private static final long serialVersionUID = -8977509125836117620L;
+	private static final long serialVersionUID = 1L;
 
     @NonNull
     @Enumerated(EnumType.STRING)
