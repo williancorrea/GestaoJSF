@@ -15,8 +15,9 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class Usuario extends Comum implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @NotBlank
+	@NotBlank
     @Size(min = 3, max = 120)
     @Column(nullable = false, length = 120)
     private String nome;

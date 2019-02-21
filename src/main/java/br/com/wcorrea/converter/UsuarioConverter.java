@@ -10,7 +10,7 @@ import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
 @FacesConverter(forClass = Usuario.class)
-public class UsuarioConverter implements Converter {
+public class UsuarioConverter implements Converter<Object> {
 
     @Inject
     private UsuarioRepository objDao;

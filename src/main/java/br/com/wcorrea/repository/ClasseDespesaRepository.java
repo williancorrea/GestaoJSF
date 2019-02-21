@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ClasseDespesaRepository extends GenericDao<ClasseDespesa, Long> implements Serializable {
-    private static final long serialVersionUID = -4669657125949454834L;
+	private static final long serialVersionUID = 1L;
 
     public ClasseDespesaRepository() {
         super(ClasseDespesa.class);

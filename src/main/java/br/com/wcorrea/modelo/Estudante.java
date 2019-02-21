@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Entity
 public class Estudante extends Comum implements Serializable {
-    private static final long serialVersionUID = -4202262600065388090L;
+	private static final long serialVersionUID = 1L;
 
 
 }

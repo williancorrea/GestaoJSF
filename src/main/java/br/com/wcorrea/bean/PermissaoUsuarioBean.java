@@ -22,66 +22,68 @@ import java.util.Map;
 @ViewScoped
 @Data
 public class PermissaoUsuarioBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 
-    @Inject
-    private Usuario usuario;
+	@Inject
+	private Usuario usuario;
 
-    @Inject
-    protected UsuarioRepository usuarioRepository;
+	@Inject
+	protected UsuarioRepository usuarioRepository;
 
-    protected List<PermissoesSistema> permissoesSistemaList;
-    private Map<String, Boolean> map;
-    private List<Usuario> usuarioList;
+	protected List<PermissoesSistema> permissoesSistemaList;
+	private Map<String, Boolean> map;
+	private List<Usuario> usuarioList;
 
-    /**
-     * METODO EXEXUTADO LOGO APOS A RENDERIZACAO DA TELA
-     */
-    @PostConstruct
-    public void inicio() {
-        permissoesSistemaList = usuarioRepository.buscarTodasPermissaoSistema();
-        usuarioList = usuarioRepository.listarTudo();
-        usuario = null;
-    }
+	/**
+	 * METODO EXEXUTADO LOGO APOS A RENDERIZACAO DA TELA
+	 */
+	@PostConstruct
+	public void inicio() {
+		permissoesSistemaList = usuarioRepository.buscarTodasPermissaoSistema();
+		usuarioList = usuarioRepository.listarTudo();
+		usuario = null;
+	}
 
-    public void carregarPermissoesIniciaisTela() {
+	public void carregarPermissoesIniciaisTela() {
 //        TODO: FAZER A TRATATIVA PARA COLOCAR OS INPUTS NA TELA DE PERMISSOES DE - ADMINISTRADOR E PERMISSSOES DE USUARIO
 
-        if (usuario != null) {
-            map = new HashMap<>();
-            for (Permissoes permissao : Permissoes.values()) {
-                boolean adicionado = false;
-                for (PermissoesSistema permissoesSistema : usuario.getListaPermissoesSistema()) {
-                    if (permissoesSistema.getNome().equalsIgnoreCase(permissao.toString())) {
-                        map.put(permissao.toString(), true);
-                        adicionado = true;
-                        break;
-                    }
-                }
-                if (adicionado == false) {
-                    map.put(permissao.toString(), false);
-                }
-            }
-        }
-    }
+		if (usuario != null) {
+			map = new HashMap<>();
+			for (Permissoes permissao : Permissoes.values()) {
+				boolean adicionado = false;
+				for (PermissoesSistema permissoesSistema : usuario.getListaPermissoesSistema()) {
+					if (permissoesSistema.getNome().equalsIgnoreCase(permissao.toString())) {
+						map.put(permissao.toString(), true);
+						adicionado = true;
+						break;
+					}
+				}
+				if (adicionado == false) {
+					map.put(permissao.toString(), false);
+				}
+			}
+		}
+	}
 
-    @Transacional
-    public void alterarPermissaoUsuario(ValueChangeEvent event) {
-        String permissao = ((UIInput) event.getSource()).getAttributes().get("permissao").toString();
-        for (PermissoesSistema permissoesSistema : permissoesSistemaList) {
-            if (permissoesSistema.getNome().equalsIgnoreCase(permissao)) {
-                if (((Boolean) event.getNewValue()) == true) {
-                    usuario.getListaPermissoesSistema().add(permissoesSistema);
-                } else {
-                    usuario.getListaPermissoesSistema().remove(permissoesSistema);
-                }
-                map.replace(permissao, ((Boolean) event.getNewValue()));
-                //TODO: Verificar se vai manter as permissoes quando trocar de usuario e voltar para o mesmo
-                usuarioRepository.salvar(usuario);
-            }
-        }
-    }
+	@Transacional
+	public void alterarPermissaoUsuario(ValueChangeEvent event) {
+		String permissao = ((UIInput) event.getSource()).getAttributes().get("permissao").toString();
+		for (PermissoesSistema permissoesSistema : permissoesSistemaList) {
+			if (permissoesSistema.getNome().equalsIgnoreCase(permissao)) {
+				if (((Boolean) event.getNewValue()) == true) {
+					usuario.getListaPermissoesSistema().add(permissoesSistema);
+				} else {
+					usuario.getListaPermissoesSistema().remove(permissoesSistema);
+				}
+				map.replace(permissao, ((Boolean) event.getNewValue()));
+				// TODO: Verificar se vai manter as permissoes quando trocar de usuario e voltar
+				// para o mesmo
+				usuarioRepository.salvar(usuario);
+			}
+		}
+	}
 
-    public boolean isUsuarioSelecionado() {
-        return usuario != null;
-    }
+	public boolean isUsuarioSelecionado() {
+		return usuario != null;
+	}
 }
