@@ -1,12 +1,10 @@
 package br.com.wcorrea.bean;
 
-import br.com.wcorrea.modelo.Pessoa.Estudante;
-import br.com.wcorrea.modelo.Pessoa.Pessoa;
-import br.com.wcorrea.modelo.Pessoa.PessoaFisica;
-import br.com.wcorrea.modelo.Pessoa.PessoaTipo;
+import br.com.wcorrea.modelo.Pessoa.*;
 import br.com.wcorrea.modelo.Universidade;
 import br.com.wcorrea.modelo.filtros.FiltroGlobal;
 import br.com.wcorrea.repository.EstudanteRepository;
+import br.com.wcorrea.repository.PessoaRepository;
 import br.com.wcorrea.repository.UniversidadeRepository;
 import br.com.wcorrea.util.jpa.Transacional;
 import br.com.wcorrea.util.jsf.FacesUtils;
@@ -50,6 +48,10 @@ public class EstudanteBean implements Serializable {
 
     @Inject
     private UniversidadeRepository universidadeRepository;
+
+    @Inject
+    private PessoaRepository pessoaRepository;
+
 
     /**
      * METODO EXEXUTADO LOGO APOS A RENDERIZACAO DA TELA
@@ -119,12 +121,15 @@ public class EstudanteBean implements Serializable {
         boolean editando = estudante.isEditando();
         estudante.getPessoa().getPessoaFisica().setPessoa(estudante.getPessoa());
 
-//        TODO: VERIFICAR SE O CPF JA ESTA CADASTRADO E SE É O MESMO ID
-//        if(!estudante.isEditando()){
-//            Estudante objEncontrado = estudanteRepository.
-//        }
-
-
+        if(!estudante.isEditando()){
+            Pessoa pessoa = pessoaRepository.buscarCPF(estudante.getPessoa().getPessoaFisica().getCpf());
+            if(pessoa != null || pessoa.getId() == estudante.getPessoa().getId()){
+                if(pessoa.getPessoaFisica().getCpf().equalsIgnoreCase(estudante.getPessoa().getPessoaFisica().getCpf())){
+                    FacesUtils.addMessageErro(estudante.getPessoa().getPessoaFisica().getCpf() + " - " + FacesUtils.mensagemInternacionalizada("erro_cpf_esta_sendo_utilizado"), false);
+                    return;
+                }
+            }
+        }
 
         estudante = estudanteRepository.salvar(estudante);
 
@@ -148,4 +153,7 @@ public class EstudanteBean implements Serializable {
         listarEstudantesCadastradas();
     }
 
+    public PessoaSexo[] getPessoaSexo(){
+        return PessoaSexo.values();
+    }
 }

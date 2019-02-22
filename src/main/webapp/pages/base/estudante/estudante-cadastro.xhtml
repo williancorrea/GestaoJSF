@@ -49,8 +49,17 @@
                             <p:outputLabel value="#{app.lbl_cpf}" for="cpf"/>
                             <p:inputMask id="cpf" value="#{estudanteBean.estudante.pessoa.pessoaFisica.cpf}" mask="999.999.999-99" slotChar="_"/>
 
+                            <p:outputLabel value="#{app.lbl_rg}" for="rg"/>
+                            <p:inputText id="rg" value="#{estudanteBean.estudante.pessoa.pessoaFisica.rg}"/>
+
                             <p:outputLabel value="#{app.lbl_nome}" for="nome"/>
                             <p:inputText id="nome" value="#{estudanteBean.estudante.pessoa.nome}"/>
+
+                            <p:outputLabel value="#{app.lbl_sexo}" for="cmbSexo"/>
+                            <p:selectOneMenu id="cmbSexo" value="#{estudanteBean.estudante.pessoa.pessoaFisica.sexo}">
+                                <f:selectItem itemLabel="#{app.lbl_selecione}" itemValue="" noSelectionOption="true"/>
+                                <f:selectItems value="#{estudanteBean.pessoaSexo}" var="obj" itemLabel="#{obj.descricao}"/>
+                            </p:selectOneMenu>
 
                             <p:outputLabel value="#{app.lbl_email}" for="email"/>
                             <p:inputText id="email" value="#{estudanteBean.estudante.pessoa.email}" styleClass="lowercase"/>
@@ -63,6 +72,8 @@
                             </p:selectOneMenu>
 
                         </p:panelGrid>
+
+                        <p:graphicImage  name="img/fotoPadrao.png" library="wcorrea" />
 
                     </h:form>
                 </div>

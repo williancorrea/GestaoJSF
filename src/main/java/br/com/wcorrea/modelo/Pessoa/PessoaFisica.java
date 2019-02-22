@@ -3,19 +3,21 @@ package br.com.wcorrea.modelo.Pessoa;
 import br.com.wcorrea.modelo.util.Comum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "pessoa_fisica")
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@Table(name = "pessoa_fisica")
 public class PessoaFisica extends Comum implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -36,7 +38,10 @@ public class PessoaFisica extends Comum implements Serializable {
     @Column(name = "data_nascimento")
     private Date dataNascimento;
 
-    private String sexo;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30, name = "sexo")
+    private PessoaSexo sexo;
 
     private String naturalidade;
 

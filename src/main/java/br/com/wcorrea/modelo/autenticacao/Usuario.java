@@ -14,6 +14,7 @@ import java.util.List;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@Table(name = "usuario")
 public class Usuario extends Comum implements Serializable {
 	private static final long serialVersionUID = 1L;
 

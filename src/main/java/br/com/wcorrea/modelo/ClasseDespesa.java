@@ -15,11 +15,11 @@ import java.io.Serializable;
 
 @ToString
 @Entity
-@Table
 @Data
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@Table(name = "classe_despesa")
 public class ClasseDespesa extends Comum implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Size(min = 3, max = 150)
     @Column(length = 150, nullable = false)
@@ -31,3 +31,5 @@ public class ClasseDespesa extends Comum implements Serializable {
     public ClasseDespesa() {
     }
 }
+
+

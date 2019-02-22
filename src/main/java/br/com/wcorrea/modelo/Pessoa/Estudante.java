@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@Table(name = "estudante")
 public class Estudante extends Comum implements Serializable {
     private static final long serialVersionUID = 1L;
 

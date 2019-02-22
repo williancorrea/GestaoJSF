@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
@@ -13,10 +14,11 @@ import java.io.Serializable;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@Table(name = "pessoa")
 public class Pessoa extends Comum implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-    @NonNull
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30, name = "pessoa_tipo")
     private PessoaTipo pessoaTipo;

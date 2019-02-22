@@ -2,6 +2,7 @@ package br.com.wcorrea.bean;
 
 import br.com.wcorrea.modelo.Universidade;
 import br.com.wcorrea.modelo.filtros.FiltroGlobal;
+import br.com.wcorrea.repository.PessoaRepository;
 import br.com.wcorrea.repository.UniversidadeRepository;
 import br.com.wcorrea.util.jpa.Transacional;
 import br.com.wcorrea.util.jsf.FacesUtils;
