@@ -60,6 +60,8 @@
                                 <f:attribute name="permissao" value="#{PERMISSOES.CLASSE_DESPESA_EXCLUIR}"/> <p:ajax/>
                             </p:inputSwitch>
 
+
+
                             <h:outputText value="#{app.universidade_titulo}" style="font-weight: bolder"/>
                             <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.UNIVERSIDADE_PESQUISAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"
                                            valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
@@ -72,6 +74,22 @@
                             <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.UNIVERSIDADE_EXCLUIR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"
                                            valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
                                 <f:attribute name="permissao" value="#{PERMISSOES.UNIVERSIDADE_EXCLUIR}"/> <p:ajax/>
+                            </p:inputSwitch>
+
+
+
+                            <h:outputText value="#{app.estudante_titulo}" style="font-weight: bolder"/>
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.ESTUDANTE_PESQUISAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"
+                                           valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                                <f:attribute name="permissao" value="#{PERMISSOES.ESTUDANTE_PESQUISAR}"/> <p:ajax/>
+                            </p:inputSwitch>
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.ESTUDANTE_SALVAR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"
+                                           valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                                <f:attribute name="permissao" value="#{PERMISSOES.ESTUDANTE_SALVAR}"/> <p:ajax/>
+                            </p:inputSwitch>
+                            <p:inputSwitch value="#{permissaoUsuarioBean.map[PERMISSOES.ESTUDANTE_EXCLUIR.toString()]}" offLabel="#{app.lbl_nao}" onLabel="#{app.lbl_sim}"
+                                           valueChangeListener="#{permissaoUsuarioBean.alterarPermissaoUsuario}">
+                                <f:attribute name="permissao" value="#{PERMISSOES.ESTUDANTE_EXCLUIR}"/> <p:ajax/>
                             </p:inputSwitch>
                         </h:panelGrid>
                     </h:form>

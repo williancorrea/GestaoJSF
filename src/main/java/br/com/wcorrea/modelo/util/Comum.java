@@ -16,6 +16,7 @@ public abstract class Comum implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "ID", nullable = false, unique = true)
     private Long id;
 
     //TODO: COLOCAR A CRIPTOGRAFIA
@@ -23,11 +24,11 @@ public abstract class Comum implements Serializable {
     private String key;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data_alteracao")
+    @Column(name = "DATA_ALTERACAO")
     private Date dataAlteracao;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data_criacao")
+    @Column(name = "DATA_CRIACAO")
     private Date dataCriacao;
 
     /**

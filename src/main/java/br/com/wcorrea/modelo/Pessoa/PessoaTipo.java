@@ -1,4 +1,4 @@
-package br.com.wcorrea.modelo;
+package br.com.wcorrea.modelo.Pessoa;
 
 public enum PessoaTipo {
     FISICA, JURIDICA

@@ -16,7 +16,8 @@
                         <p:submenu id="base" label="Base" icon="fa fa-fw fa-bars"
                                    rendered="#{seguranca.temPermissoes([
                                        PERMISSOES.CLASSE_DESPESA_PESQUISAR, PERMISSOES.CLASSE_DESPESA_SALVAR,
-                                       PERMISSOES.UNIVERSIDADE_PESQUISAR, PERMISSOES.UNIVERSIDADE_SALVAR
+                                       PERMISSOES.UNIVERSIDADE_PESQUISAR, PERMISSOES.UNIVERSIDADE_SALVAR,
+                                       PERMISSOES.ESTUDANTE_PESQUISAR, PERMISSOES.ESTUDANTE_SALVAR
                                    ])}">
 
                             <p:submenu label="#{app.classe_despesa_titulo}" icon="fa fa-fw fa-columns"
@@ -41,6 +42,18 @@
                                             value="#{app.lbl_Listar}"
                                             outcome="/pages/base/universidade/universidade-pesquisa"
                                             rendered="#{seguranca.temPermissao(PERMISSOES.UNIVERSIDADE_PESQUISAR)}"/>
+                            </p:submenu>
+
+                            <p:submenu label="#{app.estudante_titulo}" icon="fa fa-fw fa-columns"
+                                       rendered="#{seguranca.temPermissoes([PERMISSOES.ESTUDANTE_PESQUISAR, PERMISSOES.ESTUDANTE_SALVAR])}">
+                                <p:menuitem id="estudante-novo" icon="fa fa-fw fa-columns"
+                                            value="#{app.lbl_novo}"
+                                            outcome="/pages/base/estudante/estudante-cadastro"
+                                            rendered="#{seguranca.temPermissao(PERMISSOES.ESTUDANTE_SALVAR)}"/>
+                                <p:menuitem id="estudante_listar" icon="fa fa-fw fa-columns"
+                                            value="#{app.lbl_Listar}"
+                                            outcome="/pages/base/estudante/estudante-pesquisa"
+                                            rendered="#{seguranca.temPermissao(PERMISSOES.ESTUDANTE_PESQUISAR)}"/>
                             </p:submenu>
 
                         </p:submenu>

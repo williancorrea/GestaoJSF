@@ -17,13 +17,11 @@ public class ClasseDespesaConverter implements Converter<Object> {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        ClasseDespesa retorno = null;
-
         if (!value.isEmpty()) {
             Long id = new Long(value);
-            retorno = objDao.buscarPorID(id);
+            return objDao.buscarPorID(id);
         }
-        return retorno;
+        return null;
     }
 
     @Override

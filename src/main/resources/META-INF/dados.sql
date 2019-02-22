@@ -14,5 +14,9 @@ insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) v
 insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('UNIVERSIDADE_EXCLUIR', '', now(), now());
 insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('UNIVERSIDADE_PESQUISAR', '', now(), now());
 
+insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('ESTUDANTE_SALVAR', '', now(), now());
+insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('ESTUDANTE_EXCLUIR', '', now(), now());
+insert into permissoes_sistema (nome, descricao, data_criacao, data_alteracao) values ('ESTUDANTE_PESQUISAR', '', now(), now());
+
 # USUARIOS E PERMISSOES
 INSERT INTO usuario_permissao (id_permissao_sistema, id_usuario) VALUES ((select id from permissoes_sistema p where p.nome = 'ALTERAR_PERMISSOES_USUARIO'), (select id from usuario u where u.email='willian.vag@gmail.com'));
