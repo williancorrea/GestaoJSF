@@ -10,13 +10,22 @@ import br.com.wcorrea.util.jpa.Transacional;
 import br.com.wcorrea.util.jsf.FacesUtils;
 import lombok.Getter;
 import lombok.Setter;
+import org.omnifaces.cdi.ViewScoped;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.CroppedImage;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
+import org.primefaces.model.UploadedFile;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.imageio.stream.FileImageOutputStream;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +60,18 @@ public class EstudanteBean implements Serializable {
 
     @Inject
     private PessoaRepository pessoaRepository;
+
+
+    @Setter
+    @Getter
+    private UploadedFile file;
+
+    @Getter
+    private String imagemCarregada;
+
+    @Getter
+    @Setter
+    private CroppedImage croppedImage;
 
 
     /**
@@ -103,6 +124,7 @@ public class EstudanteBean implements Serializable {
         estudante.setPessoa(new Pessoa());
         estudante.getPessoa().setPessoaTipo(PessoaTipo.FISICA);
         estudante.getPessoa().setPessoaFisica(new PessoaFisica());
+        estudante.getPessoa().getPessoaFisica().setSexo(PessoaSexo.MAXCULINO);
     }
 
     public void limparFiltros() {
@@ -121,10 +143,10 @@ public class EstudanteBean implements Serializable {
         boolean editando = estudante.isEditando();
         estudante.getPessoa().getPessoaFisica().setPessoa(estudante.getPessoa());
 
-        if(!estudante.isEditando()){
+        if (!estudante.isEditando()) {
             Pessoa pessoa = pessoaRepository.buscarCPF(estudante.getPessoa().getPessoaFisica().getCpf());
-            if(pessoa != null || pessoa.getId() == estudante.getPessoa().getId()){
-                if(pessoa.getPessoaFisica().getCpf().equalsIgnoreCase(estudante.getPessoa().getPessoaFisica().getCpf())){
+            if (pessoa != null || pessoa.getId() == estudante.getPessoa().getId()) {
+                if (pessoa.getPessoaFisica().getCpf().equalsIgnoreCase(estudante.getPessoa().getPessoaFisica().getCpf())) {
                     FacesUtils.addMessageErro(estudante.getPessoa().getPessoaFisica().getCpf() + " - " + FacesUtils.mensagemInternacionalizada("erro_cpf_esta_sendo_utilizado"), false);
                     return;
                 }
@@ -153,7 +175,79 @@ public class EstudanteBean implements Serializable {
         listarEstudantesCadastradas();
     }
 
-    public PessoaSexo[] getPessoaSexo(){
+    public PessoaSexo[] getPessoaSexo() {
         return PessoaSexo.values();
     }
+
+
+    public void crop() {
+        if (croppedImage == null) {
+            return;
+        }
+
+        String newFileName = "";
+//        setNewImageName(getRandomImageName());
+//        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+//        String newFileName = externalContext.getRealPath("") + File.separator + "resources" + File.separator + "demo" +
+//                File.separator + "images" + File.separator + "crop" + File.separator + getNewImageName() + ".jpg";
+
+        FileImageOutputStream imageOutput;
+        try {
+            imageOutput = new FileImageOutputStream(new File(newFileName));
+            imageOutput.write(croppedImage.getBytes(), 0, croppedImage.getBytes().length);
+            imageOutput.close();
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Cropping failed."));
+            return;
+        }
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Cropping finished."));
+    }
+
+    public void upload() {
+        if (file != null) {
+//            imagemCarregada = ImageHelper.encodeFileToBase64Binary(new File(file.getFileName()));
+//            imagemCarregada = new DefaultStreamedContent(new ByteArrayInputStream(file.getInputstream()),"image/png");
+
+//            FacesMessage message = new FacesMessage("Succesful", file.getFileName() + " is uploaded.");
+//            FacesContext.getCurrentInstance().addMessage(null, message);
+
+
+//            FacesMessage msg = new FacesMessage(file.getFileName() + " foi enviado com sucesso.");
+//            FacesContext.getCurrentInstance().addMessage(null, msg);
+            // Do what you want with the file
+            try {
+                byte[] foto = file.getContents();
+//                String nomeArquivo = file.getFileName();
+                //TODO: COLOCAR NOME DO ARQUIVO UNICO (PARA CADA USUARIO) PARA NAO TER PROBLEMA COM ESPACO NO SERVIDOR
+                String nomeArquivo = "TESTE_NOME.jpg";
+//                FacesContext facesContext = FacesContext.getCurrentInstance();
+//                ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
+
+//                String arquivo = scontext.getRealPath("java.io.tmpdir" + nomeArquivo);
+                String arquivo = System.getProperty("java.io.tmpdir") + File.separator + nomeArquivo;
+                imagemCarregada = System.getProperty("java.io.tmpdir") + File.separator + nomeArquivo;
+
+//            String arquivo = scontext.getContextPath()+"/uploadis/" + nomeArquivo;
+                File f = new File(arquivo);
+                if (!f.getParentFile().exists()) f.getParentFile().mkdirs();
+                if (!f.exists())
+                    f.createNewFile();
+                System.out.println(f.getAbsolutePath());
+                FileOutputStream fos = new FileOutputStream(arquivo);
+                fos.write(foto);
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void handleFileUpload(FileUploadEvent event) {
+        System.out.println("TESTE");
+//        FacesMessage msg = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+//        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
 }

@@ -27,6 +27,12 @@
         <param-value>Development</param-value>
     </context-param>
 
+    <!--CONFIGURANDO UPLOAD-->
+    <context-param>
+        <param-name>primefaces.UPLOADER</param-name>
+        <param-value>native</param-value>
+    </context-param>
+
     <!-- Theme do Primefaces -->
     <context-param>
         <param-name>primefaces.THEME</param-name>

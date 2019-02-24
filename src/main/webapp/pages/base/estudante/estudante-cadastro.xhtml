@@ -41,44 +41,84 @@
                         </p:messages>
 
                         <p:focus context="pnl"/>
-                        <p:panelGrid id="pnl" columns="2"
-                                     style="width: 100%; margin-top: 20px"
-                                     styleClass="ui-fluid"
-                                     columnClasses="rotulo, campo">
+                        <div style="display: flex">
+                            <p:graphicImage name="img/fotoPadrao.png" library="wcorrea" width="150" height="223"
+                                            style="margin-right: 10px; cursor: pointer" onclick="PF('dlgImagem').show()"/>
 
-                            <p:outputLabel value="#{app.lbl_cpf}" for="cpf"/>
-                            <p:inputMask id="cpf" value="#{estudanteBean.estudante.pessoa.pessoaFisica.cpf}" mask="999.999.999-99" slotChar="_"/>
+                            <p:panelGrid id="pnl" columns="2"
+                                         style="width: 100%; border: 1px solid #d4d4d4;"
+                                         styleClass="ui-fluid"
+                                         columnClasses="rotulo, campo">
 
-                            <p:outputLabel value="#{app.lbl_rg}" for="rg"/>
-                            <p:inputText id="rg" value="#{estudanteBean.estudante.pessoa.pessoaFisica.rg}"/>
+                                <p:outputLabel value="#{app.lbl_cpf}" for="cpf"/>
+                                <p:inputMask id="cpf" value="#{estudanteBean.estudante.pessoa.pessoaFisica.cpf}" mask="999.999.999-99" slotChar="_"/>
 
-                            <p:outputLabel value="#{app.lbl_nome}" for="nome"/>
-                            <p:inputText id="nome" value="#{estudanteBean.estudante.pessoa.nome}"/>
+                                <p:outputLabel value="#{app.lbl_rg}" for="rg"/>
+                                <p:inputText id="rg" value="#{estudanteBean.estudante.pessoa.pessoaFisica.rg}"/>
 
-                            <p:outputLabel value="#{app.lbl_sexo}" for="cmbSexo"/>
-                            <p:selectOneMenu id="cmbSexo" value="#{estudanteBean.estudante.pessoa.pessoaFisica.sexo}">
-                                <f:selectItem itemLabel="#{app.lbl_selecione}" itemValue="" noSelectionOption="true"/>
-                                <f:selectItems value="#{estudanteBean.pessoaSexo}" var="obj" itemLabel="#{obj.descricao}"/>
-                            </p:selectOneMenu>
+                                <p:outputLabel value="#{app.lbl_nome}" for="nome"/>
+                                <p:inputText id="nome" value="#{estudanteBean.estudante.pessoa.nome}"/>
 
-                            <p:outputLabel value="#{app.lbl_email}" for="email"/>
-                            <p:inputText id="email" value="#{estudanteBean.estudante.pessoa.email}" styleClass="lowercase"/>
+                                <p:outputLabel value="#{app.lbl_sexo}" for="cmbSexo"/>
+                                <p:selectOneMenu id="cmbSexo" value="#{estudanteBean.estudante.pessoa.pessoaFisica.sexo}">
+                                    <f:selectItem itemLabel="#{app.lbl_selecione}" itemValue="" noSelectionOption="true"/>
+                                    <f:selectItems value="#{estudanteBean.pessoaSexo}" var="obj" itemLabel="#{obj.descricao}"/>
+                                </p:selectOneMenu>
 
-                            <p:outputLabel value="#{app.lbl_universidade}" for="cmbUniversidade"/>
-                            <p:selectOneMenu id="cmbUniversidade" value="#{estudanteBean.estudante.universidade}"
-                                             filter="true" filterMatchMode="contains">
-                                <f:selectItem itemLabel="#{app.lbl_selecione}" itemValue="" noSelectionOption="true"/>
-                                <f:selectItems value="#{estudanteBean.universidadeList}" var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}"/>
-                            </p:selectOneMenu>
+                                <p:outputLabel value="#{app.lbl_email}" for="email"/>
+                                <p:inputText id="email" value="#{estudanteBean.estudante.pessoa.email}" styleClass="lowercase"/>
 
-                        </p:panelGrid>
+                                <p:outputLabel value="#{app.lbl_universidade}" for="cmbUniversidade"/>
+                                <p:selectOneMenu id="cmbUniversidade" value="#{estudanteBean.estudante.universidade}"
+                                                 filter="true" filterMatchMode="contains">
+                                    <f:selectItem itemLabel="#{app.lbl_selecione}" itemValue="" noSelectionOption="true"/>
+                                    <f:selectItems value="#{estudanteBean.universidadeList}" var="obj" itemValue="#{obj}" itemLabel="#{obj.nome}"/>
+                                </p:selectOneMenu>
 
-                        <p:graphicImage  name="img/fotoPadrao.png" library="wcorrea" />
+
+                            </p:panelGrid>
+                        </div>
+
 
                     </h:form>
                 </div>
             </div>
         </div>
+
+        <p:dialog header="Modal Dialog" widgetVar="dlgImagem"
+                  appendToBody="true"
+                  modal="true" height="200" width="250">
+            <h:form id="frmDlgImagem" enctype="multipart/form-data">
+                <!--<p:commandButton value="carregar" />-->
+                <!--<p:commandButton value="WebCan" />-->
+
+                <!--<h:panelGrid columns="2">-->
+                <!--<p:imageCropper value="#{cropperView.croppedImage}" image="/resources/demo/images/nature/nature6.jpg" initialCoords="225,75,300,125"/>-->
+                <!--<h:panelGroup id="cropped">-->
+                <!--<p:graphicImage rendered="#{not empty cropperView.newImageName}" name="demo/images/crop/#{cropperView.newImageName}.jpg" />-->
+                <!--</h:panelGroup>-->
+                <!--</h:panelGrid>-->
+
+                <!--<p:fileUpload value="#{estudanteBean.file}"-->
+                              <!--mode="simple" update=":frmDlgImagem" sizeLimit="1000000"-->
+                              <!--skinSimple="true"-->
+                              <!--allowTypes="/(\.|\/)(gif|jpe?g|png)$/"-->
+                              <!--invalidFileMessage="#{app.lbl_upload_arquivo} (gif, jpeg, jpg e png)"-->
+                              <!--onstart="console.log('Iniciando envio de arquivo')"-->
+                              <!--onerror="console.log('Erro na requisição de envio')"-->
+                              <!--oncomplete="console.log('Envio concluído')" />-->
+                <p:fileUpload value="#{estudanteBean.file}"
+                              mode="simple"  sizeLimit="1000000"
+
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+                              invalidFileMessage="#{app.lbl_upload_arquivo} (gif, jpeg, jpg e png)"/>
+
+                <p:commandButton value="Submit" ajax="false" action="#{estudanteBean.upload}"/>
+
+                <!--<p:graphicImage value="#{estudanteBean.imagemCarregada}"/>-->
+
+            </h:form>
+        </p:dialog>
 
     </ui:define>
 

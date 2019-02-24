@@ -1,34 +1,33 @@
-<ui:composition 
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:pa="http://primefaces.org/atlantis">
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+>
 
     <div class="topbar">
         <div class="logo">
-            <p:graphicImage name="images/logo.png" library="atlantis-layout" />
+            <p:graphicImage name="images/logo.png" library="atlantis-layout"/>
         </div>
-        
+
         <p:graphicImage name="images/appname.svg" library="atlantis-layout" styleClass="app-name"/>
-        
+
         <a id="topbar-menu-button" href="#">
             <i class="fa fa-bars"></i>
         </a>
-        
+
         <ul class="topbar-menu fadeInDown animated">
             <li class="profile-item">
-                <a href="#">                            
+                <a href="#">
                     <div class="profile-image">
-                        <p:graphicImage name="images/profile-image.png" library="atlantis-layout" />
+                        <p:graphicImage name="images/profile-image.png" library="atlantis-layout"/>
                     </div>
                     <div class="profile-info">
                         <span class="topbar-item-name profile-name">#{seguranca.nomeUsuario}</span>
                         <span class="topbar-item-name profile-role">System Admin</span>
                     </div>
                 </a>
-                
+
                 <ul class="animated">
                     <li role="menuitem">
                         <a href="#">
@@ -51,10 +50,9 @@
                         </a>
                     </li>
                     <li role="menuitem">
-                        <!--TODO: VERIFICAR SE O LOGOUT ESTA FUNCIONANDO-->
-                        <a href="/logout">
+                        <a href="#{seguranca.logout()}">
                             <i class="fa fa-fw fa-sign-out"></i>
-                            <span>Logout</span>
+                            <span>#{app.lbl_logout}</span>
                         </a>
                     </li>
                 </ul>
@@ -169,7 +167,7 @@
             <li class="search-item">
                 <h:form>
                     <i class="fa fa-search"></i>
-                    <p:inputText />
+                    <p:inputText/>
                 </h:form>
             </li>
         </ul>
