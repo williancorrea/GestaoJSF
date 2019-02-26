@@ -11,13 +11,14 @@ public class ImageHelper {
         System.out.println(encodstring);
     }
 
-    private static String encodeFileToBase64Binary(File file){
+    public static String encodeFileToBase64Binary(File file){
+        //TODO: REFATORAR
         String encodedfile = null;
         try {
             FileInputStream fileInputStreamReader = new FileInputStream(file);
             byte[] bytes = new byte[(int)file.length()];
             fileInputStreamReader.read(bytes);
-            encodedfile = new String(Base64.getEncoder().encode(bytes), "UTF-8");
+            encodedfile ="data:image/jpg;base64, " +  new String(Base64.getEncoder().encode(bytes), "UTF-8");
         } catch (FileNotFoundException e) {
             //TODO: Adicionar mensagem de erro internacionalizada
             e.printStackTrace();

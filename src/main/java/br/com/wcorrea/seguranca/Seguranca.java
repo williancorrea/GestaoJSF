@@ -1,5 +1,6 @@
 package br.com.wcorrea.seguranca;
 
+import br.com.wcorrea.util.jsf.FacesUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import javax.enterprise.context.RequestScoped;
@@ -65,5 +66,9 @@ public class Seguranca {
     public boolean naoTemPermissao(String permissao){
         return !temPermissao(permissao);
 
+    }
+
+    public String logout(){
+        return FacesUtils.getContextPath() + "/logout";
     }
 }
