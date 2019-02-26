@@ -16,6 +16,7 @@ import java.io.Serializable;
 public class Estudante extends Comum implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    //TODO: FAZER ID COMPOSTO
     @NotNull
     @ManyToOne(cascade = CascadeType.MERGE, optional = false)
     @JoinColumn(name = "pessoa_id")
